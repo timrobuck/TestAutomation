@@ -80,7 +80,7 @@
     <Compile Include="core\SeleniumSetMethods.cs" />
     <Compile Include="src\pages\SMDashboardPageObject.cs" />
     <Compile Include="src\pages\SMLoginPageObject.cs" />
-    <Compile Include="tests\SMLoginPageTest.cs" />
+    <Compile Include="tests\ShippingManagerSmokeTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
