@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium.Support.UI;
+using static NUnit.Core.NUnitFramework;
 
 namespace Autodan
 {
@@ -37,6 +38,25 @@ namespace Autodan
         public static void SelectDropdown(this IWebElement element, string value)
         {
             new SelectElement(element).SelectByText(value);
+        }
+
+
+
+        public static void Verify(this IWebElement element)
+        {
+            element.GetType();
+        }
+
+        public static bool VerifyIsPresent(this IWebDriver driver, By by)
+        {
+            try
+            {
+                return driver.FindElement(by).Displayed;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
         }
     }
 }

@@ -23,7 +23,13 @@ namespace Autodan
         public IWebElement txtPassword { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div > div > form > button")]
-        public IWebElement loginBtn { get; set; }
+        public IWebElement btnLogin { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "body > header > div > div > h3")]
+        public IWebElement pageTitle { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = ".container>p")]
+        public IWebElement pageFooter { get; set; }
 
 
         public SMDashboardPageObject Login(string userName, string password)
@@ -33,11 +39,22 @@ namespace Autodan
             //password
             txtPassword.SendKeys(password);
             //click btn
-            loginBtn.Submit();
+            btnLogin.Submit();
+
+            Console.WriteLine("Credentials provided, logging into Shipping Manager");
 
             //return page object
             return new SMDashboardPageObject();
+        }
 
+        public void VerifyLoginPageElements()
+        {
+            txtUserName.Verify();
+            txtPassword.Verify();
+            btnLogin.Verify();
+            pageTitle.Verify();
+            pageFooter.Verify();
+            Console.WriteLine("Verified Login Page Elements");
         }
     }
 }

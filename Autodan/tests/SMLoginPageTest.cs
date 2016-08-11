@@ -10,18 +10,15 @@ using System.Threading.Tasks;
 namespace Autodan
 {
     class ShippingManagerLoginPage
-    {
-        
-        static void Main(string[] args)
-        {
-        }
-        
+    {   
         [SetUp]
         public void Initialize()
         {
+            //build browser
             PropertiesCollection.driver = new ChromeDriver();
-
-
+            Console.WriteLine("Created Chrome instance");
+            PropertiesCollection.driver.Manage().Window.Maximize();
+            Console.WriteLine("Browser instance window maximized");
             //navigate to application
             PropertiesCollection.driver.Navigate().GoToUrl("http://tools.cafepress.com/Shipping/");
             Console.WriteLine("Created browser instance, opening URL");
@@ -33,10 +30,8 @@ namespace Autodan
         {
             //login to app
             SMLoginPageObject loginPage = new SMLoginPageObject();
-            SMDashboardPageObject pageEA =  loginPage.Login("actiondan", "password1234");
-
-
-            //pageEA.FillUserForm("DP", "Dan", "Josh");
+            SMDashboardPageObject dashboardPage =  loginPage.Login("dpeterson", "ADano!#1519!#");
+            Console.WriteLine("Credentials provided, logging into Shipping Manager");
         }
         
         [TearDown]
