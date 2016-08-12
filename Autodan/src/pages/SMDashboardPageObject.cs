@@ -32,29 +32,37 @@ namespace Autodan
 
         //dashboard page links
         [FindsBy(How = How.CssSelector, Using = "body > div > div.home-button.stock-status")]
-        public IWebElement btnStockStatusBlock { get; set; }
+        public IWebElement BtnStockStatusBlock { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div > div.home-button.sla")]
-        public IWebElement btnServiceLevelAgreementBlock { get; set; }
+        public IWebElement BtnServiceLevelAgreementBlock { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div > div.home-button.facilities")]
-        public IWebElement btnFacilitesBlock { get; set; }
+        public IWebElement BtnFacilitesBlock { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div > div.home-button.reports")]
-        public IWebElement btnReportsBlock { get; set; }
+        public IWebElement BtnReportsBlock { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#thisSelectorDoesntExist")]
-        public IWebElement testSelector { get; set; }
+        public IWebElement TestSelector { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > header > div > div.navbar-header.navbar-left > h3")]
-        public IWebElement pageTitle { get; set; }
+        public IWebElement PageTitle { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > footer > div > p")]
-        public IWebElement pageFooter { get; set; }
+        public IWebElement PageFooter { get; set; }
 
         public void NavigateToStockStatus()
         {
-            btnStockStatusBlock.Click();
+            BtnStockStatusBlock.Click();
+        }
+
+        public SMStockStatusProductTypePageObject NavToStockStatusProductType()
+        {
+            BtnStockStatusBlock.Click();
+            Console.WriteLine("Navigating to Product Type page");
+
+            return new SMStockStatusProductTypePageObject();
         }
         
         public void VerifyDashboardPageElements()
@@ -62,12 +70,12 @@ namespace Autodan
             NavBtnHome.Verify();
             NavBtnLogOut.Verify();
             NavBtnSla.Verify();
-            btnStockStatusBlock.Verify();
-            btnServiceLevelAgreementBlock.Verify();
-            btnFacilitesBlock.Verify();
-            btnReportsBlock.Verify();
-            pageTitle.Verify();
-            pageFooter.Verify();
+            BtnStockStatusBlock.Verify();
+            BtnServiceLevelAgreementBlock.Verify();
+            BtnFacilitesBlock.Verify();
+            BtnReportsBlock.Verify();
+            PageTitle.Verify();
+            PageFooter.Verify();
             Console.WriteLine("Verified Dashboard Page Elements");
         }
     }

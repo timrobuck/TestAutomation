@@ -78,9 +78,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="core\SeleniumGetMethods.cs" />
     <Compile Include="core\SeleniumSetMethods.cs" />
+    <Compile Include="src\pages\SMCommonPageObject.cs" />
     <Compile Include="src\pages\SMDashboardPageObject.cs" />
     <Compile Include="src\pages\SMLoginPageObject.cs" />
+    <Compile Include="src\pages\SMStockStatusProductionFacilitiesPageObject.cs" />
+    <Compile Include="src\pages\SMStockStatusProductTypePageObject.cs" />
     <Compile Include="tests\ShippingManagerSmokeTest.cs" />
+    <Compile Include="tests\SMSmoke.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
