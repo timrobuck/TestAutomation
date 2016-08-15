@@ -10,7 +10,11 @@ using System.Threading.Tasks;
 namespace Autodan
 {
     class ShippingManagerLoginPage
-    {   
+    {
+        static void Main(string[] args)
+        {
+        }
+
         [SetUp]
         public void Initialize()
         {
@@ -24,16 +28,20 @@ namespace Autodan
             Console.WriteLine("Created browser instance, opening URL");
         }
 
-        
+
         [Test]
-        public void ExecuteTest()
+        public void LoginPageTest()
         {
-            //login to app
+            //navigate to login page of Shipping Manager app
             SMLoginPageObject loginPage = new SMLoginPageObject();
-            SMDashboardPageObject dashboardPage =  loginPage.Login("dpeterson", "ADano!#1519!#");
-            Console.WriteLine("Credentials provided, logging into Shipping Manager");
+
+            //verify login page elements
+            loginPage.VerifyLoginPageElements();
+
+            //login to app + returns dashboard page object
+            loginPage.Login();
         }
-        
+
         [TearDown]
         public void Cleanup()
         {

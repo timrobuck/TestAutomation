@@ -12,10 +12,6 @@ namespace Autodan
     class ShippingManagerSmokeTest
     {
         
-        static void Main(string[] args)
-        {
-        }
-        
         [SetUp]
         public void Initialize()
         {
@@ -40,67 +36,93 @@ namespace Autodan
             loginPage.VerifyLoginPageElements();
 
             //login to app + returns dashboard page object
-            SMDashboardPageObject dashboard =  loginPage.Login("dpeterson", "ADano!#1519!#"); 
+            loginPage.Login();
         }
 
         [Test]
         public void DashboardPageTest()
         {
             //login to app
-            SMLoginPageObject loginpage = new SMLoginPageObject();
-            SMDashboardPageObject dashboard = loginpage.Login("dpeterson", "ADano!#1519!#");
-                    
-            //Verify page elements on Dashboard page
-            dashboard.VerifyDashboardPageElements();
+            SMLoginPageObject loginPage = new SMLoginPageObject();
+            SMCommonPageObject common = loginPage.Login();
+
+            //smoke test dashboard page
+            common.VerifyPersistentNav();
+            common.VerifyDashboardPageElements();
         }
 
         [Test]
         public void StockStatusProductTypeTest()
         {
-            //login to app
-            SMLoginPageObject loginpage = new SMLoginPageObject();
-            SMDashboardPageObject dashboard = loginpage.Login("dpeterson", "ADano!#1519!#");
+            //init page object & login to app
+            SMLoginPageObject loginPage = new SMLoginPageObject();
+            SMCommonPageObject common = loginPage.Login();
             
-            //init common
-            SMCommonPageObject common = new SMCommonPageObject();
 
-            //navigate to Product type page && init locators
-            dashboard.NavToStockStatusProductType();
-            SMStockStatusProductTypePageObject producttype = new SMStockStatusProductTypePageObject();
+            //navigate to Product type page & init locators
+            SMStockStatusPageObject stockStatus = common.NavigateToStockStatus();
+
 
             //smoke test of stockstatus - product type data table
-            producttype.VerifyStockStatusProductTypePageElements();
+            common.VerifyPersistentNav();
+            stockStatus.VerifyStockStatusProductTypePageElements();
+            common.VerifyDataTableOnPage();
+            
+            stockStatus.ProductTypeTableFilterInputTest();
             common.VerifyDataTableOnPage();
 
-            //smoke test filter input && re-verify data table
-            producttype.TestTableFilterInput();
-            common.VerifyDataTableOnPage();
 
             //drill into product type table to nav to Production Facilities page/table
-            producttype.DrillIntoTable();
+            stockStatus.ProductTypeDrillIntoTable();
         }
 
         [Test]
         public void StockStatusProductionFacilitiesTest()
         {
-            //login to app
-            SMLoginPageObject loginpage = new SMLoginPageObject();
-            SMDashboardPageObject dashboard = loginpage.Login("dpeterson", "ADano!#1519!#");
-
-            //init common
-            SMCommonPageObject common = new SMCommonPageObject();
-
-            //navigate to Product type page && init locators
-            dashboard.NavToStockStatusProductType();
-            SMStockStatusProductTypePageObject producttype = new SMStockStatusProductTypePageObject();
+            //init page object & login to app
+            SMLoginPageObject loginPage = new SMLoginPageObject();
+            SMCommonPageObject common = loginPage.Login();
             
-            //navigate to Production Facilities & init locators 
-            producttype.DrillIntoTable();
-            SMStockStatusProductionFacilitiesPageObject ProdFacilities = new SMStockStatusProductionFacilitiesPageObject();
+
+            //navigate to Product type page & init locators
+            SMStockStatusPageObject stockStatus = common.NavigateToStockStatus();
+
+
+            //drill into product type table to navigate to production facilities page & init page object
+            stockStatus.ProductTypeDrillIntoTable();
+
 
             //smoke test prod facilities
-            ProdFacilities.VerifyStockStatusProductionFacilitiesPageElements();
+            common.VerifyPersistentNav();
+            stockStatus.VerifyStockStatusProductionFacilitiesPageElements();
             common.VerifyDataTableOnPage();
+            
+            stockStatus.ProductionFacilitiesTableFilterInputTest();
+            common.VerifyDataTableOnPage();
+        }
+
+
+        [Test]
+        public void StockStatusCurrentStockTest()
+        {
+            //init page object & login to app
+            SMLoginPageObject loginPage = new SMLoginPageObject();
+            SMCommonPageObject common = loginPage.Login();
+
+
+            //navigate to product type page & init locators
+            SMStockStatusPageObject stockStatus = common.NavigateToStockStatus();
+
+
+            //drill into product type table - drill into prod facilities table
+            stockStatus.ProductTypeDrillIntoTable();
+            stockStatus.ProductionFacilitiesDrillIntoTable();
+
+            //smoke test view stock status page
+            common.VerifyPersistentNav();
+            stockStatus.VerifyStockStatusViewStockStatusPageElements();
+
+            
         }
 
         [TearDown]

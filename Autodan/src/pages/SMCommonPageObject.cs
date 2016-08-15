@@ -12,11 +12,12 @@ namespace Autodan
             PageFactory.InitElements(PropertiesCollection.driver, this);
         }
 
-        //navigation elements
+
+        //common+shared navigation elements
         [FindsBy(How = How.CssSelector, Using = "#logout > a")]
         public IWebElement NavBtnLogOut { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "body > header > div > nav > ul > li.active > a")]
+        [FindsBy(How = How.CssSelector, Using = "body > header > div > nav > ul > li:nth-child(1) > a")]
         public IWebElement NavBtnHome { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > header > div > nav > ul > li:nth-child(2) > a")]
@@ -37,13 +38,38 @@ namespace Autodan
         [FindsBy(How = How.CssSelector, Using = "body > footer > div > p")]
         public IWebElement pageFooterCopyRight { get; set; }
 
+
+        //dashboard page elements
+        [FindsBy(How = How.CssSelector, Using = "body > div > div.home-button.stock-status")]
+        public IWebElement BtnStockStatusBlock { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "body > div > div.home-button.sla")]
+        public IWebElement BtnServiceLevelAgreementBlock { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "body > div > div.home-button.facilities")]
+        public IWebElement BtnFacilitesBlock { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "body > div > div.home-button.reports")]
+        public IWebElement BtnReportsBlock { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "#thisSelectorDoesntExist")]
+        public IWebElement TestSelector { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "body > header > div > div.navbar-header.navbar-left > h3")]
+        public IWebElement PageTitle { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "body > footer > div > p")]
+        public IWebElement PageFooter { get; set; }
+
+
+        //expected elements
         public void VerifyPersistentNav()
         {
             NavBtnLogOut.Verify();
             NavBtnHome.Verify();
             NavBtnStockStatus.Verify();
             NavBtnSla.Verify();
-            Console.WriteLine("Verified persistent navigation elements");
+            Console.WriteLine("Verified: persistent navigation elements");
         }
 
         public void VerifyDataTableOnPage()
@@ -51,7 +77,36 @@ namespace Autodan
             DataTableContainer.Verify();
             DataTableInfo.Verify();
             DataTablePager.Verify();
-            Console.WriteLine("Verified presence of data table on page");
+            Console.WriteLine("Verified: presence of data table on page");
+            Console.WriteLine("Verified: data table pager");
+            Console.WriteLine("Verified: data table info footer");
+        }
+
+        public void VerifyDashboardPageElements()
+        {
+            NavBtnHome.Verify();
+            NavBtnLogOut.Verify();
+            NavBtnSla.Verify();
+            BtnStockStatusBlock.Verify();
+            BtnServiceLevelAgreementBlock.Verify();
+            BtnFacilitesBlock.Verify();
+            BtnReportsBlock.Verify();
+            PageTitle.Verify();
+            PageFooter.Verify();
+            Console.WriteLine("Verified: dashboard page elements");
+            Console.WriteLine("Verified: page navigation elements");
+        }
+
+
+        //common+shared actions
+        //dashboard navigation
+        public SMStockStatusPageObject NavigateToStockStatus()
+        {
+            BtnStockStatusBlock.Click();
+            Console.WriteLine("Navigating to Stock Status - Product Type");
+
+            //returns page object
+            return new SMStockStatusPageObject();
         }
     }
 }
