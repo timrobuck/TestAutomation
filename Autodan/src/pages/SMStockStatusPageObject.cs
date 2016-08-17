@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Autodan.core;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System;
 
@@ -8,7 +9,7 @@ namespace Autodan
     {
         public SMStockStatusPageObject()
         {
-            PageFactory.InitElements(PropertiesCollection.driver, this);
+            PageFactory.InitElements(BaseTest.driver, this);
         }
 
 
@@ -122,7 +123,7 @@ namespace Autodan
             Console.WriteLine("Verified: data table container and columns");
         }
 
-        public void VerifyStockStatusViewStockStatusPageElements()
+        public void VerifyStockStatusCurrentStockStatusPageElements()
         {
             BreadCrumbHome.Verify();
             BreadCrumbProductType.Verify();
@@ -139,7 +140,7 @@ namespace Autodan
             Console.WriteLine("Verified: data table container and columns");
         }
 
-        public void ProductTypeTableFilterInputTest()
+        public void StockStatusProductTypeTableFilterInputTest()
         {
             InputSearchDataTableFilter.SendKeys("Mug");
             InputSearchDataTableFilter.Clear();
@@ -152,7 +153,7 @@ namespace Autodan
             Console.WriteLine("Verified: filter text input function and table filtering");
         }
 
-        public void ProductionFacilitiesTableFilterInputTest()
+        public void StockStatusProdFacilitiesTableFilterInputTest()
         {
             InputSearchDataTableFilter.SendKeys("Duplium");
             InputSearchDataTableFilter.Clear();
@@ -168,7 +169,7 @@ namespace Autodan
 
         //page specific actions
         //Product Type(subpage)
-        public SMStockStatusPageObject ProductTypeDrillIntoTable()
+        public SMStockStatusPageObject ClickProductTypeTableRow()
         {
             ProductTypeTableInteractView.Click();
             Console.WriteLine("Drilling into table - Navigating to Production Facilities page");
@@ -177,7 +178,7 @@ namespace Autodan
         }
 
         //Product Facilities(subpage)
-        public void ProductionFacilitiesDrillIntoTable()
+        public void ClickProdFacilitiesTableRow()
         {
             ProductionFacilitiesTableInteractView.Click();
         }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium.Support.UI;
+using Autodan.core;
 
 namespace Autodan
 {
@@ -13,7 +14,7 @@ namespace Autodan
     {
         public SMLoginPageObject()
         {
-            PageFactory.InitElements(PropertiesCollection.driver, this);
+            PageFactory.InitElements(BaseTest.driver, this);
         }
 
         //login page elements
