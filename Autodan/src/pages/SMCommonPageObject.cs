@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Autodan.core;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System;
 
@@ -9,7 +10,7 @@ namespace Autodan
 
         public SMCommonPageObject()
         {
-            PageFactory.InitElements(PropertiesCollection.driver, this);
+            PageFactory.InitElements(BaseTest.driver, this);
         }
 
 
@@ -25,6 +26,9 @@ namespace Autodan
 
         [FindsBy(How = How.CssSelector, Using = "body > header > div > nav > ul > li:nth-child(3) > a")]
         public IWebElement NavBtnSla { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "body > header > div > div.navbar-header.navbar-left > h3")]
+        public IWebElement SMTitle { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_wrapper")]
         public IWebElement DataTableContainer { get; set; }
@@ -107,6 +111,24 @@ namespace Autodan
 
             //returns page object
             return new SMStockStatusPageObject();
+        }
+
+        public SMSlaPageObject NavigateToSLA()
+        {
+            BtnServiceLevelAgreementBlock.Click();
+            Console.WriteLine("Navigating to SLA - Product Type");
+
+            //returns page object
+            return new SMSlaPageObject();
+        }
+
+        public SMFacilitiesPageObject NavigateToFacilities()
+        {
+            BtnFacilitesBlock.Click();
+            Console.WriteLine("Navigating to SLA - Select a Facility");
+
+            //return page object
+            return new SMFacilitiesPageObject();
         }
     }
 }
