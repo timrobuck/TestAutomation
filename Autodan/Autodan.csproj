@@ -85,7 +85,8 @@
     <Compile Include="src\pages\SMCommonPageObject.cs" />
     <Compile Include="src\pages\SMLoginPageObject.cs" />
     <Compile Include="src\pages\SMFacilitiesPageObject.cs" />
-    <Compile Include="src\pages\SMSLAPageObject.cs" />
+    <Compile Include="src\pages\SMReportsPageObject.cs" />
+    <Compile Include="src\pages\SMSlaPageObject.cs" />
     <Compile Include="src\pages\SMStockStatusPageObject.cs" />
     <Compile Include="tests\ShippingManagerSmokeTest.cs" />
   </ItemGroup>

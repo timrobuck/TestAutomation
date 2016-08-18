@@ -222,5 +222,28 @@ namespace Autodan
             facPage.VerifyViewFacilityPageElements();
         }
 
+        [Test]
+        public void SMReportsSmokeTest()
+        {
+            //build test
+            Setup("chrome");
+
+            //init page object and login to app
+            SMLoginPageObject loginPage = new SMLoginPageObject();
+            SMCommonPageObject common = loginPage.Login();
+
+            //nav to reports landing page and init locators
+            SMReportsPageObject reportsPage = common.NavigateToReports();
+
+            //smoke test Reports - View Reports
+            common.VerifyPersistentNav();
+            reportsPage.VerifyReportsPageElements();
+            reportsPage.TestReportsTableFilterInput();
+            reportsPage.ClickReportsTableRow();
+
+            //smoke test Reports - Facility reports page
+            common.VerifyPersistentNav();
+            reportsPage.VerifyReportsFacilityStockAvailPageElements();
+        }
     }
 }
