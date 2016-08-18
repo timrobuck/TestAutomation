@@ -122,6 +122,15 @@ namespace Autodan
             return new SMSlaPageObject();
         }
 
+        public SMReportsPageObject NavigateToReports()
+        {
+            BtnReportsBlock.Click();
+            Console.WriteLine("Navigating to Reports - View Reports");
+
+            //returns page object
+            return new SMReportsPageObject();
+        }
+
         public SMFacilitiesPageObject NavigateToFacilities()
         {
             BtnFacilitesBlock.Click();
