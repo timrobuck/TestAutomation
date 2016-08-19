@@ -50,8 +50,8 @@ namespace Autodan
         public SMCommonPageObject Login()
         {
             //username + pw + submit
-            txtUserName.SendKeys("dpeterson");
-            txtPassword.SendKeys("ADano!#1519!#");
+            txtUserName.SendKeys("CORP_Webdriver");
+            txtPassword.SendKeys("ANapPqH<");
             btnLogin.Submit();
 
             Console.WriteLine("input credentials, logged into Shipping Manager");
