@@ -4,17 +4,17 @@ using NUnit.Framework;
 
 namespace Autodan.tests.ShippingManager
 {
-    internal class ShippingManagerSmokeTest : BaseTest
+    internal class SmSmokeTest : BaseTest
     {
 
         [Test]
         public void SmLoginPageTest()
         {
             //build test
-            Setup("chrome");
+            Setup("chrome", "shippingmanager");
 
             //navigate to login page of Shipping Manager app
-            SmLoginPageObject loginPage = new SmLoginPageObject();
+            var loginPage = new SmLoginPageObject();
 
             //verify login page elements
             loginPage.VerifyLoginPageElements();
@@ -30,11 +30,11 @@ namespace Autodan.tests.ShippingManager
         public void SmDashboardPageTest()
         {
             //build test
-            Setup("chrome");
+            Setup("chrome", "shippingmanager");
 
             //login to app
-            SmLoginPageObject loginPage = new SmLoginPageObject();
-            SmCommonPageObject common = loginPage.Login();
+            var loginPage = new SmLoginPageObject();
+            var common = loginPage.Login();
 
             //smoke test dashboard page
             common.VerifyPersistentNav();
@@ -48,14 +48,14 @@ namespace Autodan.tests.ShippingManager
         public void SmStockStatusProductTypeTest()
         {
             //build test
-            Setup("chrome");
+            Setup("chrome", "shippingmanager");
 
             //init page object & login to app
-            SmLoginPageObject loginPage = new SmLoginPageObject();
-            SmCommonPageObject common = loginPage.Login();
+            var loginPage = new SmLoginPageObject();
+            var common = loginPage.Login();
 
             //navigate to Product type page & init locators
-            SmStockStatusPageObject stockStatus = common.NavigateToStockStatus();
+            var stockStatus = common.NavigateToStockStatus();
 
             //smoke test of stockstatus - product type data table
             common.VerifyPersistentNav();
@@ -76,14 +76,14 @@ namespace Autodan.tests.ShippingManager
         public void SmStockStatusProductionFacilitiesTest()
         {
             //build test
-            Setup("chrome");
+            Setup("chrome", "shippingmanager");
 
             //init page object & login to app
-            SmLoginPageObject loginPage = new SmLoginPageObject();
-            SmCommonPageObject common = loginPage.Login();
+            var loginPage = new SmLoginPageObject();
+            var common = loginPage.Login();
 
             //navigate to Product type page & init locators
-            SmStockStatusPageObject stockStatus = common.NavigateToStockStatus();
+            var stockStatus = common.NavigateToStockStatus();
 
             //drill into product type table to navigate to production facilities page & init page object
             stockStatus.ClickProductTypeTableRow();
@@ -105,14 +105,14 @@ namespace Autodan.tests.ShippingManager
         public void SmStockStatusCurrentStockTest()
         {
             //build test
-            Setup("chrome");
+            Setup("chrome", "shippingmanager");
 
             //init page object & login to app
-            SmLoginPageObject loginPage = new SmLoginPageObject();
-            SmCommonPageObject common = loginPage.Login();
+            var loginPage = new SmLoginPageObject();
+            var common = loginPage.Login();
 
             //navigate to product type page & init locators
-            SmStockStatusPageObject stockStatus = common.NavigateToStockStatus();
+            var stockStatus = common.NavigateToStockStatus();
 
             //drill into product type table - drill into prod facilities table
             stockStatus.ClickProductTypeTableRow();
@@ -130,14 +130,14 @@ namespace Autodan.tests.ShippingManager
         public void SmStockStatusSmokeTest()
         {
             //build test
-            Setup("chrome");
+            Setup("chrome", "shippingmanager");
 
             //init page object & login to app
-            SmLoginPageObject loginPage = new SmLoginPageObject();
-            SmCommonPageObject common = loginPage.Login();
+            var loginPage = new SmLoginPageObject();
+            var common = loginPage.Login();
 
             //navigate to stock status - product type & init locators
-            SmStockStatusPageObject stockStatus = common.NavigateToStockStatus();
+            var stockStatus = common.NavigateToStockStatus();
 
             //smoke test Stock Status - Product Type page
             common.VerifyPersistentNav();
@@ -163,14 +163,14 @@ namespace Autodan.tests.ShippingManager
         public void SmSlaSmokeTest()
         {
             //build test
-            Setup("chrome");
+            Setup("chrome", "shippingmanager");
 
             //init page object & login to app
-            SmLoginPageObject loginPage = new SmLoginPageObject();
-            SmCommonPageObject common = loginPage.Login();
+            var loginPage = new SmLoginPageObject();
+            var common = loginPage.Login();
 
             //navigate to product type page & init locators (sla)
-            SmSlaPageObject slaPage = common.NavigateToSla();
+            var slaPage = common.NavigateToSla();
 
             //smoke test SLA - Product type
             common.VerifyPersistentNav();
@@ -196,14 +196,14 @@ namespace Autodan.tests.ShippingManager
         public void SmFacilitiesSmokeTest()
         {
             //build test
-            Setup("chrome");
+            Setup("chrome", "shippingmanager");
 
             //init page object and login to app
-            SmLoginPageObject loginPage = new SmLoginPageObject();
-            SmCommonPageObject common = loginPage.Login();
+            var loginPage = new SmLoginPageObject();
+            var common = loginPage.Login();
 
             //nav to facilities landing page and init locators
-            SmFacilitiesPageObject facPage = common.NavigateToFacilities();
+            var facPage = common.NavigateToFacilities();
 
             //smoke test Facilities - Select a facility
             common.VerifyPersistentNav();
@@ -220,14 +220,14 @@ namespace Autodan.tests.ShippingManager
         public void SmReportsSmokeTest()
         {
             //build test
-            Setup("chrome");
+            Setup("chrome", "shippingmanager");
 
             //init page object and login to app
-            SmLoginPageObject loginPage = new SmLoginPageObject();
-            SmCommonPageObject common = loginPage.Login();
+            var loginPage = new SmLoginPageObject();
+            var common = loginPage.Login();
 
             //nav to reports landing page and init locators
-            SmReportsPageObject reportsPage = common.NavigateToReports();
+            var reportsPage = common.NavigateToReports();
 
             //smoke test Reports - View Reports
             common.VerifyPersistentNav();

@@ -13,11 +13,11 @@ namespace Autodan.pages.ShippingManager
         }
 
         //login page elements
-        [FindsBy(How = How.Id, Using = "UserName")]
-        public IWebElement TxtUserName { get; set; }
+        [FindsBy(How = How.CssSelector, Using = "#UserName")]
+        public IWebElement UserName { get; set; }
 
-        [FindsBy(How = How.Id, Using = "Password")]
-        public IWebElement TxtPassword { get; set; }
+        [FindsBy(How = How.CssSelector, Using = "#Password")]
+        public IWebElement Password { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div > div > form > button")]
         public IWebElement BtnLogin { get; set; }
@@ -32,8 +32,8 @@ namespace Autodan.pages.ShippingManager
         //expected elements
         public void VerifyLoginPageElements()
         {
-            TxtUserName.Verify();
-            TxtPassword.Verify();
+            UserName.Verify();
+            Password.Verify();
             BtnLogin.Verify();
             PageTitle.Verify();
             PageFooter.Verify();
@@ -45,8 +45,8 @@ namespace Autodan.pages.ShippingManager
         public SmCommonPageObject Login()
         {
             //username + pw + submit
-            TxtUserName.SendKeys("CORP_Webdriver");
-            TxtPassword.SendKeys("ANapPqH<");
+            UserName.SendKeys("CORP_Webdriver");
+            Password.SendKeys("ANapPqH<");
             BtnLogin.Submit();
 
             Console.WriteLine("input credentials, logged into Shipping Manager");
