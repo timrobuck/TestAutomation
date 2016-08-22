@@ -1,15 +1,15 @@
-﻿using Autodan.core;
+﻿using System;
+using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using System;
 
-namespace Autodan
+namespace Autodan.pages.ShippingManager
 {
-    class SMStockStatusPageObject
+    internal class SmStockStatusPageObject
     {
-        public SMStockStatusPageObject()
+        public SmStockStatusPageObject()
         {
-            PageFactory.InitElements(BaseTest.driver, this);
+            PageFactory.InitElements(BaseTest.Driver, this);
         }
 
 
@@ -43,7 +43,7 @@ namespace Autodan
 
         //Product Type Table Specific
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(1) > div")]
-        public IWebElement TableColumnPTN { get; set; }
+        public IWebElement TableColumnPtn { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(2) > div")]
         public IWebElement TableColumnCaption { get; set; }
@@ -97,7 +97,7 @@ namespace Autodan
             StockStatusPageTitle.Verify();
             DropdownDataTableRecordsPerPage.Verify();
             InputSearchDataTableFilter.Verify();
-            TableColumnPTN.Verify();
+            TableColumnPtn.Verify();
             TableColumnCaption.Verify();
             TableColumnFacilities.Verify();
             ProductTypeTableInteractView.Verify();
@@ -169,12 +169,12 @@ namespace Autodan
 
         //page specific actions
         //Product Type(subpage)
-        public SMStockStatusPageObject ClickProductTypeTableRow()
+        public SmStockStatusPageObject ClickProductTypeTableRow()
         {
             ProductTypeTableInteractView.Click();
             Console.WriteLine("Drilling into table - Navigating to Production Facilities page");
 
-            return new SMStockStatusPageObject();
+            return new SmStockStatusPageObject();
         }
 
         //Product Facilities(subpage)

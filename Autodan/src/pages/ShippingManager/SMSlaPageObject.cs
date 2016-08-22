@@ -1,15 +1,15 @@
-﻿using Autodan.core;
+﻿using System;
+using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using System;
 
-namespace Autodan
+namespace Autodan.pages.ShippingManager
 {
-    class SMSlaPageObject
+    internal class SmSlaPageObject
     {
-        public SMSlaPageObject()
+        public SmSlaPageObject()
         {
-            PageFactory.InitElements(BaseTest.driver, this);
+            PageFactory.InitElements(BaseTest.Driver, this);
         }
 
 
@@ -24,12 +24,12 @@ namespace Autodan
         public IWebElement BreadCrumbFacilitiesList { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div > ul >li:nth-child(4)")]
-        public IWebElement BreadCrumbEditSLA { get; set; }
+        public IWebElement BreadCrumbEditSla { get; set; }
 
 
         //SLA  page headers
         [FindsBy(How = How.CssSelector, Using = "body > header > div > div.navbar-header.navbar-left > h3")]
-        public IWebElement SLAPageTitle { get; set; }
+        public IWebElement SlaPageTitle { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_length > label > select")]
         public IWebElement DropdownDataTableRecordsPerPage { get; set; }
@@ -43,7 +43,7 @@ namespace Autodan
 
         //SLA - Product Type Table Specific
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(1) > div")]
-        public IWebElement TableColumnPTN { get; set; }
+        public IWebElement TableColumnPtn { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(2) > div")]
         public IWebElement TableColumnCaption { get; set; }
@@ -52,7 +52,7 @@ namespace Autodan
         public IWebElement TableColumnFacilities { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td:nth-child(3) > a")]
-        public IWebElement SLAProductTypeTableInteractView { get; set; }
+        public IWebElement SlaProductTypeTableInteractView { get; set; }
         
 
         //SLA - Production Facilities page specific
@@ -69,7 +69,7 @@ namespace Autodan
         public IWebElement TableColumnStockStatus { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td:nth-child(4) > a")]
-        public IWebElement SLAProductionFacilitiesTableInteractView { get; set; }
+        public IWebElement SlaProductionFacilitiesTableInteractView { get; set; }
 
 
         //SLA - current SLA page specific
@@ -96,45 +96,45 @@ namespace Autodan
 
 
         //expected elements
-        public void VerifySLAProductTypePageElements()
+        public void VerifySlaProductTypePageElements()
         {
             BreadCrumbHome.Verify();
             BreadCrumbProductType.Verify();
-            SLAPageTitle.Verify();
+            SlaPageTitle.Verify();
             DropdownDataTableRecordsPerPage.Verify();
             InputSearchDataTableFilter.Verify();
-            TableColumnPTN.Verify();
+            TableColumnPtn.Verify();
             TableColumnCaption.Verify();
             TableColumnFacilities.Verify();
-            SLAProductTypeTableInteractView.Verify();
+            SlaProductTypeTableInteractView.Verify();
             Console.WriteLine("Verified: SLA - Product Type Page Elements");
             Console.WriteLine("Verified: bread crumbs");
             Console.WriteLine("Verified: data table container and columns");
         }
 
-        public void VerifySLAProductionFacilitiesPageElements()
+        public void VerifySlaProductionFacilitiesPageElements()
         {
             BreadCrumbHome.Verify();
             BreadCrumbProductType.Verify();
-            SLAPageTitle.Verify();
+            SlaPageTitle.Verify();
             DropdownDataTableRecordsPerPage.Verify();
             InputSearchDataTableFilter.Verify();
             TableColumnFacilityName.Verify();
             TableColumnCountryCode.Verify();
             TableColumnIsOwnedByCafePress.Verify();
             TableColumnStockStatus.Verify();
-            SLAProductionFacilitiesTableInteractView.Verify();
+            SlaProductionFacilitiesTableInteractView.Verify();
             Console.WriteLine("Verified: SLA - Production Facilities Page Elements");
             Console.WriteLine("Verified: bread crumbs");
             Console.WriteLine("Verified: data table container and columns");
         }
 
-        public void VerifySLAViewCurrentSLAPageElements()
+        public void VerifySlaViewCurrentSlaPageElements()
         {
             BreadCrumbHome.Verify();
             BreadCrumbProductType.Verify();
             BreadCrumbFacilitiesList.Verify();
-            BreadCrumbEditSLA.Verify();
+            BreadCrumbEditSla.Verify();
             TableColumnColor.Verify();
             TableColumnSize.Verify();
             TableColumnAttribute.Verify();
@@ -147,7 +147,7 @@ namespace Autodan
             Console.WriteLine("Verified: data table container and columns");
         }
 
-        public void SLAProductTypeTableFilterInputTest()
+        public void SlaProductTypeTableFilterInputTest()
         {
             InputSearchDataTableFilter.SendKeys("Mug");
             InputSearchDataTableFilter.Clear();
@@ -160,7 +160,7 @@ namespace Autodan
             Console.WriteLine("Verified: filter text input function and table filtering");
         }
 
-        public void SLAProductionFacilitiesTableFilterInputTest()
+        public void SlaProductionFacilitiesTableFilterInputTest()
         {
             InputSearchDataTableFilter.SendKeys("Duplium");
             InputSearchDataTableFilter.Clear();
@@ -176,18 +176,18 @@ namespace Autodan
 
         //page specific actions
         //Product Type(subpage)
-        public SMStockStatusPageObject ClickSLAProductTypeTableRow()
+        public SmStockStatusPageObject ClickSlaProductTypeTableRow()
         {
-            SLAProductTypeTableInteractView.Click();
+            SlaProductTypeTableInteractView.Click();
             Console.WriteLine("Drilling into table - Navigating to Production Facilities page");
 
-            return new SMStockStatusPageObject();
+            return new SmStockStatusPageObject();
         }
 
         //Product Facilities(subpage)
-        public void ClickSLAFacilitiesTableRow()
+        public void ClickSlaFacilitiesTableRow()
         {
-            SLAProductionFacilitiesTableInteractView.Click();
+            SlaProductionFacilitiesTableInteractView.Click();
         }
 
         public void TestProductionFacilitiesTableFilterInput()

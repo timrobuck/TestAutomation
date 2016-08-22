@@ -1,15 +1,15 @@
-﻿using Autodan.core;
+﻿using System;
+using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using System;
 
-namespace Autodan
+namespace Autodan.pages.ShippingManager
 {
-    class SMFacilitiesPageObject
+    internal class SmFacilitiesPageObject
     {
-        public SMFacilitiesPageObject()
+        public SmFacilitiesPageObject()
         {
-            PageFactory.InitElements(BaseTest.driver, this);
+            PageFactory.InitElements(BaseTest.Driver, this);
         }
 
 
@@ -121,17 +121,17 @@ namespace Autodan
 
         //page specific actions
         //Product Type(subpage)
-        public SMFacilitiesPageObject ClickSLAProductTypeTableRow()
+        public SmFacilitiesPageObject ClickSlaProductTypeTableRow()
         {
             FacilityFacilitiesListTableInteractView.Click();
             Console.WriteLine("Drilling into table - Navigating to View Facility page");
 
-            return new SMFacilitiesPageObject();
+            return new SmFacilitiesPageObject();
         }
 
 
         //Product Facilities(subpage)
-        public void ClickSLAFacilitiesTableRow()
+        public void ClickSlaFacilitiesTableRow()
         {
             FacilityFacilitiesListTableInteractView.Click();
         }

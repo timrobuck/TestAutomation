@@ -1,16 +1,16 @@
-﻿using Autodan.core;
+﻿using System;
+using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using System;
 
-namespace Autodan
+namespace Autodan.pages.ShippingManager
 {
-    class SMCommonPageObject
+    internal class SmCommonPageObject
     {
 
-        public SMCommonPageObject()
+        public SmCommonPageObject()
         {
-            PageFactory.InitElements(BaseTest.driver, this);
+            PageFactory.InitElements(BaseTest.Driver, this);
         }
 
 
@@ -28,7 +28,7 @@ namespace Autodan
         public IWebElement NavBtnSla { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > header > div > div.navbar-header.navbar-left > h3")]
-        public IWebElement SMTitle { get; set; }
+        public IWebElement SmTitle { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_wrapper")]
         public IWebElement DataTableContainer { get; set; }
@@ -40,7 +40,7 @@ namespace Autodan
         public IWebElement DataTablePager { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > footer > div > p")]
-        public IWebElement pageFooterCopyRight { get; set; }
+        public IWebElement PageFooterCopyRight { get; set; }
 
 
         //dashboard page elements
@@ -104,40 +104,40 @@ namespace Autodan
 
         //common+shared actions
         //dashboard navigation
-        public SMStockStatusPageObject NavigateToStockStatus()
+        public SmStockStatusPageObject NavigateToStockStatus()
         {
             BtnStockStatusBlock.Click();
             Console.WriteLine("Navigating to Stock Status - Product Type");
 
             //returns page object
-            return new SMStockStatusPageObject();
+            return new SmStockStatusPageObject();
         }
 
-        public SMSlaPageObject NavigateToSLA()
+        public SmSlaPageObject NavigateToSla()
         {
             BtnServiceLevelAgreementBlock.Click();
             Console.WriteLine("Navigating to SLA - Product Type");
 
             //returns page object
-            return new SMSlaPageObject();
+            return new SmSlaPageObject();
         }
 
-        public SMReportsPageObject NavigateToReports()
+        public SmReportsPageObject NavigateToReports()
         {
             BtnReportsBlock.Click();
             Console.WriteLine("Navigating to Reports - View Reports");
 
             //returns page object
-            return new SMReportsPageObject();
+            return new SmReportsPageObject();
         }
 
-        public SMFacilitiesPageObject NavigateToFacilities()
+        public SmFacilitiesPageObject NavigateToFacilities()
         {
             BtnFacilitesBlock.Click();
             Console.WriteLine("Navigating to SLA - Select a Facility");
 
             //return page object
-            return new SMFacilitiesPageObject();
+            return new SmFacilitiesPageObject();
         }
     }
 }
