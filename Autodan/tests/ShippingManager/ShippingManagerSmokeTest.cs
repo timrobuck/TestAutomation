@@ -1,26 +1,20 @@
 ﻿using Autodan.core;
+using Autodan.pages.ShippingManager;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Autodan
+namespace Autodan.tests.ShippingManager
 {
-    class ShippingManagerSmokeTest : BaseTest
+    internal class ShippingManagerSmokeTest : BaseTest
     {
 
         [Test]
-        public void LoginPageTest()
+        public void SmLoginPageTest()
         {
             //build test
             Setup("chrome");
 
             //navigate to login page of Shipping Manager app
-            SMLoginPageObject loginPage = new SMLoginPageObject();
+            SmLoginPageObject loginPage = new SmLoginPageObject();
 
             //verify login page elements
             loginPage.VerifyLoginPageElements();
@@ -33,14 +27,14 @@ namespace Autodan
         }
 
         [Test]
-        public void DashboardPageTest()
+        public void SmDashboardPageTest()
         {
             //build test
             Setup("chrome");
 
             //login to app
-            SMLoginPageObject loginPage = new SMLoginPageObject();
-            SMCommonPageObject common = loginPage.Login();
+            SmLoginPageObject loginPage = new SmLoginPageObject();
+            SmCommonPageObject common = loginPage.Login();
 
             //smoke test dashboard page
             common.VerifyPersistentNav();
@@ -51,17 +45,17 @@ namespace Autodan
         }
 
         [Test]
-        public void StockStatusProductTypeTest()
+        public void SmStockStatusProductTypeTest()
         {
             //build test
             Setup("chrome");
 
             //init page object & login to app
-            SMLoginPageObject loginPage = new SMLoginPageObject();
-            SMCommonPageObject common = loginPage.Login();
+            SmLoginPageObject loginPage = new SmLoginPageObject();
+            SmCommonPageObject common = loginPage.Login();
 
             //navigate to Product type page & init locators
-            SMStockStatusPageObject stockStatus = common.NavigateToStockStatus();
+            SmStockStatusPageObject stockStatus = common.NavigateToStockStatus();
 
             //smoke test of stockstatus - product type data table
             common.VerifyPersistentNav();
@@ -79,17 +73,17 @@ namespace Autodan
         }
 
         [Test]
-        public void StockStatusProductionFacilitiesTest()
+        public void SmStockStatusProductionFacilitiesTest()
         {
             //build test
             Setup("chrome");
 
             //init page object & login to app
-            SMLoginPageObject loginPage = new SMLoginPageObject();
-            SMCommonPageObject common = loginPage.Login();
+            SmLoginPageObject loginPage = new SmLoginPageObject();
+            SmCommonPageObject common = loginPage.Login();
 
             //navigate to Product type page & init locators
-            SMStockStatusPageObject stockStatus = common.NavigateToStockStatus();
+            SmStockStatusPageObject stockStatus = common.NavigateToStockStatus();
 
             //drill into product type table to navigate to production facilities page & init page object
             stockStatus.ClickProductTypeTableRow();
@@ -108,17 +102,17 @@ namespace Autodan
 
 
         [Test]
-        public void StockStatusCurrentStockTest()
+        public void SmStockStatusCurrentStockTest()
         {
             //build test
             Setup("chrome");
 
             //init page object & login to app
-            SMLoginPageObject loginPage = new SMLoginPageObject();
-            SMCommonPageObject common = loginPage.Login();
+            SmLoginPageObject loginPage = new SmLoginPageObject();
+            SmCommonPageObject common = loginPage.Login();
 
             //navigate to product type page & init locators
-            SMStockStatusPageObject stockStatus = common.NavigateToStockStatus();
+            SmStockStatusPageObject stockStatus = common.NavigateToStockStatus();
 
             //drill into product type table - drill into prod facilities table
             stockStatus.ClickProductTypeTableRow();
@@ -133,17 +127,17 @@ namespace Autodan
         }
 
         [Test]
-        public void SMStockStatusSmokeTest()
+        public void SmStockStatusSmokeTest()
         {
             //build test
             Setup("chrome");
 
             //init page object & login to app
-            SMLoginPageObject loginPage = new SMLoginPageObject();
-            SMCommonPageObject common = loginPage.Login();
+            SmLoginPageObject loginPage = new SmLoginPageObject();
+            SmCommonPageObject common = loginPage.Login();
 
             //navigate to stock status - product type & init locators
-            SMStockStatusPageObject stockStatus = common.NavigateToStockStatus();
+            SmStockStatusPageObject stockStatus = common.NavigateToStockStatus();
 
             //smoke test Stock Status - Product Type page
             common.VerifyPersistentNav();
@@ -166,56 +160,56 @@ namespace Autodan
         }
 
         [Test]
-        public void SMSlaSmokeTest()
+        public void SmSlaSmokeTest()
         {
             //build test
             Setup("chrome");
 
             //init page object & login to app
-            SMLoginPageObject loginPage = new SMLoginPageObject();
-            SMCommonPageObject common = loginPage.Login();
+            SmLoginPageObject loginPage = new SmLoginPageObject();
+            SmCommonPageObject common = loginPage.Login();
 
             //navigate to product type page & init locators (sla)
-            SMSlaPageObject slaPage = common.NavigateToSLA();
+            SmSlaPageObject slaPage = common.NavigateToSla();
 
             //smoke test SLA - Product type
             common.VerifyPersistentNav();
-            slaPage.VerifySLAProductTypePageElements();
-            slaPage.SLAProductTypeTableFilterInputTest();
-            slaPage.ClickSLAProductTypeTableRow();
+            slaPage.VerifySlaProductTypePageElements();
+            slaPage.SlaProductTypeTableFilterInputTest();
+            slaPage.ClickSlaProductTypeTableRow();
 
             //smoke test SLA - Facilities
             common.VerifyPersistentNav();
-            slaPage.VerifySLAProductionFacilitiesPageElements();
-            slaPage.SLAProductionFacilitiesTableFilterInputTest();
-            slaPage.ClickSLAFacilitiesTableRow();
+            slaPage.VerifySlaProductionFacilitiesPageElements();
+            slaPage.SlaProductionFacilitiesTableFilterInputTest();
+            slaPage.ClickSlaFacilitiesTableRow();
 
             //smoke test SLA - Current SLA
             common.VerifyPersistentNav();
-            slaPage.VerifySLAViewCurrentSLAPageElements();
+            slaPage.VerifySlaViewCurrentSlaPageElements();
 
             //teardown
             Cleanup();
         }
 
         [Test]
-        public void SMFacilitiesSmokeTest()
+        public void SmFacilitiesSmokeTest()
         {
             //build test
             Setup("chrome");
 
             //init page object and login to app
-            SMLoginPageObject loginPage = new SMLoginPageObject();
-            SMCommonPageObject common = loginPage.Login();
+            SmLoginPageObject loginPage = new SmLoginPageObject();
+            SmCommonPageObject common = loginPage.Login();
 
             //nav to facilities landing page and init locators
-            SMFacilitiesPageObject facPage = common.NavigateToFacilities();
+            SmFacilitiesPageObject facPage = common.NavigateToFacilities();
 
             //smoke test Facilities - Select a facility
             common.VerifyPersistentNav();
             facPage.VerifyFacilitySelectFacilityPageElements();
             facPage.FacilitiesSelectFacilityTableFilterInputTest();
-            facPage.ClickSLAFacilitiesTableRow();
+            facPage.ClickSlaFacilitiesTableRow();
 
             //smoke test View facility subpage
             common.VerifyPersistentNav();
@@ -223,17 +217,17 @@ namespace Autodan
         }
 
         [Test]
-        public void SMReportsSmokeTest()
+        public void SmReportsSmokeTest()
         {
             //build test
             Setup("chrome");
 
             //init page object and login to app
-            SMLoginPageObject loginPage = new SMLoginPageObject();
-            SMCommonPageObject common = loginPage.Login();
+            SmLoginPageObject loginPage = new SmLoginPageObject();
+            SmCommonPageObject common = loginPage.Login();
 
             //nav to reports landing page and init locators
-            SMReportsPageObject reportsPage = common.NavigateToReports();
+            SmReportsPageObject reportsPage = common.NavigateToReports();
 
             //smoke test Reports - View Reports
             common.VerifyPersistentNav();

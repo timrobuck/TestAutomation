@@ -1,15 +1,15 @@
-﻿using Autodan.core;
+﻿using System;
+using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using System;
 
-namespace Autodan
+namespace Autodan.pages.ShippingManager
 {
-    class SMReportsPageObject
+    internal class SmReportsPageObject
     {
-        public SMReportsPageObject()
+        public SmReportsPageObject()
         {
-            PageFactory.InitElements(BaseTest.driver, this);
+            PageFactory.InitElements(BaseTest.Driver, this);
         }
 
 

@@ -1,78 +1,58 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium.Support.UI;
+﻿using System;
 using Autodan.core;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
 
-namespace Autodan
+namespace Autodan.pages.ShippingManager
 {
-    class SMLoginPageObject
+    internal class SmLoginPageObject
     {
-        public SMLoginPageObject()
+        public SmLoginPageObject()
         {
-            PageFactory.InitElements(BaseTest.driver, this);
+            PageFactory.InitElements(BaseTest.Driver, this);
         }
 
         //login page elements
         [FindsBy(How = How.Id, Using = "UserName")]
-        public IWebElement txtUserName { get; set; }
+        public IWebElement TxtUserName { get; set; }
 
         [FindsBy(How = How.Id, Using = "Password")]
-        public IWebElement txtPassword { get; set; }
+        public IWebElement TxtPassword { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div > div > form > button")]
-        public IWebElement btnLogin { get; set; }
+        public IWebElement BtnLogin { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > header > div > div > h3")]
-        public IWebElement pageTitle { get; set; }
+        public IWebElement PageTitle { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = ".container>p")]
-        public IWebElement pageFooter { get; set; }
+        public IWebElement PageFooter { get; set; }
 
 
         //expected elements
         public void VerifyLoginPageElements()
         {
-            txtUserName.Verify();
-            txtPassword.Verify();
-            btnLogin.Verify();
-            pageTitle.Verify();
-            pageFooter.Verify();
+            TxtUserName.Verify();
+            TxtPassword.Verify();
+            BtnLogin.Verify();
+            PageTitle.Verify();
+            PageFooter.Verify();
             Console.WriteLine("Verified: Login Page Elements");
         }
 
 
         //login page actions
-        public SMCommonPageObject Login()
+        public SmCommonPageObject Login()
         {
             //username + pw + submit
-            txtUserName.SendKeys("CORP_Webdriver");
-            txtPassword.SendKeys("ANapPqH<");
-            btnLogin.Submit();
+            TxtUserName.SendKeys("CORP_Webdriver");
+            TxtPassword.SendKeys("ANapPqH<");
+            BtnLogin.Submit();
 
             Console.WriteLine("input credentials, logged into Shipping Manager");
 
             //return page object
-            return new SMCommonPageObject();
+            return new SmCommonPageObject();
         }
-
-        //public SMDashboardPageObject Login(string userName, string password)
-        //{
-        //    //username
-        //    txtUserName.SendKeys(userName);
-        //    //password
-        //    txtPassword.SendKeys(password);
-        //    //click btn
-        //    btnLogin.Submit();
-
-        //    Console.WriteLine("Credentials provided, logging into Shipping Manager");
-
-        //    //return page object
-        //    return new SMDashboardPageObject();
-        //}
     }
 }
