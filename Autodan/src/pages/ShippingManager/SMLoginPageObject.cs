@@ -42,6 +42,7 @@ namespace Autodan.pages.ShippingManager
 
 
         //login page actions
+        //login to shipping manager and passes common page object
         public SmCommonPageObject Login()
         {
             //username + pw + submit

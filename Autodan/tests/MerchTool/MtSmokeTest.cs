@@ -1,12 +1,15 @@
 ﻿using Autodan.core;
 using Autodan.pages.MerchTool;
+using Autodan.pages.ShippingManager;
+using NUnit.Core;
 using NUnit.Framework;
 
 namespace Autodan.tests.MerchTool
 {
-    internal class MtSmokeTest : BaseTest
+    [TestFixture]
+    [Parallelizable(ParallelScope.None)]
+    public class MtSmokeTest : BaseTest
     {
-
         [Test]
         public void MtLoginPageTest()
         {
@@ -27,9 +30,20 @@ namespace Autodan.tests.MerchTool
         }
 
         [Test]
-        public void DashboardPageTest()
+        public void MtDashboardPageTest()
         {
             //build test
+            Setup("chrome", "merchtool");
+
+            //nav to login page
+            var loginPage = new MtLoginPageObject();
+            var common = loginPage.Login();
+
+            //smoke test dashboard page(landing page)
+            common.VerifyLandingPage();
+            common.VerifyPersistentNav();
         }
+
+
     }
 }

@@ -7,7 +7,6 @@ namespace Autodan.pages.ShippingManager
 {
     internal class SmCommonPageObject
     {
-
         public SmCommonPageObject()
         {
             PageFactory.InitElements(BaseTest.Driver, this);
@@ -138,6 +137,12 @@ namespace Autodan.pages.ShippingManager
 
             //return page object
             return new SmFacilitiesPageObject();
+        }
+
+        public void NavigateToHome()
+        {
+            NavBtnHome.Click();
+            Console.WriteLine("navigating to home");
         }
     }
 }

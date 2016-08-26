@@ -31,11 +31,17 @@ namespace Autodan.pages.MerchTool
 
 
         //loginpage actions
-        public void Login()
+        //login to merchtool and passes common page object
+        public MtCommonPageObject Login()
         {
             UserName.EnterText("CORP_Webdriver");
             Password.EnterText("ANapPqH<");
             BtnLogin.Click();
+
+            Console.WriteLine("input creds, logged into merchtool");
+
+            //return po
+            return new MtCommonPageObject();
         }
 
         //expected elements

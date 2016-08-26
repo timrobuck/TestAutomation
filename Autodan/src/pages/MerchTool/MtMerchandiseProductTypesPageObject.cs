@@ -64,7 +64,17 @@ namespace Autodan.pages.MerchTool
         //ProductTypes page expected eles
         public void VerifyProductTypesPageElements()
         {
-            
+            BreadCrumbHome.Verify();
+            BreadCrumbMerch.Verify();
+            BtnTableByPtn.Verify();
+            BtnTableByAspectRatio.Verify();
+            InputSearchProductTypes.Verify();
+            BtnSearchMagGlass.Verify();
+            TableHeaderProductTypes.Verify();
+            TableContainerProductTypes.Verify();
+            TablePagerProductTypes.Verify();
+            ProductTypesTableMug.Verify();
+
         }
 
     }

@@ -4,9 +4,10 @@ using NUnit.Framework;
 
 namespace Autodan.tests.ShippingManager
 {
-    internal class SmSmokeTest : BaseTest
+    [TestFixture]
+    [Parallelizable(ParallelScope.None)]
+    public class SmSmokeTest : BaseTest
     {
-
         [Test]
         public void SmLoginPageTest()
         {
