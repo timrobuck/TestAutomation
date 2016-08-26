@@ -101,5 +101,10 @@ namespace Autodan.pages.ShippingManager
             Console.WriteLine("Input text: 'Facility'");
             Console.WriteLine("Verified: filter text input function and table filtering");
         }
+
+        public void ClickFacilitiesDropdown()
+        {
+            FacilitiesDropdown.Click();
+        }
     }
 }

@@ -1,13 +1,9 @@
-﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+using NUnit.Core;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using static NUnit.Core.NUnitFramework;
 
-namespace Autodan
+namespace Autodan.core
 {
     public static class SeleniumSetMethods
     {

@@ -1,22 +1,17 @@
-﻿using OpenQA.Selenium;
+﻿using System.Linq;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static NUnit.Core.NUnitFramework;
 
-namespace Autodan
+namespace Autodan.core
 {
-    class SeleniumGetMethods
+    internal class SeleniumGetMethods
     {
         public static string GetText(IWebElement element)
         {
             return element.GetAttribute("value");
         }
 
-        public static string GetTextFromDDL(IWebElement element)
+        public static string GetTextFromDdl(IWebElement element)
         {
             return new SelectElement(element).AllSelectedOptions.SingleOrDefault().Text;
         }        

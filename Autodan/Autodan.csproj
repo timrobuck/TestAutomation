@@ -82,16 +82,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="core\SeleniumGetMethods.cs" />
     <Compile Include="core\SeleniumSetMethods.cs" />
-    <Compile Include="src\pages\MerchTool\MTLoginPageObject.cs" />
-    <Compile Include="tests\MerchTool\MerchToolSmokeTest.cs" />
-    <Compile Include="src\pages\ShippingManager\SMCommonPageObject.cs" />
-    <Compile Include="src\pages\ShippingManager\SMLoginPageObject.cs" />
-    <Compile Include="src\pages\ShippingManager\SMFacilitiesPageObject.cs" />
-    <Compile Include="src\pages\ShippingManager\SMReportsPageObject.cs" />
-    <Compile Include="src\pages\ShippingManager\SMSlaPageObject.cs" />
-    <Compile Include="src\pages\ShippingManager\SMStockStatusPageObject.cs" />
-    <Compile Include="src\pages\MerchTool\MTCommonPageObject.cs" />
-    <Compile Include="tests\ShippingManager\ShippingManagerSmokeTest.cs" />
+    <Compile Include="src\pages\MerchTool\MtLoginPageObject.cs" />
+    <Compile Include="src\pages\MerchTool\MtMerchandiseProductTypesPageObject.cs" />
+    <Compile Include="tests\MerchTool\MtSmokeTest.cs" />
+    <Compile Include="src\pages\ShippingManager\SmCommonPageObject.cs" />
+    <Compile Include="src\pages\ShippingManager\SmLoginPageObject.cs" />
+    <Compile Include="src\pages\ShippingManager\SmFacilitiesPageObject.cs" />
+    <Compile Include="src\pages\ShippingManager\SmReportsPageObject.cs" />
+    <Compile Include="src\pages\ShippingManager\SmSlaPageObject.cs" />
+    <Compile Include="src\pages\ShippingManager\SmStockStatusPageObject.cs" />
+    <Compile Include="src\pages\MerchTool\MtCommonPageObject.cs" />
+    <Compile Include="tests\ShippingManager\SmSmokeTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
