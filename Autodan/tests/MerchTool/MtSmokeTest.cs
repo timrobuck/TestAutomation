@@ -44,6 +44,22 @@ namespace Autodan.tests.MerchTool
             common.VerifyPersistentNav();
         }
 
+        [Test]
+        public void MtMerchProductTypesPage()
+        {
+            Setup("chrome", "merchtool");
+            
+            var loginPage = new MtLoginPageObject();
+            var common = loginPage.Login();
 
+            common.VerifyLandingPage();
+            common.VerifyPersistentNav();
+
+            var productType = common.NavToMerch();
+            common.VerifySideNavigationOptions();
+            
+            productType.VerifyProductTypesPageElements();
+            productType.MerchProductTypesTableFilterTest();
+        }
     }
 }
