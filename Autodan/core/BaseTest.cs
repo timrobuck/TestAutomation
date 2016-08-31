@@ -4,6 +4,8 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using System;
+using System.Diagnostics;
+using System.Threading;
 
 namespace Autodan.core
 {
@@ -20,7 +22,7 @@ namespace Autodan.core
     {
         public static IWebDriver Driver;
         
-        //setup method wrapper
+        //setup
         public void Setup(string browserName, string serviceUrl)
         {
             if (browserName.ToLower().Equals("ie"))
@@ -44,20 +46,44 @@ namespace Autodan.core
             Console.WriteLine("Navigated to: " + serviceUrl);
         }
 
+
         [TearDown]
+        //runs teardown- closes active instance and retires process 
         public void Cleanup()
         {
             Driver.Quit();
         }
-
-        public void CloseDriver()
+        
+        /// do not confuse with .Quit method-  close simply closes the browser
+        /// the process will continue until retired/disposed
+        public void DriverClose()
         {
             Driver.Close();
         }
-
-        public void Sleep(int number)
+        
+        public void DriverDispose()
         {
-            Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(number));
+            Driver.Dispose();
+        }
+
+
+        /// <summary>
+        /// sleeps on ajax requests
+        /// </summary>
+        /// <param name="timeout"></param>
+        public void WaitForAjax(int timeout = 30)
+        {
+            var sw = new Stopwatch();
+            sw.Start();
+            while (true)
+            {
+                if (sw.Elapsed.Seconds > timeout) throw new Exception("Timeout");
+                var javaScriptExecutor = Driver as IJavaScriptExecutor;
+                var ajaxIsComplete = javaScriptExecutor != null && (bool)javaScriptExecutor.ExecuteScript("return jQuery.active == 0");
+                if (ajaxIsComplete)
+                    break;
+                Thread.Sleep(100);
+            }
         }
     }
 }

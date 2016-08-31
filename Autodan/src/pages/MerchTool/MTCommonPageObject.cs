@@ -64,9 +64,11 @@ namespace Autodan.pages.MerchTool
 
 
         //common page actions
-        public void NavToMerch()
+        public MtMerchProductTypesPageObject NavToMerch()
         {
-            NavBtnMerchandise.Click();   
+            NavBtnMerchandise.Click();
+
+            return new MtMerchProductTypesPageObject();
         }
 
         public void NavToSmartProductEngine()

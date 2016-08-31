@@ -1,12 +1,13 @@
-﻿using Autodan.core;
+﻿using System;
+using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace Autodan.pages.MerchTool
 {
-    internal class MtMerchandiseProductTypesPageObject
+    internal class MtMerchProductTypesPageObject : BaseTest
     {
-        public MtMerchandiseProductTypesPageObject()
+        public MtMerchProductTypesPageObject()
         {
             PageFactory.InitElements(BaseTest.Driver, this);
         }
@@ -33,7 +34,7 @@ namespace Autodan.pages.MerchTool
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > div:nth-child(3) > form > div > input")]
         public IWebElement InputSearchProductTypes { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > div:nth-child(3) > form > div > button > i")]
+        [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > div > form > div > button")]
         public IWebElement BtnSearchMagGlass { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > div:nth-child(3) > h2")]
@@ -74,8 +75,24 @@ namespace Autodan.pages.MerchTool
             TableContainerProductTypes.Verify();
             TablePagerProductTypes.Verify();
             ProductTypesTableMug.Verify();
-
+            Console.WriteLine("Verified ProductType Page Elements");
         }
 
+        public void MerchProductTypesTableFilterTest()
+        {
+            InputSearchProductTypes.ClearAndEnterText("Mug");
+            BtnSearchMagGlass.Click();
+            WaitForAjax();
+            TableContainerProductTypes.Verify();
+            InputSearchProductTypes.ClearAndEnterText("NoTableTest");
+            BtnSearchMagGlass.Click();
+            WaitForAjax();
+            TableContainerProductTypes.Verify();
+            InputSearchProductTypes.ClearAndEnterText("Shirt");
+            BtnSearchMagGlass.Click();
+            WaitForAjax();
+            VerifyProductTypesPageElements();
+            Console.WriteLine("Verified search input and re-tested table container");
+        }
     }
 }
