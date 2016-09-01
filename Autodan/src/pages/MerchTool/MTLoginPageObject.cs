@@ -47,10 +47,19 @@ namespace Autodan.pages.MerchTool
         //expected elements
         public void VerifyLoginPageElements()
         {
-            PageTitle.Verify();
-            UserName.Verify();
-            Password.Verify();
-            BtnLogin.Verify();
+            var pageElements = new List<IWebElement>
+            {
+                PageTitle,
+                UserName,
+                Password,
+                BtnLogin,
+            };
+
+            foreach (IWebElement element in pageElements)
+            {
+                element.Verify();
+            }
+            Console.WriteLine("Verified: login page elements");
         }
     }
 }

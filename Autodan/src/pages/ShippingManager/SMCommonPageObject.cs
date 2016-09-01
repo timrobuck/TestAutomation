@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -68,37 +69,64 @@ namespace Autodan.pages.ShippingManager
         //expected elements
         public void VerifyPersistentNav()
         {
-            NavBtnLogOut.Verify();
-            NavBtnHome.Verify();
-            NavBtnStockStatus.Verify();
-            NavBtnSla.Verify();
-            Console.WriteLine("Verified: persistent navigation elements");
+            var navElements = new List<IWebElement>
+            {
+                NavBtnLogOut,
+                NavBtnHome,
+                NavBtnStockStatus,
+                NavBtnSla,
+            };
+
+            foreach (IWebElement element in navElements)
+            {
+                element.Verify();
+            }
+            Console.WriteLine("Verified: persistent nav elements");
         }
+
 
         public void VerifyDataTableOnPage()
         {
-            DataTableContainer.Verify();
-            DataTableInfo.Verify();
-            DataTablePager.Verify();
+            var dataTableElements = new List<IWebElement>
+            {
+                DataTableContainer,
+                DataTableInfo,
+                DataTablePager,
+            };
+
+            foreach (IWebElement element in dataTableElements)
+            {
+                element.Verify();
+            }
             Console.WriteLine("Verified: presence of data table on page");
             Console.WriteLine("Verified: data table pager");
             Console.WriteLine("Verified: data table info footer");
         }
 
+
         public void VerifyDashboardPageElements()
         {
-            NavBtnHome.Verify();
-            NavBtnLogOut.Verify();
-            NavBtnSla.Verify();
-            BtnStockStatusBlock.Verify();
-            BtnServiceLevelAgreementBlock.Verify();
-            BtnFacilitesBlock.Verify();
-            BtnReportsBlock.Verify();
-            PageTitle.Verify();
-            PageFooter.Verify();
+            var dashboardElements = new List<IWebElement>
+            {
+                NavBtnHome,
+                NavBtnLogOut,
+                NavBtnSla,
+                BtnStockStatusBlock,
+                BtnServiceLevelAgreementBlock,
+                BtnFacilitesBlock,
+                BtnReportsBlock,
+                PageTitle,
+                PageFooter,
+            };
+
+            foreach (IWebElement element in dashboardElements)
+            {
+                element.Verify();
+            }
             Console.WriteLine("Verified: dashboard page elements");
             Console.WriteLine("Verified: page navigation elements");
         }
+        
 
 
         //common+shared actions

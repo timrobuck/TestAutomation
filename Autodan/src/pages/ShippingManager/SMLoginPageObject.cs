@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Autodan.core;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -32,11 +34,19 @@ namespace Autodan.pages.ShippingManager
         //expected elements
         public void VerifyLoginPageElements()
         {
-            UserName.Verify();
-            Password.Verify();
-            BtnLogin.Verify();
-            PageTitle.Verify();
-            PageFooter.Verify();
+            var loginPageElements = new List<IWebElement>
+            {
+                UserName,
+                Password,
+                BtnLogin,
+                PageTitle,
+                PageFooter,
+            };
+
+            foreach (IWebElement element in loginPageElements)
+            {
+                element.Verify();
+            }
             Console.WriteLine("Verified: Login Page Elements");
         }
 

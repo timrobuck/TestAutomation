@@ -1,4 +1,7 @@
-﻿using Autodan.core;
+﻿using System;
+using System.Collections.Generic;
+using Autodan.core;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -127,29 +130,56 @@ namespace Autodan.pages.MerchTool
         //common expected eles
         public void VerifyPersistentNav()
         {
-            MerchMgtPageTitle.Verify();
-            NavBtnHome.Verify();
-            NavBtnMerchandise.Verify();
-            NavBtnSmartProductEngine.Verify();
-            BtnLogout.Verify();
+            var navElements = new List<IWebElement>
+            {
+                MerchMgtPageTitle,
+                NavBtnHome,
+                NavBtnMerchandise,
+                NavBtnSmartProductEngine,
+                BtnLogout,
+            };
+            foreach (IWebElement element in navElements)
+            {
+                element.Verify();
+            }
+            Console.WriteLine("Verified: persistent nav options");
         }
+
 
         public void VerifyLandingPage()
         {
-            BtnLandingMerchBlock.Verify();
-            BtnLandingSmartProductEngineBlock.Verify();            
+            var pageElements = new List<IWebElement>
+            {
+                BtnLandingMerchBlock,
+                BtnLandingSmartProductEngineBlock,
+            };
+
+            foreach (IWebElement element in pageElements)
+            {
+                element.Verify();
+            }
+            Console.WriteLine("verified: landing nav options");
         }
 
         public void VerifySideNavigationOptions()
         {
-            SideNavProductTypes.Verify();
-            SideNavColors.Verify();
-            SideNavSizes.Verify();
-            SideNavAttributes.Verify();
-            SideNavProductCategories.Verify();
-            SideNavSalesChannels.Verify();
-            SideNavShipBoxCategories.Verify();
-            SideNavShippingMethods.Verify();
+            var sideNavElements = new List<IWebElement>
+            {
+                SideNavProductTypes,
+                SideNavColors,
+                SideNavSizes,
+                SideNavAttributes,
+                SideNavProductCategories,
+                SideNavSalesChannels,
+                SideNavShipBoxCategories,
+                SideNavShippingMethods,
+            };
+
+            foreach (IWebElement element in sideNavElements)
+            {
+                element.Verify();
+            }
+            Console.WriteLine("verified: side navigation options");
         }
     }
 }
