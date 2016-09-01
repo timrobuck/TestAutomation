@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -98,32 +99,49 @@ namespace Autodan.pages.ShippingManager
         //expected elements
         public void VerifySlaProductTypePageElements()
         {
-            BreadCrumbHome.Verify();
-            BreadCrumbProductType.Verify();
-            SlaPageTitle.Verify();
-            DropdownDataTableRecordsPerPage.Verify();
-            InputSearchDataTableFilter.Verify();
-            TableColumnPtn.Verify();
-            TableColumnCaption.Verify();
-            TableColumnFacilities.Verify();
-            SlaProductTypeTableInteractView.Verify();
+            var pageElements = new List<IWebElement>
+            {
+                BreadCrumbHome,
+                BreadCrumbProductType,
+                SlaPageTitle,
+                DropdownDataTableRecordsPerPage,
+                InputSearchDataTableFilter,
+                TableColumnPtn,
+                TableColumnCaption,
+                TableColumnFacilities,
+                SlaProductTypeTableInteractView,
+            };
+
+            foreach (IWebElement element in pageElements)
+            {
+                element.Verify();    
+            }
             Console.WriteLine("Verified: SLA - Product Type Page Elements");
             Console.WriteLine("Verified: bread crumbs");
             Console.WriteLine("Verified: data table container and columns");
         }
 
+
         public void VerifySlaProductionFacilitiesPageElements()
         {
-            BreadCrumbHome.Verify();
-            BreadCrumbProductType.Verify();
-            SlaPageTitle.Verify();
-            DropdownDataTableRecordsPerPage.Verify();
-            InputSearchDataTableFilter.Verify();
-            TableColumnFacilityName.Verify();
-            TableColumnCountryCode.Verify();
-            TableColumnIsOwnedByCafePress.Verify();
-            TableColumnStockStatus.Verify();
-            SlaProductionFacilitiesTableInteractView.Verify();
+            var pageElements = new List<IWebElement>
+            {
+                BreadCrumbHome,
+                BreadCrumbProductType,
+                SlaPageTitle,
+                DropdownDataTableRecordsPerPage,
+                InputSearchDataTableFilter,
+                TableColumnFacilityName,
+                TableColumnCountryCode,
+                TableColumnIsOwnedByCafePress,
+                TableColumnStockStatus,
+                SlaProductionFacilitiesTableInteractView,
+            };
+
+            foreach (IWebElement element in pageElements)
+            {
+                element.Verify();
+            }
             Console.WriteLine("Verified: SLA - Production Facilities Page Elements");
             Console.WriteLine("Verified: bread crumbs");
             Console.WriteLine("Verified: data table container and columns");
@@ -131,17 +149,25 @@ namespace Autodan.pages.ShippingManager
 
         public void VerifySlaViewCurrentSlaPageElements()
         {
-            BreadCrumbHome.Verify();
-            BreadCrumbProductType.Verify();
-            BreadCrumbFacilitiesList.Verify();
-            BreadCrumbEditSla.Verify();
-            TableColumnColor.Verify();
-            TableColumnSize.Verify();
-            TableColumnAttribute.Verify();
-            TableColumnMinShipDays.Verify();
-            TableColumnMaxShipDays.Verify();
-            TableColumnAvailabilityOverrideMessage.Verify();
-            ViewStockStatusTableContainer.Verify();
+            var pageElements = new List<IWebElement>
+            {
+                BreadCrumbHome,
+                BreadCrumbProductType,
+                BreadCrumbFacilitiesList,
+                BreadCrumbEditSla,
+                TableColumnColor,
+                TableColumnSize,
+                TableColumnAttribute,
+                TableColumnMinShipDays,
+                TableColumnMaxShipDays,
+                TableColumnAvailabilityOverrideMessage,
+                ViewStockStatusTableContainer,
+            };
+
+            foreach (IWebElement element in pageElements)
+            {
+                element.Verify();
+            }
             Console.WriteLine("Verified: SLA - Current SLA Page Elements");
             Console.WriteLine("Verified: bread crumbs");
             Console.WriteLine("Verified: data table container and columns");

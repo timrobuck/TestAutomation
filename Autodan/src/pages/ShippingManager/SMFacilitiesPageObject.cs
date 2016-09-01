@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -78,32 +79,50 @@ namespace Autodan.pages.ShippingManager
         //expected elements
         public void VerifyFacilitySelectFacilityPageElements()
         {
-            BreadCrumbHome.Verify();
-            BreadCrumbFacilitiesList.Verify();
-            FacilityPageTitle.Verify();
-            DropdownDataTableRecordsPerPage.Verify();
-            InputSearchDataTableFilter.Verify();
-            TableColumnFacilityCode.Verify();
-            TableColumnFacilityName.Verify();
-            TableColumnCountryCode.Verify();
-            FacilityFacilitiesListTableInteractView.Verify();
+            var pageElements = new List<IWebElement>
+            {
+                BreadCrumbHome,
+                BreadCrumbFacilitiesList,
+                FacilityPageTitle,
+                DropdownDataTableRecordsPerPage,
+                InputSearchDataTableFilter,
+                TableColumnFacilityCode,
+                TableColumnFacilityName,
+                TableColumnCountryCode,
+                FacilityFacilitiesListTableInteractView,
+            };
+
+            foreach (IWebElement element in pageElements)
+            {
+                element.Verify();    
+            }
             Console.WriteLine("Verified: Facilities - Select a Facility Page Elements");
             Console.WriteLine("Verified: bread crumbs");
             Console.WriteLine("Verified: data table container and columns");
         }
 
+
         public void VerifyViewFacilityPageElements()
         {
-            BreadCrumbHome.Verify();
-            BreadCrumbFacilitiesList.Verify();
-            BreadCrumbViewFacilities.Verify();
-            ProductionFacilityCodeTitle.Verify();
-            FacilityNameTitle.Verify();
-            CountryCodeTitle.Verify();
+            var pageElements = new List<IWebElement>
+            {
+
+                BreadCrumbHome,
+                BreadCrumbFacilitiesList,
+                BreadCrumbViewFacilities,
+                ProductionFacilityCodeTitle,
+                FacilityNameTitle,
+                CountryCodeTitle,
+            };
+            foreach (IWebElement element in pageElements)
+            {
+                element.Verify();
+            }
             Console.WriteLine("Verified: Facilities - View Facility Page Elements");
             Console.WriteLine("Verified: bread crumbs");
             Console.WriteLine("Verified: View Facilities page text- Prod codes, name & country code");
         }
+
 
         public void FacilitiesSelectFacilityTableFilterInputTest()
         {

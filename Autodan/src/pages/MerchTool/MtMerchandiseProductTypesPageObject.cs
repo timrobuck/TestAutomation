@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing.Drawing2D;
 using Autodan.core;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -48,7 +51,7 @@ namespace Autodan.pages.MerchTool
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > table > tbody > tr:nth-child(1) > td:nth-child(2)")]
         public IWebElement ProductTypesTableMug { get; set; }
-
+        
         
         //navigation options
         public void DrillIntoProductTypeTable()
@@ -65,18 +68,29 @@ namespace Autodan.pages.MerchTool
         //ProductTypes page expected eles
         public void VerifyProductTypesPageElements()
         {
-            BreadCrumbHome.Verify();
-            BreadCrumbMerch.Verify();
-            BtnTableByPtn.Verify();
-            BtnTableByAspectRatio.Verify();
-            InputSearchProductTypes.Verify();
-            BtnSearchMagGlass.Verify();
-            TableHeaderProductTypes.Verify();
-            TableContainerProductTypes.Verify();
-            TablePagerProductTypes.Verify();
-            ProductTypesTableMug.Verify();
-            Console.WriteLine("Verified ProductType Page Elements");
+            var pageElements = new List<IWebElement>
+            {
+                BreadCrumbHome,
+                BreadCrumbMerch,
+                BtnTableByPtn,
+                BtnTableByAspectRatio,
+                InputSearchProductTypes,
+                BtnSearchMagGlass,
+                TableHeaderProductTypes,
+                TableContainerProductTypes,
+                TablePagerProductTypes,
+                ProductTypesTableMug,
+            };
+
+            foreach (IWebElement element in pageElements)
+            {
+                element.Verify();
+            }
+            Console.WriteLine("Verified ProductType page elements");
         }
+
+
+
 
         public void MerchProductTypesTableFilterTest()
         {

@@ -24,7 +24,7 @@ namespace Autodan.tests.MerchTool
 
             //login to app + return dashboard PO
             loginPage.Login();
-
+            
             //teardown
             Cleanup();
         }

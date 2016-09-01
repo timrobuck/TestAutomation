@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Autodan.core;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -57,14 +59,22 @@ namespace Autodan.pages.ShippingManager
         //expected elements
         public void VerifyReportsPageElements()
         {
-            BreadCrumbHome.Verify();
-            BreadCrumbViewReports.Verify();
-            DataTableTitle.Verify();
-            DropdownDataTableRecordsPerPage.Verify();
-            InputSearchDataTableFilter.Verify();
-            TableColumnReport.Verify();
-            TableColumnView.Verify();
-            ReportsTableInteractView.Verify();
+            var pageElement = new List<IWebElement>
+            {
+                BreadCrumbHome,
+                BreadCrumbViewReports,
+                DataTableTitle,
+                DropdownDataTableRecordsPerPage,
+                InputSearchDataTableFilter,
+                TableColumnReport,
+                TableColumnView,
+                ReportsTableInteractView,
+            };
+
+            foreach (IWebElement element in pageElement)
+            {
+                element.Verify();
+            }
             Console.WriteLine("Verified: Reports Page Elements");
             Console.WriteLine("Verified: bread crumbs");
             Console.WriteLine("Verified: data table container and columns");
@@ -72,11 +82,19 @@ namespace Autodan.pages.ShippingManager
 
         public void VerifyReportsFacilityStockAvailPageElements()
         {
-            BreadCrumbHome.Verify();
-            BreadCrumbViewReports.Verify();
-            FacilityStockAvailabilityTitle.Verify();
-            FacilitiesDropdown.Verify();
-            FacilityStockAvailSubmitBtn.Verify();
+            var pageElements = new List<IWebElement>
+            {
+                BreadCrumbHome,
+                BreadCrumbViewReports,
+                FacilityStockAvailabilityTitle,
+                FacilitiesDropdown,
+                FacilityStockAvailSubmitBtn,
+            };
+
+            foreach (IWebElement element in pageElements)
+            {
+                element.Verify();
+            }
             Console.WriteLine("Verified: Reports - Facility Stock Availability Page Elements");
             Console.WriteLine("Verified: bread crumbs");
             Console.WriteLine("Verified: Facilities dropdown presence");

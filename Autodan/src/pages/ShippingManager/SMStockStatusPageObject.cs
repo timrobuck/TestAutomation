@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -92,15 +93,23 @@ namespace Autodan.pages.ShippingManager
         //expected elements
         public void VerifyStockStatusProductTypePageElements()
         {
-            BreadCrumbHome.Verify();
-            BreadCrumbProductType.Verify();
-            StockStatusPageTitle.Verify();
-            DropdownDataTableRecordsPerPage.Verify();
-            InputSearchDataTableFilter.Verify();
-            TableColumnPtn.Verify();
-            TableColumnCaption.Verify();
-            TableColumnFacilities.Verify();
-            ProductTypeTableInteractView.Verify();
+            var pageElements = new List<IWebElement>
+            {
+                BreadCrumbHome,
+                BreadCrumbProductType,
+                StockStatusPageTitle,
+                DropdownDataTableRecordsPerPage,
+                InputSearchDataTableFilter,
+                TableColumnPtn,
+                TableColumnCaption,
+                TableColumnFacilities,
+                ProductTypeTableInteractView,
+            };
+
+            foreach (IWebElement element in pageElements)
+            {
+                element.Verify();
+            }
             Console.WriteLine("Verified: Product Type Page Elements");
             Console.WriteLine("Verified: bread crumbs");
             Console.WriteLine("Verified: data table container and columns");
@@ -108,16 +117,24 @@ namespace Autodan.pages.ShippingManager
 
         public void VerifyStockStatusProductionFacilitiesPageElements()
         {
-            BreadCrumbHome.Verify();
-            BreadCrumbProductType.Verify();
-            StockStatusPageTitle.Verify();
-            DropdownDataTableRecordsPerPage.Verify();
-            InputSearchDataTableFilter.Verify();
-            TableColumnFacilityName.Verify();
-            TableColumnCountryCode.Verify();
-            TableColumnIsOwnedByCafePress.Verify();
-            TableColumnStockStatus.Verify();
-            ProductionFacilitiesTableInteractView.Verify();
+            var pageElements = new List<IWebElement>
+            {
+                BreadCrumbHome,
+                BreadCrumbProductType,
+                StockStatusPageTitle,
+                DropdownDataTableRecordsPerPage,
+                InputSearchDataTableFilter,
+                TableColumnFacilityName,
+                TableColumnCountryCode,
+                TableColumnIsOwnedByCafePress,
+                TableColumnStockStatus,
+                ProductionFacilitiesTableInteractView,
+            };
+
+            foreach (IWebElement element in pageElements)
+            {
+                element.Verify();
+            }
             Console.WriteLine("Verified: Production Facilities Page Elements");
             Console.WriteLine("Verified: bread crumbs");
             Console.WriteLine("Verified: data table container and columns");
@@ -125,16 +142,24 @@ namespace Autodan.pages.ShippingManager
 
         public void VerifyStockStatusCurrentStockStatusPageElements()
         {
-            BreadCrumbHome.Verify();
-            BreadCrumbProductType.Verify();
-            BreadCrumbFacilitiesList.Verify();
-            BreadCrumbViewStockStatus.Verify();
-            TableColumnColor.Verify();
-            TableColumnSize.Verify();
-            TableColumnAttribute.Verify();
-            TableColumnInStock.Verify();
-            StockStatusPageTitle.Verify();
-            ViewStockStatusTableContainer.Verify();
+            var pageElements = new List<IWebElement>
+            {
+                BreadCrumbHome,
+                BreadCrumbProductType,
+                BreadCrumbFacilitiesList,
+                BreadCrumbViewStockStatus,
+                TableColumnColor,
+                TableColumnSize,
+                TableColumnAttribute,
+                TableColumnInStock,
+                StockStatusPageTitle,
+                ViewStockStatusTableContainer,
+            };
+
+            foreach (IWebElement element in pageElements)
+            {
+                element.Verify();
+            }
             Console.WriteLine("Verified: View Stock STatus Page Elements");
             Console.WriteLine("Verified: bread crumbs");
             Console.WriteLine("Verified: data table container and columns");
