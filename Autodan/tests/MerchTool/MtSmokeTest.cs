@@ -1,4 +1,5 @@
-﻿using Autodan.core;
+﻿using System;
+using Autodan.core;
 using Autodan.pages.MerchTool;
 using Autodan.pages.ShippingManager;
 using NUnit.Core;
@@ -60,6 +61,26 @@ namespace Autodan.tests.MerchTool
             
             productType.VerifyProductTypesPageElements();
             productType.MerchProductTypesTableFilterTest();
+        }
+
+        [Test]
+        public void MtMerchandiseColorsPage()
+        {
+            Setup("chrome", "merchtool");
+
+            var loginPage = new MtLoginPageObject();
+            var common = loginPage.Login();
+
+            common.VerifyLandingPage();
+            common.VerifyPersistentNav();
+
+            common.NavToMerch();
+            common.VerifySideNavigationOptions();
+            var mtMerchandiseColorsPage =  common.SideNavToColors();
+            mtMerchandiseColorsPage.VerifyColorsPageElements();
+            mtMerchandiseColorsPage.MerchandiseColorFilterColors();
+            mtMerchandiseColorsPage.MerchandiseColorExportToCsvButton();
+            mtMerchandiseColorsPage.MerchandiseColorSelectNumberOfEntries();
         }
     }
 }
