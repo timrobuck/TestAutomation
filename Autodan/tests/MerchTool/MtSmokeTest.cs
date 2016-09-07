@@ -40,7 +40,7 @@ namespace Autodan.tests.MerchTool
         }
 
         [Test]
-        public void MtMerchProductTypesPage()
+        public void MtMerchProductTypesPageTest()
         {
             var common = _loginPage.Login();
             common.VerifyLandingPage();
@@ -52,7 +52,7 @@ namespace Autodan.tests.MerchTool
         }
 
         [Test]
-        public void MtMerchandiseColorsPage()
+        public void MtMerchandiseColorsPageTest()
         {
             var common = _loginPage.Login();
             common.VerifyLandingPage();
@@ -64,6 +64,12 @@ namespace Autodan.tests.MerchTool
             mtMerchandiseColorsPage.MerchandiseColorFilterColors();
             mtMerchandiseColorsPage.MerchandiseColorExportToCsvButton();
             mtMerchandiseColorsPage.MerchandiseColorSelectNumberOfEntries();
+        }
+
+        [Test]
+        public void MtMerchandiseSizePageTest()
+        {
+            
         }
     }
 }
