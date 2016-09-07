@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Autodan.core;
-using OpenQA;
+﻿using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System;
+using System.Collections.Generic;
 
 
 namespace Autodan.pages.MerchTool
 {
-    internal class MtMerchandiseColorsPageObject:BaseTest
+    internal class MtMerchandiseColorsPageObject : BaseTest
     {
 
         public MtMerchandiseColorsPageObject()
@@ -65,7 +61,7 @@ namespace Autodan.pages.MerchTool
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(2)")]
         public IWebElement ColorTableSelectWhite { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using="")]
+        [FindsBy(How = How.CssSelector, Using = "")]
         public IWebElement ExportToCvs { get; set; }
         //navigation elements
         public void DrillIntoColorTable()
@@ -127,10 +123,11 @@ namespace Autodan.pages.MerchTool
 
         public void MerchandiseColorSelectNumberOfEntries()
         {
-            SelectNumberOfEntries.SelectDropdown("10");
             SelectNumberOfEntries.SelectDropdown("50");
-            Console.WriteLine("Verified that the number of items showing in the list can change");
-
+            SelectNumberOfEntries.SelectDropdown("10");
+            Console.WriteLine(ShowingEntries.Text.Contains("10")
+                ? "Verify that the item count changes and corresponds to label shown on bottom of page."
+                : "Failure to Verify that the item count changes and corresponds to label show on bottom of page.");
         }
     }
 }

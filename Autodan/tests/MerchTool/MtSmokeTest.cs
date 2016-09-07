@@ -61,6 +61,8 @@ namespace Autodan.tests.MerchTool
             
             productType.VerifyProductTypesPageElements();
             productType.MerchProductTypesTableFilterTest();
+            
+            Cleanup();
         }
 
         [Test]
@@ -76,11 +78,14 @@ namespace Autodan.tests.MerchTool
 
             common.NavToMerch();
             common.VerifySideNavigationOptions();
+
             var mtMerchandiseColorsPage =  common.SideNavToColors();
             mtMerchandiseColorsPage.VerifyColorsPageElements();
             mtMerchandiseColorsPage.MerchandiseColorFilterColors();
             mtMerchandiseColorsPage.MerchandiseColorExportToCsvButton();
             mtMerchandiseColorsPage.MerchandiseColorSelectNumberOfEntries();
+
+            Cleanup();
         }
     }
 }
