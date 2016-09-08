@@ -106,7 +106,7 @@ namespace Autodan.pages.MerchTool
             InputSearch.ClearAndEnterText("White");
             WaitForAjax();
             TableColors.Verify();
-            InputSearch.ClearAndEnterText("BlahBlah"); //todo: ask Dan why am I doing this
+            InputSearch.ClearAndEnterText("BlahBlah");
             WaitForAjax();
             TableColors.Verify();
             InputSearch.ClearAndEnterText("Black");
@@ -115,9 +115,10 @@ namespace Autodan.pages.MerchTool
             Console.WriteLine("Verified that filtering the list of colors works.");
         }
 
-        public void MerchandiseColorExportToCsvButton()  //todo: ask Dan how he handles this
+        public void MerchandiseColorExportToCsvButton()  
         {
             BtnExportToCsv.Click();
+            //todo: the code do the download and varify this is not trivial due to various browser specificities. Get back to this after more research and testing. 
             Console.WriteLine("Verified that the a CSV file is created.");
         }
 
