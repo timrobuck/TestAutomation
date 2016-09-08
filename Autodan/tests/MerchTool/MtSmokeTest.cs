@@ -1,7 +1,5 @@
 ﻿using Autodan.core;
 using Autodan.pages.MerchTool;
-using Autodan.pages.ShippingManager;
-using NUnit.Core;
 using NUnit.Framework;
 
 namespace Autodan.tests.MerchTool
@@ -10,56 +8,74 @@ namespace Autodan.tests.MerchTool
     [Parallelizable(ParallelScope.None)]
     public class MtSmokeTest : BaseTest
     {
-        [Test]
-        public void MtLoginPageTest()
+        private MtLoginPageObject _loginPage;
+        private MtCommonPageObject _common;
+
+
+        [SetUp]
+        public void Setup()
         {
-            //build test
+            if (CheckForSkipSetup())
+                return;
+
             Setup("chrome", "merchtool");
+            _loginPage = new MtLoginPageObject();
+            _common = _loginPage.Login();
+        }
 
-            // nav to login page of MerchTools
-            var loginPage = new MtLoginPageObject();
-
-            //verify login page eles
-            loginPage.VerifyLoginPageElements();
-
-            //login to app + return dashboard PO
-            loginPage.Login();
-            
-            //teardown
+        [TearDown]
+        public void Teardown()
+        {
             Cleanup();
         }
 
-        [Test]
-        public void MtDashboardPageTest()
+        [Test, Category("SkipSetup")]
+        public void MtLoginPageTest()
         {
-            //build test
             Setup("chrome", "merchtool");
-
-            //nav to login page
-            var loginPage = new MtLoginPageObject();
-            var common = loginPage.Login();
-
-            //smoke test dashboard page(landing page)
-            common.VerifyLandingPage();
-            common.VerifyPersistentNav();
+            _loginPage = new MtLoginPageObject();
+            _loginPage.Login();
+        }
+        public void MtDashboardPage_VerifyLandingPageTest()
+        {
+            _common.VerifyLandingPage();
+            _loginPage.VerifyLoginPageElements();
         }
 
         [Test]
-        public void MtMerchProductTypesPage()
+        public void MtDashboardPage_VerifyCommonNavigationTest()
         {
-            Setup("chrome", "merchtool");
-            
-            var loginPage = new MtLoginPageObject();
-            var common = loginPage.Login();
+            _common.VerifyPersistentNav();
+        }
+        [Test]
+        public void MtDashboardPage_VerifyCommonTest()
+        {
+            _common.VerifyPersistentNav();
+        }
+        [Test]
+        public void MtDashboardPage_VerifySideNavigationOptionsTest()
+        {
+            _common.NavToMerch();
+            _common.VerifySideNavigationOptions();
+        }
 
-            common.VerifyLandingPage();
-            common.VerifyPersistentNav();
-
-            var productType = common.NavToMerch();
-            common.VerifySideNavigationOptions();
-            
+        [Test]
+        public void MtMerchProductTypesPageTest()
+        {
+            var productType = _common.NavToMerch();
             productType.VerifyProductTypesPageElements();
             productType.MerchProductTypesTableFilterTest();
+        }
+
+        [Test]
+        public void MtMerchandiseColorsPageTest()
+        {
+            _common.NavToMerch();
+            var mtMerchandiseColorsPage = _common.SideNavToColors();
+            mtMerchandiseColorsPage.VerifyColorsPageElements();
+            mtMerchandiseColorsPage.MerchandiseColorFilterColors();
+            mtMerchandiseColorsPage.MerchandiseColorExportToCsvButton();
+            mtMerchandiseColorsPage.MerchandiseColorSelectNumberOfEntries();
         }
     }
 }

@@ -4,6 +4,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using System;
+using System.Collections;
 using System.Diagnostics;
 using System.Threading;
 
@@ -18,15 +19,18 @@ namespace Autodan.core
         ClassName
     }
 
+
     public class BaseTest
     {
+        public const string SkipSetup = "SkipSetup";
+
         public static IWebDriver Driver;
-        
+
         //setup
         public void Setup(string browserName, string serviceUrl)
         {
             if (browserName.ToLower().Equals("ie"))
-                    Driver = new InternetExplorerDriver();
+                Driver = new InternetExplorerDriver();
             else if (browserName.ToLower().Equals("chrome"))
                 Driver = new ChromeDriver();
             else if (browserName.ToLower().Equals("firefox"))
@@ -42,7 +46,7 @@ namespace Autodan.core
             Console.WriteLine("Created fresh " + browserName + " instance");
             Driver.Manage().Window.Maximize();
             Console.WriteLine("Instance window maximized");
-            Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));          
+            Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
             Console.WriteLine("Navigated to: " + serviceUrl);
         }
 
@@ -53,14 +57,14 @@ namespace Autodan.core
         {
             Driver.Quit();
         }
-        
+
         /// do not confuse with .Quit method-  close simply closes the browser
         /// the process will continue until retired/disposed
         public void DriverClose()
         {
             Driver.Close();
         }
-        
+
         public void DriverDispose()
         {
             Driver.Dispose();
@@ -79,11 +83,21 @@ namespace Autodan.core
             {
                 if (sw.Elapsed.Seconds > timeout) throw new Exception("Timeout");
                 var javaScriptExecutor = Driver as IJavaScriptExecutor;
-                var ajaxIsComplete = javaScriptExecutor != null && (bool)javaScriptExecutor.ExecuteScript("return jQuery.active == 0");
+                var ajaxIsComplete = javaScriptExecutor != null &&
+                                     (bool) javaScriptExecutor.ExecuteScript("return jQuery.active == 0");
                 if (ajaxIsComplete)
                     break;
                 Thread.Sleep(100);
             }
+        }
+
+        public bool CheckForSkipSetup()
+        {
+            var categories = TestContext.CurrentContext.Test
+                .Properties["Category"];
+
+            bool skipSetup = categories != null && categories.Contains(SkipSetup);
+            return skipSetup;
         }
     }
 }

@@ -59,6 +59,7 @@ namespace Autodan.core
                 return false;
             }
         }
+       
 
         /// <summary>
         /// click and wait for up to value in seconds before error
@@ -72,7 +73,7 @@ namespace Autodan.core
             driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(value));
         }
 
-        public static string GetText(IWebElement element)
+        public static string GetText(this IWebElement element)
         {
             return element.GetAttribute("value");
         }

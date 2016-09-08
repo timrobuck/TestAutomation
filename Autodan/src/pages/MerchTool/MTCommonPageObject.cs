@@ -91,9 +91,10 @@ namespace Autodan.pages.MerchTool
             SideNavProductTypes.Click();
         }
 
-        public void SideNavToColors()
+        public MtMerchandiseColorsPageObject SideNavToColors()
         {
             SideNavColors.Click();
+            return new MtMerchandiseColorsPageObject();
         }
 
         public void SideNavToSizes()
