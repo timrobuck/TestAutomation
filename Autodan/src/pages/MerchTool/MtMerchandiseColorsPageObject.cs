@@ -61,8 +61,15 @@ namespace Autodan.pages.MerchTool
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(2)")]
         public IWebElement ColorTableSelectWhite { get; set; }
 
+        [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td.sorting_1")]
+        public IWebElement GetTableIdValueFromFirstRow { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(1) > div > span")]
+        public IWebElement SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle { get; set; }
+
         [FindsBy(How = How.CssSelector, Using = "")]
         public IWebElement ExportToCvs { get; set; }
+        
         //navigation elements
         public void DrillIntoColorTable()
         {
@@ -129,6 +136,16 @@ namespace Autodan.pages.MerchTool
             Console.WriteLine(ShowingEntries.Text.Contains("10")
                 ? "Verify that the item count changes and corresponds to label shown on bottom of page."
                 : "Failure to Verify that the item count changes and corresponds to label show on bottom of page.");
+        }
+
+        public bool SortAscendingDescendingByTableColumnHeaderClick()
+        {
+            var beforeSortValue = GetTableIdValueFromFirstRow.Text;
+            SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle.Click();
+            var afterSortValue = GetTableIdValueFromFirstRow.Text;
+            if (beforeSortValue == afterSortValue) return false;
+            Console.WriteLine("Verified records will sort desc and asc off colunn header");
+            return true;
         }
     }
 }
