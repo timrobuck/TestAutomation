@@ -17,9 +17,6 @@ namespace Autodan.pages.MerchTool
         public IWebElement BreadCrumbHome { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul.breadcrumb > li:nth-child(2)")]
-        public IWebElement BreadCrumbMerchanise { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul > li.active")]
         public IWebElement BreadCrumbAttributeList { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > fieldset > legend")]
@@ -36,7 +33,6 @@ namespace Autodan.pages.MerchTool
             var pageElements = new List<IWebElement>
             {
                 BreadCrumbHome,
-                BreadCrumbMerchanise,
                 BreadCrumbAttributeList,
                 LegendCafepressAttributeOptions,
                 TableAttributeOption,

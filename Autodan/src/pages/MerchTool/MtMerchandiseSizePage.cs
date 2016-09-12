@@ -18,9 +18,6 @@ namespace Autodan.pages.MerchTool
         public IWebElement BreadCrumbHome { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul.breadcrumb > li:nth-child(2)")]
-        public IWebElement BreadCrumbMerchanise { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul > li.active")]
         public IWebElement BreadCrumbSizesList { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > fieldset > legend")]
@@ -54,13 +51,10 @@ namespace Autodan.pages.MerchTool
         public IWebElement ShowingEntries { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_paginate")]
-        public IWebElement ButtonSetPagination { get; set; }
+        public IWebElement BtnSetPagination { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(2)")]
         public IWebElement SizeTableSelectSmall { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "")]
-        public IWebElement ExportToCvs { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(1) > div > span")]
         public IWebElement SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle { get; set; }
@@ -74,17 +68,11 @@ namespace Autodan.pages.MerchTool
             SizeTableSelectSmall.Click();
         }
 
-        public void ClickTheExportToCvsButton()
-        {
-            ExportToCvs.Click();
-        }
-
         public void VerifySizesPageElements()
         {
             var pageElements = new List<IWebElement>
             {
                 BreadCrumbHome,
-                BreadCrumbMerchanise,
                 BreadCrumbSizesList,
                 LegendCafepressSizeOptions,
                 BtnExportToCsv,
@@ -96,7 +84,7 @@ namespace Autodan.pages.MerchTool
                 TableSizes,
                 TableHeaders,
                 ShowingEntries,
-                ButtonSetPagination
+                BtnSetPagination
             };
 
             foreach (var element in pageElements)
