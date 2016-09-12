@@ -8,236 +8,128 @@ namespace Autodan.tests.ShippingManager
     [Parallelizable(ParallelScope.None)]
     public class SmSmokeTest : BaseTest
     {
-        [Test]
+        private SmLoginPageObject _loginPage;
+        private SmCommonPageObject _common;
+
+
+        [SetUp]
+        public void Setup()
+        {
+            if (CheckForSkipSetup())
+                return;
+
+            Setup("chrome", "shippingmanager");
+            _loginPage = new SmLoginPageObject();
+            _common = _loginPage.Login();
+        }
+
+        [TearDown]
+        public void Teardown()
+        {
+            Cleanup();
+        }
+
+        [Test, Category("SkipSetup")]
         public void SmLoginPageTest()
         {
-            //build test
             Setup("chrome", "shippingmanager");
-
-            //navigate to login page of Shipping Manager app
-            var loginPage = new SmLoginPageObject();
-
-            //verify login page elements
-            loginPage.VerifyLoginPageElements();
-
-            //login to app + returns dashboard page object
-            loginPage.Login();
-
-            //teardown
-            Cleanup();
+            _loginPage = new SmLoginPageObject();
+            _loginPage.VerifyLoginPageElements();
+            _loginPage.Login();         
+        }
+        public void SmDashboardPage_VerifyLandingPageTest()
+        {
+            _common.VerifyPersistentNav();
+            _common.VerifyDashboardPageElements();
         }
 
         [Test]
-        public void SmDashboardPageTest()
+        public void SmStockStatus_VerifyProductTypePageTest()
         {
-            //build test
-            Setup("chrome", "shippingmanager");
-
-            //login to app
-            var loginPage = new SmLoginPageObject();
-            var common = loginPage.Login();
-
-            //smoke test dashboard page
-            common.VerifyPersistentNav();
-            common.VerifyDashboardPageElements();
-
-            //teardown
-            Cleanup();
-        }
-
-        [Test]
-        public void SmStockStatusProductTypeTest()
-        {
-            //build test
-            Setup("chrome", "shippingmanager");
-
-            //init page object & login to app
-            var loginPage = new SmLoginPageObject();
-            var common = loginPage.Login();
-
-            //navigate to Product type page & init locators
-            var stockStatus = common.NavigateToStockStatus();
-
-            //smoke test of stockstatus - product type data table
-            common.VerifyPersistentNav();
+            var stockStatus = _common.NavigateToStockStatus();
+            _common.VerifyPersistentNav();
             stockStatus.VerifyStockStatusProductTypePageElements();
-            common.VerifyDataTableOnPage();
-
+            _common.VerifyDataTableOnPage();
             stockStatus.StockStatusProductTypeTableFilterInputTest();
-            common.VerifyDataTableOnPage();
-
-            //drill into product type table to nav to Production Facilities page/table
+            _common.VerifyDataTableOnPage();
             stockStatus.ClickProductTypeTableRow();
-
-            //teardown
-            Cleanup();
         }
 
         [Test]
-        public void SmStockStatusProductionFacilitiesTest()
+        public void SmStockStatus_VerifyProductionFacilitiesTest()
         {
-            //build test
-            Setup("chrome", "shippingmanager");
-
-            //init page object & login to app
-            var loginPage = new SmLoginPageObject();
-            var common = loginPage.Login();
-
-            //navigate to Product type page & init locators
-            var stockStatus = common.NavigateToStockStatus();
-
-            //drill into product type table to navigate to production facilities page & init page object
+            var stockStatus = _common.NavigateToStockStatus();
             stockStatus.ClickProductTypeTableRow();
-
-            //smoke test prod facilities
-            common.VerifyPersistentNav();
+            _common.VerifyPersistentNav();
             stockStatus.VerifyStockStatusProductionFacilitiesPageElements();
-            common.VerifyDataTableOnPage();
-
+            _common.VerifyDataTableOnPage();
             stockStatus.StockStatusProdFacilitiesTableFilterInputTest();
-            common.VerifyDataTableOnPage();
-
-            //teardown
-            Cleanup();
+            _common.VerifyDataTableOnPage();
         }
 
-
         [Test]
-        public void SmStockStatusCurrentStockTest()
+        public void SmStockStatus_VerifyCurrentStockTest()
         {
-            //build test
-            Setup("chrome", "shippingmanager");
-
-            //init page object & login to app
-            var loginPage = new SmLoginPageObject();
-            var common = loginPage.Login();
-
-            //navigate to product type page & init locators
-            var stockStatus = common.NavigateToStockStatus();
-
-            //drill into product type table - drill into prod facilities table
+            var stockStatus = _common.NavigateToStockStatus();
             stockStatus.ClickProductTypeTableRow();
             stockStatus.ClickProdFacilitiesTableRow();
-
-            //smoke test view stock status page
-            common.VerifyPersistentNav();
+            _common.VerifyPersistentNav();
             stockStatus.VerifyStockStatusCurrentStockStatusPageElements();
-
-            //teardown
-            Cleanup();
         }
 
         [Test]
         public void SmStockStatusSmokeTest()
         {
-            //build test
-            Setup("chrome", "shippingmanager");
-
-            //init page object & login to app
-            var loginPage = new SmLoginPageObject();
-            var common = loginPage.Login();
-
-            //navigate to stock status - product type & init locators
-            var stockStatus = common.NavigateToStockStatus();
-
-            //smoke test Stock Status - Product Type page
-            common.VerifyPersistentNav();
+            var stockStatus = _common.NavigateToStockStatus();
+            _common.VerifyPersistentNav();
             stockStatus.VerifyStockStatusProductTypePageElements();
             stockStatus.StockStatusProductTypeTableFilterInputTest();
             stockStatus.ClickProductTypeTableRow();
-
-            //smoke test Stock Status - Production Facilities page
-            common.VerifyPersistentNav();
+            _common.VerifyPersistentNav();
             stockStatus.VerifyStockStatusProductionFacilitiesPageElements();
             stockStatus.StockStatusProdFacilitiesTableFilterInputTest();
             stockStatus.ClickProdFacilitiesTableRow();
-
-            //smoke test Stock Status - Current stock status
-            common.VerifyPersistentNav();
+            _common.VerifyPersistentNav();
             stockStatus.VerifyStockStatusCurrentStockStatusPageElements();
-
-            //teardown
-            Cleanup();
         }
 
         [Test]
         public void SmSlaSmokeTest()
         {
-            //build test
-            Setup("chrome", "shippingmanager");
-
-            //init page object & login to app
-            var loginPage = new SmLoginPageObject();
-            var common = loginPage.Login();
-
-            //navigate to product type page & init locators (sla)
-            var slaPage = common.NavigateToSla();
-
-            //smoke test SLA - Product type
-            common.VerifyPersistentNav();
+            var slaPage = _common.NavigateToSla();
+            _common.VerifyPersistentNav();
             slaPage.VerifySlaProductTypePageElements();
             slaPage.SlaProductTypeTableFilterInputTest();
             slaPage.ClickSlaProductTypeTableRow();
-
-            //smoke test SLA - Facilities
-            common.VerifyPersistentNav();
+            _common.VerifyPersistentNav();
             slaPage.VerifySlaProductionFacilitiesPageElements();
             slaPage.SlaProductionFacilitiesTableFilterInputTest();
             slaPage.ClickSlaFacilitiesTableRow();
-
-            //smoke test SLA - Current SLA
-            common.VerifyPersistentNav();
+            _common.VerifyPersistentNav();
             slaPage.VerifySlaViewCurrentSlaPageElements();
-
-            //teardown
-            Cleanup();
         }
 
         [Test]
         public void SmFacilitiesSmokeTest()
         {
-            //build test
-            Setup("chrome", "shippingmanager");
-
-            //init page object and login to app
-            var loginPage = new SmLoginPageObject();
-            var common = loginPage.Login();
-
-            //nav to facilities landing page and init locators
-            var facPage = common.NavigateToFacilities();
-
-            //smoke test Facilities - Select a facility
-            common.VerifyPersistentNav();
+            var facPage = _common.NavigateToFacilities();
+            _common.VerifyPersistentNav();
             facPage.VerifyFacilitySelectFacilityPageElements();
             facPage.FacilitiesSelectFacilityTableFilterInputTest();
             facPage.ClickSlaFacilitiesTableRow();
-
-            //smoke test View facility subpage
-            common.VerifyPersistentNav();
+            _common.VerifyPersistentNav();
             facPage.VerifyViewFacilityPageElements();
         }
 
         [Test]
         public void SmReportsSmokeTest()
         {
-            //build test
-            Setup("chrome", "shippingmanager");
-
-            //init page object and login to app
-            var loginPage = new SmLoginPageObject();
-            var common = loginPage.Login();
-
-            //nav to reports landing page and init locators
-            var reportsPage = common.NavigateToReports();
-
-            //smoke test Reports - View Reports
-            common.VerifyPersistentNav();
+            var reportsPage = _common.NavigateToReports();
+            _common.VerifyPersistentNav();
             reportsPage.VerifyReportsPageElements();
             reportsPage.TestReportsTableFilterInput();
             reportsPage.ClickReportsTableRow();
-
-            //smoke test Reports - Facility reports page
-            common.VerifyPersistentNav();
+            _common.VerifyPersistentNav();
             reportsPage.VerifyReportsFacilityStockAvailPageElements();
         }
     }
