@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Autodan.core;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -97,16 +98,18 @@ namespace Autodan.pages.MerchTool
             return new MtMerchandiseColorsPageObject();
         }
 
-        public void SideNavToSizes()
+        public MtMerchandiseSizePage SideNavToSizes()
         {
             SideNavSizes.Click();
+            return new MtMerchandiseSizePage();
         }
 
-        public void SideNavToAttributes()
+        public MtMerchandiseAttributeOptionsPage SideNavToAttributes()
         {
             SideNavAttributes.Click();
+            return new MtMerchandiseAttributeOptionsPage();
         }
-
+       
         public void SideNavToProductCategories()
         {
             SideNavProductCategories.Click();

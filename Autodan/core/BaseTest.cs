@@ -4,7 +4,6 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using System;
-using System.Collections;
 using System.Diagnostics;
 using System.Threading;
 
@@ -84,7 +83,7 @@ namespace Autodan.core
                 if (sw.Elapsed.Seconds > timeout) throw new Exception("Timeout");
                 var javaScriptExecutor = Driver as IJavaScriptExecutor;
                 var ajaxIsComplete = javaScriptExecutor != null &&
-                                     (bool) javaScriptExecutor.ExecuteScript("return jQuery.active == 0");
+                                     (bool)javaScriptExecutor.ExecuteScript("return jQuery.active == 0");
                 if (ajaxIsComplete)
                     break;
                 Thread.Sleep(100);

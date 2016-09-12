@@ -76,6 +76,28 @@ namespace Autodan.tests.MerchTool
             mtMerchandiseColorsPage.MerchandiseColorFilterColors();
             mtMerchandiseColorsPage.MerchandiseColorExportToCsvButton();
             mtMerchandiseColorsPage.MerchandiseColorSelectNumberOfEntries();
+            mtMerchandiseColorsPage.SortAscendingDescendingByTableColumnHeaderClick();
         }
+
+        [Test]
+        public void MtMerchandiseSizePageTest()
+        {
+            _common.NavToMerch();
+            var mtMerchandiseSizesPage = _common.SideNavToSizes();
+            mtMerchandiseSizesPage.VerifySizesPageElements();
+            mtMerchandiseSizesPage.MerchandiseSizeFilterSizes();
+            mtMerchandiseSizesPage.MerchandiseSizeExportToCsvButton();
+            mtMerchandiseSizesPage.MerchandiseSizeSelectNumberOfEntries();
+            mtMerchandiseSizesPage.SortAscendingDescendingByTableColumnHeaderClick();
+        }
+
+        [Test]
+        public void MtMerchandiseAttributeOptionPageTest()
+        {
+            _common.NavToMerch();
+            var mtMerchandiseAttributeOptionsPage = _common.SideNavToAttributes();
+            mtMerchandiseAttributeOptionsPage.VerifyAttributeOptionPageElements();
+        }
+       
     }
 }
