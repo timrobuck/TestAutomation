@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using System;
+using System.Linq;
 
 namespace Autodan.core
 {
@@ -38,14 +38,27 @@ namespace Autodan.core
         {
             new SelectElement(element).SelectByText(value);
         }
-        
+
         /// <summary>
         /// used to quickly verify presence of an element in dom; smoke/sanity tests
         /// </summary>
         /// <param name="element"></param>
         public static void Verify(this IWebElement element)
         {
+            // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
             element.GetType();
+        }
+
+        public static void ValidateValueIsNumeric(this IWebElement element)
+        {
+            // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
+            int.Parse(element.Text.Trim());
+        }
+        public static void ValidateTextIsInThisElement(this IWebElement element, string targetText)
+        {
+            var text = element.Text;
+            if (!element.Text.Contains(targetText))
+                throw new Exception("targetText=" + targetText + " was not found for this element.");
         }
 
         public static bool VerifyIsPresent(this IWebDriver driver, By by)
@@ -59,7 +72,7 @@ namespace Autodan.core
                 return false;
             }
         }
-       
+
 
         /// <summary>
         /// click and wait for up to value in seconds before error

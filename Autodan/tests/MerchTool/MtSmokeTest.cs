@@ -1,5 +1,5 @@
 ﻿using Autodan.core;
-using Autodan.pages.MerchTool;
+using Autodan.pages.MerchTool.MerchadisePages;
 using NUnit.Framework;
 
 namespace Autodan.tests.MerchTool
@@ -10,7 +10,6 @@ namespace Autodan.tests.MerchTool
     {
         private MtLoginPageObject _loginPage;
         private MtCommonPageObject _common;
-
 
         [SetUp]
         public void Setup()
@@ -98,6 +97,57 @@ namespace Autodan.tests.MerchTool
             var mtMerchandiseAttributeOptionsPage = _common.SideNavToAttributes();
             mtMerchandiseAttributeOptionsPage.VerifyAttributeOptionPageElements();
         }
-       
+
+        [Test]
+        public void MtMerchandise_ProductCategories_PageTest()
+        {
+            _common.NavToMerch();
+            var mtMerchandiseProductCategoriesPage = _common.SideNavToProductCategories();
+            mtMerchandiseProductCategoriesPage.VerifyElements();
+            mtMerchandiseProductCategoriesPage.RunActions();
+        }
+
+        [Test]
+        public void MtMerchandise_SalesChannels_PageTest()
+        {
+            _common.NavToMerch();
+            var page = _common.SideNavToSalesChannels();
+            page.VerifyElements();
+            page.ValidateElementHasValue();
+            page.RunActions();
+        }
+
+        [Test]
+        public void MtMerchandise_ShipBoxCategories_PageTest()
+        {
+            _common.NavToMerch();
+            var page = _common.SideNavToShipBoxCategories();
+            page.VerifyElements();
+            page.ValidateElementHasValue();
+            page.RunActions();
+        }
+
+        [Test]
+        public void MtMerchandise_ShippingMethods_PageTest()
+        {
+            _common.NavToMerch();
+            var page = _common.SideNavToShippingMethods();
+            page.VerifyElements();
+            page.ValidateElementHasValue();
+            page.RunActions();
+        }
+
+        [Test]
+        public void MtMerchandiseDetailsPageTest()
+        {
+            _common.NavToMerch();
+            var page = _common.SideNavToSalesChannels();
+            page.VerifyElements();
+            page.ValidateElementHasValue();
+            page.RunActions();
+            var detailsPage = page.GotoDetailsPage();
+            detailsPage.VerifyElements();
+            detailsPage.ValidatePresentation();
+        }
     }
 }
