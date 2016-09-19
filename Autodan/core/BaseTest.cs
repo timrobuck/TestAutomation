@@ -3,8 +3,10 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.PhantomJS;
 using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Threading;
 
 namespace Autodan.core
@@ -34,6 +36,8 @@ namespace Autodan.core
                 Driver = new ChromeDriver();
             else if (browserName.ToLower().Equals("firefox"))
                 Driver = new FirefoxDriver();
+            else if (browserName.ToLower().Equals("headless"))
+                Driver = new PhantomJSDriver();
             else
                 Driver = new ChromeDriver();
 
@@ -41,6 +45,9 @@ namespace Autodan.core
                 Driver.Navigate().GoToUrl("http://tools.cafepress.com/Shipping/");
             else if (serviceUrl.ToLower().Equals("merchtool"))
                 Driver.Navigate().GoToUrl("http://tools.cafepress.com/Merchandise/");
+            else if (serviceUrl.ToLower().Equals("cafepress"))
+                Driver.Navigate().GoToUrl("http://10.1.2.115/product/829702495/");
+
 
             Console.WriteLine("Created fresh " + browserName + " instance");
             Driver.Manage().Window.Maximize();
@@ -48,7 +55,6 @@ namespace Autodan.core
             Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
             Console.WriteLine("Navigated to: " + serviceUrl);
         }
-
 
         [TearDown]
         //runs teardown- closes active instance and retires process 
