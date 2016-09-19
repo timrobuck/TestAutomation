@@ -81,11 +81,16 @@
     <Compile Include="core\PropertiesCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="core\SelExtensionMethods.cs" />
+    <Compile Include="src\pages\cafepress.com\CpCartPageObject.cs" />
+    <Compile Include="src\pages\cafepress.com\CpCommonPageObject.cs" />
+    <Compile Include="src\pages\cafepress.com\CpProductDescriptionPageObject.cs" />
     <Compile Include="src\pages\MerchTool\MtLoginPageObject.cs" />
     <Compile Include="src\pages\MerchTool\MtMerchandiseAttributeOptionsPage.cs" />
     <Compile Include="src\pages\MerchTool\MtMerchandiseColorsPageObject.cs" />
     <Compile Include="src\pages\MerchTool\MtMerchandiseProductTypesPageObject.cs" />
     <Compile Include="src\pages\MerchTool\MtMerchandiseSizePage.cs" />
+    <Compile Include="tests\cafepress.com\cart\CpCartSmokeTest.cs" />
+    <Compile Include="tests\cafepress.com\checkout\CpCheckoutSmokeTest.cs" />
     <Compile Include="tests\MerchTool\MtSmokeTest.cs" />
     <Compile Include="src\pages\ShippingManager\SmCommonPageObject.cs" />
     <Compile Include="src\pages\ShippingManager\SmLoginPageObject.cs" />
