@@ -1,6 +1,13 @@
-﻿namespace Autodan.src.pages.MerchTool.SmartProductEnginePages
+﻿using Autodan.core;
+using OpenQA.Selenium.Support.PageObjects;
+
+namespace Autodan.pages.MerchTool.SmartProductEnginePages
 {
-    class MtSpeProductTypeExclusionsPage
+    public class MtSpeProductTypeExclusionsPage
     {
+        public MtSpeProductTypeExclusionsPage()
+        {
+            PageFactory.InitElements(BaseTest.Driver, this);
+        }
     }
 }

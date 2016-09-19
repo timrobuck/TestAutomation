@@ -4,31 +4,37 @@ using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Autodan.pages.MerchTool.MerchadisePages
+namespace Autodan.pages.MerchTool.MerchandisePages
 {
-    internal class MtMerchandiseColorsPageObject : BaseTest
+    public class MtCommonToMerchandisePages:BaseTest
     {
+        private readonly string _comsummingPageName;
 
-        public MtMerchandiseColorsPageObject()
+        public  MtCommonToMerchandisePages(string consummingPageName)
         {
             PageFactory.InitElements(Driver, this);
+            _comsummingPageName = consummingPageName;
+
         }
 
-        //Colors subpage elements
+        //common to ProductTypes, Colors, Sizes, ProductCategories, SalesChannels, ShipBoxCategories, ShippingMethods
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul.breadcrumb > li:nth-child(1)")]
         public IWebElement BreadCrumbHome { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul.breadcrumb > li:nth-child(2)")]
-        public IWebElement BreadCrumbMerchanise { get; set; }
+        public IWebElement BreadCrumbForThisPage { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul > li.active")]
-        public IWebElement BreadCrumbColorsList { get; set; }
+        [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td.sorting_1")]
+        public IWebElement TableFirstRow { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > fieldset > legend")]
-        public IWebElement LegendCafepressColorOptions { get; set; }
+        [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(2)")]
+        public IWebElement TableSelectFromList { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > fieldset > div > a")]
         public IWebElement BtnExportToCsv { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > fieldset > legend")]
+        public IWebElement LegendForTable { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_length > label")]
         public IWebElement LabelShow { get; set; }
@@ -40,13 +46,13 @@ namespace Autodan.pages.MerchTool.MerchadisePages
         public IWebElement OptionSelected50 { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_filter > label")]
-        public IWebElement LabelSearch { get; set; }
+        public IWebElement LabelFilter { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_filter > label > input")]
-        public IWebElement InputSearch { get; set; }
+        public IWebElement InputFilter { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_wrapper")]
-        public IWebElement TableColors { get; set; }
+        public IWebElement Table { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(3)")]
         public IWebElement TableHeaders { get; set; }
@@ -55,96 +61,70 @@ namespace Autodan.pages.MerchTool.MerchadisePages
         public IWebElement ShowingEntries { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_paginate")]
-        public IWebElement ButtonSetPagination { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(2)")]
-        public IWebElement ColorTableSelectWhite { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td.sorting_1")]
-        public IWebElement GetTableIdValueFromFirstRow { get; set; }
+        public IWebElement BtnSetPagination { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(1) > div > span")]
         public IWebElement SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "")]
-        public IWebElement ExportToCvs { get; set; }
-        
-        //navigation elements
-        public void DrillIntoColorTable()
-        {
-            ColorTableSelectWhite.Click();
-        }
+        [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td.sorting_1")]
+        public IWebElement GetTableIdValueFromFirstRow { get; set; }
 
-        public void ClickTheExportToCvsButton()
-        {
-            ExportToCvs.Click();
-        }
-
-        public void VerifyColorsPageElements()
+        public void VerifyCommonElements()
         {
             var pageElements = new List<IWebElement>
             {
                 BreadCrumbHome,
-                BreadCrumbMerchanise,
-                BreadCrumbColorsList,
-                LegendCafepressColorOptions,
+                TableSelectFromList,
                 BtnExportToCsv,
+                LegendForTable,
                 LabelShow,
                 SelectNumberOfEntries,
                 OptionSelected50,
-                LabelSearch,
-                InputSearch,
-                TableColors,
+                LabelFilter,
+                InputFilter,
+                Table,
                 TableHeaders,
                 ShowingEntries,
-                ButtonSetPagination
+                BtnSetPagination
             };
-
             foreach (var element in pageElements)
             {
                 element.Verify();
             }
-            Console.WriteLine("Verified Color page elements");
+            Console.WriteLine("Verified CommonToMerchanise elements for " + _comsummingPageName);
         }
 
-        public void MerchandiseColorFilterColors()
+
+        public void RunCommonActions()
         {
-            InputSearch.ClearAndEnterText("White");
-            WaitForAjax();
-            TableColors.Verify();
-            InputSearch.ClearAndEnterText("BlahBlah");
-            WaitForAjax();
-            TableColors.Verify();
-            InputSearch.ClearAndEnterText("Black");
-            WaitForAjax();
-            TableColors.Verify();
-            Console.WriteLine("Verified that filtering the list of colors works.");
+            ActionExportToCsvButton();
+            ActionSelectNumberOfLines();
+            ActionSortAscendingDescendingByTableColumnHeaderClick();
         }
-
-        public void MerchandiseColorExportToCsvButton()  
+        private void ActionExportToCsvButton()
         {
             BtnExportToCsv.Click();
             //todo: the code do the download and varify this is not trivial due to various browser specificities. Get back to this after more research and testing. 
-            Console.WriteLine("Verified that the a CSV file is created.");
+            Console.WriteLine("Verified that the button to download a CSV file was clicked. " + _comsummingPageName);
         }
 
-        public void MerchandiseColorSelectNumberOfEntries()
+        private void ActionSelectNumberOfLines()
         {
             SelectNumberOfEntries.SelectDropdown("50");
             SelectNumberOfEntries.SelectDropdown("10");
-            Console.WriteLine(ShowingEntries.Text.Contains("10")
-                ? "Verify that the item count changes and corresponds to label shown on bottom of page."
-                : "Failure to Verify that the item count changes and corresponds to label show on bottom of page.");
-        }
+            if (!ShowingEntries.Text.Contains("10"))
+                throw new Exception("Select Number Of Lines to Show [50 to 10] did not work");
 
-        public bool SortAscendingDescendingByTableColumnHeaderClick()
+            Console.WriteLine("Verified the dropdown to filter lines from 50 to 10 for " + _comsummingPageName);
+        } 
+
+        private void ActionSortAscendingDescendingByTableColumnHeaderClick()
         {
             var beforeSortValue = GetTableIdValueFromFirstRow.Text;
             SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle.Click();
             var afterSortValue = GetTableIdValueFromFirstRow.Text;
-            if (beforeSortValue == afterSortValue) return false;
-            Console.WriteLine("Verified records will sort desc and asc off colunn header");
-            return true;
+            if (beforeSortValue == afterSortValue)
+                throw new Exception("Resorting items does not appear to work");
         }
     }
 }

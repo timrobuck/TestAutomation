@@ -1,20 +1,20 @@
-using System.Collections.Generic;
 using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.Generic;
 
-namespace Autodan.pages.MerchTool.MerchadisePages
+namespace Autodan.pages.MerchTool.MerchandisePages
 {
-    public class MtMerchandiseDetailsPage : BaseTest
+    public class MtCommonMerchandiseDetailsPage : BaseTest
     {
-        public string FirstRowContentFromLaunchPage { get; private set; }
+        public string FirstRowContentFromLaunchPage { get; }
 
-        public MtMerchandiseDetailsPage(string firstRowContentFromLaunchPage)
+        public MtCommonMerchandiseDetailsPage(string firstRowContentFromLaunchPage)
         {
             PageFactory.InitElements(Driver, this);
             FirstRowContentFromLaunchPage = firstRowContentFromLaunchPage;
         }
-        
+
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul > li.active")]
         public IWebElement BreadCrumbDetails { get; set; }
 

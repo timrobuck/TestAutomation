@@ -5,7 +5,7 @@ using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Autodan.pages.MerchTool.MerchadisePages
+namespace Autodan.pages.MerchTool.MerchandisePages
 {
     public class MtMerchandiseShipBoxCategoriesPage : BaseTest
     {
@@ -53,11 +53,11 @@ namespace Autodan.pages.MerchTool.MerchadisePages
             page.RunCommonActions();
         }
 
-        public MtMerchandiseDetailsPage GotoDetailsPage()
+        public MtCommonMerchandiseDetailsPage GotoDetailsPage()
         {
             var firstRowContentText = FirstRowContent.Text;
             GotoDetailPageOnFirstRow.Click();
-            return new MtMerchandiseDetailsPage(firstRowContentText);
+            return new MtCommonMerchandiseDetailsPage(firstRowContentText);
         }
 
         private void VerifyElementsUniqueToPage()

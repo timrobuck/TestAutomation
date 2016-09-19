@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Autodan.core;
+using OpenQA.Selenium.Support.PageObjects;
 
-namespace Autodan.src.pages.MerchTool.SmartProductEnginePages
+namespace Autodan.pages.MerchTool.SmartProductEnginePages
 {
-    class MtSpeEditFitNCropPage
+    public class MtSpeEditFitNCropPage
     {
+        public MtSpeEditFitNCropPage()
+        {
+            PageFactory.InitElements(BaseTest.Driver, this);
+        }
     }
 }

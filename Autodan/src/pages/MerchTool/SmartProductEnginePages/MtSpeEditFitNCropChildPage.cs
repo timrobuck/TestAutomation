@@ -3,11 +3,12 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace Autodan.pages.MerchTool.SmartProductEnginePages
 {
-    public class MtSpeMemberExclusionPage
+    public class MtSpeEditFitNCropChildPage
     {
-        public MtSpeMemberExclusionPage()
+        public MtSpeEditFitNCropChildPage()
         {
             PageFactory.InitElements(BaseTest.Driver, this);
         }
+
     }
 }

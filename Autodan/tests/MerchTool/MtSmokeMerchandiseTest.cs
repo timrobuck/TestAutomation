@@ -1,15 +1,16 @@
 ﻿using Autodan.core;
-using Autodan.pages.MerchTool.MerchadisePages;
+using Autodan.pages.MerchTool.MtCommonPages;
+using Autodan.pages.MerchTool.MtCommonSitePages;
 using NUnit.Framework;
 
 namespace Autodan.tests.MerchTool
 {
     [TestFixture]
     [Parallelizable(ParallelScope.None)]
-    public class MtSmokeTest : BaseTest
+    public class MtSmokeMerchandiseTest : BaseTest
     {
         private MtLoginPageObject _loginPage;
-        private MtCommonPageObject _common;
+        private MtHomePageObject _home;
 
         [SetUp]
         public void Setup()
@@ -19,7 +20,7 @@ namespace Autodan.tests.MerchTool
 
             Setup("chrome", "merchtool");
             _loginPage = new MtLoginPageObject();
-            _common = _loginPage.Login();
+            _home = _loginPage.Login();
         }
 
         [TearDown]
@@ -33,35 +34,18 @@ namespace Autodan.tests.MerchTool
         {
             Setup("chrome", "merchtool");
             _loginPage = new MtLoginPageObject();
-            _loginPage.Login();
-        }
-        public void MtDashboardPage_VerifyLandingPageTest()
-        {
-            _common.VerifyLandingPage();
             _loginPage.VerifyLoginPageElements();
-        }
-
-        [Test]
-        public void MtDashboardPage_VerifyCommonNavigationTest()
-        {
-            _common.VerifyPersistentNav();
-        }
-        [Test]
-        public void MtDashboardPage_VerifyCommonTest()
-        {
-            _common.VerifyPersistentNav();
-        }
-        [Test]
-        public void MtDashboardPage_VerifySideNavigationOptionsTest()
-        {
-            _common.NavToMerch();
-            _common.VerifySideNavigationOptions();
+            _home = _loginPage.Login();
+            _home.VerifyLandingPage();
+            _home.VerifyPersistentNav();
+            _home.NavToMerch();
+            _home.VerifySideNavigationOptions();
         }
 
         [Test]
         public void MtMerchProductTypesPageTest()
         {
-            var productType = _common.NavToMerch();
+            var productType = _home.NavToMerch();
             productType.VerifyProductTypesPageElements();
             productType.MerchProductTypesTableFilterTest();
         }
@@ -69,8 +53,8 @@ namespace Autodan.tests.MerchTool
         [Test]
         public void MtMerchandiseColorsPageTest()
         {
-            _common.NavToMerch();
-            var mtMerchandiseColorsPage = _common.SideNavToColors();
+            _home.NavToMerch();
+            var mtMerchandiseColorsPage = _home.SideNavToColors();
             mtMerchandiseColorsPage.VerifyColorsPageElements();
             mtMerchandiseColorsPage.MerchandiseColorFilterColors();
             mtMerchandiseColorsPage.MerchandiseColorExportToCsvButton();
@@ -81,8 +65,8 @@ namespace Autodan.tests.MerchTool
         [Test]
         public void MtMerchandiseSizePageTest()
         {
-            _common.NavToMerch();
-            var mtMerchandiseSizesPage = _common.SideNavToSizes();
+            _home.NavToMerch();
+            var mtMerchandiseSizesPage = _home.SideNavToSizes();
             mtMerchandiseSizesPage.VerifySizesPageElements();
             mtMerchandiseSizesPage.MerchandiseSizeFilterSizes();
             mtMerchandiseSizesPage.MerchandiseSizeExportToCsvButton();
@@ -93,16 +77,16 @@ namespace Autodan.tests.MerchTool
         [Test]
         public void MtMerchandiseAttributeOptionPageTest()
         {
-            _common.NavToMerch();
-            var mtMerchandiseAttributeOptionsPage = _common.SideNavToAttributes();
+            _home.NavToMerch();
+            var mtMerchandiseAttributeOptionsPage = _home.SideNavToAttributes();
             mtMerchandiseAttributeOptionsPage.VerifyAttributeOptionPageElements();
         }
 
         [Test]
         public void MtMerchandise_ProductCategories_PageTest()
         {
-            _common.NavToMerch();
-            var mtMerchandiseProductCategoriesPage = _common.SideNavToProductCategories();
+            _home.NavToMerch();
+            var mtMerchandiseProductCategoriesPage = _home.SideNavToProductCategories();
             mtMerchandiseProductCategoriesPage.VerifyElements();
             mtMerchandiseProductCategoriesPage.RunActions();
         }
@@ -110,18 +94,18 @@ namespace Autodan.tests.MerchTool
         [Test]
         public void MtMerchandise_SalesChannels_PageTest()
         {
-            _common.NavToMerch();
-            var page = _common.SideNavToSalesChannels();
-            page.VerifyElements();
-            page.ValidateElementHasValue();
-            page.RunActions();
+            _home.NavToMerch();
+            var mtMerchandiseSaleChannelsPage = _home.SideNavToSalesChannels();
+            mtMerchandiseSaleChannelsPage.VerifyElements();
+            mtMerchandiseSaleChannelsPage.ValidateElementHasValue();
+            mtMerchandiseSaleChannelsPage.RunActions();
         }
 
         [Test]
         public void MtMerchandise_ShipBoxCategories_PageTest()
         {
-            _common.NavToMerch();
-            var page = _common.SideNavToShipBoxCategories();
+            _home.NavToMerch();
+            var page = _home.SideNavToShipBoxCategories();
             page.VerifyElements();
             page.ValidateElementHasValue();
             page.RunActions();
@@ -130,8 +114,8 @@ namespace Autodan.tests.MerchTool
         [Test]
         public void MtMerchandise_ShippingMethods_PageTest()
         {
-            _common.NavToMerch();
-            var page = _common.SideNavToShippingMethods();
+            _home.NavToMerch();
+            var page = _home.SideNavToShippingMethods();
             page.VerifyElements();
             page.ValidateElementHasValue();
             page.RunActions();
@@ -140,8 +124,8 @@ namespace Autodan.tests.MerchTool
         [Test]
         public void MtMerchandiseDetailsPageTest()
         {
-            _common.NavToMerch();
-            var page = _common.SideNavToSalesChannels();
+            _home.NavToMerch();
+            var page = _home.SideNavToSalesChannels();
             page.VerifyElements();
             page.ValidateElementHasValue();
             page.RunActions();

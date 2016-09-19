@@ -4,7 +4,7 @@ using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Autodan.pages.MerchTool.MerchadisePages
+namespace Autodan.pages.MerchTool.MerchandisePages
 {
     internal class MtMerchProductTypesPageObject : BaseTest
     {

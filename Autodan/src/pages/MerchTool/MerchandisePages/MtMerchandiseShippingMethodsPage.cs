@@ -5,16 +5,15 @@ using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Autodan.pages.MerchTool.MerchadisePages
+namespace Autodan.pages.MerchTool.MerchandisePages
 {
-    public class MtMerchandiseSalesChannelsPage : BaseTest
+    public class MtMerchandiseShippingMethodsPage:BaseTest
     {
-        private string PageName { get; } = "SalesChannel";
-        public MtMerchandiseSalesChannelsPage()
+       private string PageName { get; }= "ShippingMethods";
+        public MtMerchandiseShippingMethodsPage()
         {
             PageFactory.InitElements(Driver, this);
         }
-
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(1) > div")]
         public IWebElement ColumnHeaderId { get; set; }
 
@@ -22,6 +21,12 @@ namespace Autodan.pages.MerchTool.MerchadisePages
         public IWebElement ColumnHeaderName { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(3) > div")]
+        public IWebElement ColumnHeaderDeliveryTime { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(4) > div")]
+        public IWebElement ColumnHeaderIsExpidited { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(5) > div")]
         public IWebElement ColumnHeaderDetails { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td:nth-child(3) > a")]
@@ -32,7 +37,7 @@ namespace Autodan.pages.MerchTool.MerchadisePages
 
         public void VerifyElements()
         {
-            VerifyElementsUniqueToPage();
+            VerifyElementsUniqueToPage(); Console.WriteLine("Verified " + PageName + " page elements");
             VarifyElementsCommonToPage();
         }
 
@@ -40,9 +45,10 @@ namespace Autodan.pages.MerchTool.MerchadisePages
         {
             ColumnHeaderId.ValidateTextIsInThisElement("Id");
             ColumnHeaderName.ValidateTextIsInThisElement("Name");
+            ColumnHeaderDeliveryTime.ValidateTextIsInThisElement("Delivery Time");
+            ColumnHeaderIsExpidited.ValidateTextIsInThisElement("Is Expedited?");
             ColumnHeaderDetails.ValidateTextIsInThisElement("Details");
-            Console.WriteLine("Verified SalesChannels page Header elements have expected values");
-
+            Console.WriteLine("Verified " + PageName + "  page Header elements have expected values");
         }
 
         public void RunActions()
@@ -51,11 +57,12 @@ namespace Autodan.pages.MerchTool.MerchadisePages
             page.RunCommonActions();
         }
 
-        public MtMerchandiseDetailsPage GotoDetailsPage()
+        public MtCommonMerchandiseDetailsPage GotoDetailsPage()
         {
             var firstRowContentText = FirstRowContent.Text;
             GotoDetailPageOnFirstRow.Click();
-            return new MtMerchandiseDetailsPage(firstRowContentText);
+            Console.WriteLine("Verified Navigation to LandingPage");
+            return new MtCommonMerchandiseDetailsPage(firstRowContentText);
         }
 
         private void VerifyElementsUniqueToPage()
@@ -64,7 +71,6 @@ namespace Autodan.pages.MerchTool.MerchadisePages
             {
                 element.Verify();
             }
-            Console.WriteLine("Verified SalesChannels page elements");
         }
 
         private void VarifyElementsCommonToPage()

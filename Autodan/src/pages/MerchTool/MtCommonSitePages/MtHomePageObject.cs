@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using Autodan.core;
+using Autodan.pages.MerchTool.MerchandisePages;
+using Autodan.pages.MerchTool.SmartProductEnginePages;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Autodan.pages.MerchTool.MerchadisePages
+namespace Autodan.pages.MerchTool.MtCommonPages
 {
-    internal class MtCommonPageObject
+    internal class MtHomePageObject
     {
 
-        public MtCommonPageObject()
+        public MtHomePageObject()
         {
             PageFactory.InitElements(BaseTest.Driver, this);
         }
@@ -69,20 +71,19 @@ namespace Autodan.pages.MerchTool.MerchadisePages
         public MtMerchProductTypesPageObject NavToMerch()
         {
             NavBtnMerchandise.Click();
-
             return new MtMerchProductTypesPageObject();
         }
 
-        public void NavToSmartProductEngine()
+        public MtSpeAdministativeFunctionPage NavToSmartProductEngine()
         {
             NavBtnSmartProductEngine.Click();
+            return new MtSpeAdministativeFunctionPage();
         }
 
         public void Logout()
         {
             BtnLogout.Click();
         }
-
 
         //Merchandise - Side nav options
         public void SideNavToProductTypes()

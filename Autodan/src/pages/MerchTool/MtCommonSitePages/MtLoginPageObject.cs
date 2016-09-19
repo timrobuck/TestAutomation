@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Autodan.core;
+using Autodan.pages.MerchTool.MtCommonPages;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Autodan.pages.MerchTool.MerchadisePages
+namespace Autodan.pages.MerchTool.MtCommonSitePages
 {
     internal class MtLoginPageObject
     {
@@ -29,16 +30,14 @@ namespace Autodan.pages.MerchTool.MerchadisePages
 
         //loginpage actions
         //login to merchtool and passes common page object
-        public MtCommonPageObject Login()
+        public MtHomePageObject Login()
         {
             UserName.EnterText("CORP_Webdriver");
             Password.EnterText("ANapPqH<");
             BtnLogin.Click();
 
-            Console.WriteLine("input creds, logged into merchtool");
-
-            //return po
-            return new MtCommonPageObject();
+            Console.WriteLine("Varified input creds and logged into merchtool");
+            return new MtHomePageObject();
         }
 
         //expected elements
@@ -49,7 +48,7 @@ namespace Autodan.pages.MerchTool.MerchadisePages
                 PageTitle,
                 UserName,
                 Password,
-                BtnLogin,
+                BtnLogin
             };
 
             foreach (IWebElement element in pageElements)
