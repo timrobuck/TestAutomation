@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Autodan.core;
-using Autodan.pages.MerchTool.MtCommonPages;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 

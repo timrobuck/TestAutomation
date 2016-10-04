@@ -7,12 +7,25 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace Autodan.pages.MerchTool.MerchandisePages
 {
-    public class MtMerchandiseShippingMethodsPage:BaseTest
+    public interface IMtMerchandiseShippingMethodsPage
     {
-       private string PageName { get; }= "ShippingMethods";
-        public MtMerchandiseShippingMethodsPage()
+        void VerifyElements();
+        void RunActions();
+    }
+    public class MtMerchandiseShippingMethodsPage:BaseTest, IBaseSmokeTest, IMtMerchandiseShippingMethodsPage
+    {
+        private readonly IMtCommonToMerchandisePages _common;
+        private readonly IMtMerchandiseShippingMethodsDetailsPage _detail;
+        private static string PageName { get; } = "ShippingMethods";
+
+        public MtMerchandiseShippingMethodsPage(): this(new MtCommonToMerchandisePages(PageName),new MtMerchandiseShippingMethodsDetailsPage()) {}
+
+        public MtMerchandiseShippingMethodsPage(IMtCommonToMerchandisePages common, IMtMerchandiseShippingMethodsDetailsPage detail)
         {
             PageFactory.InitElements(Driver, this);
+            _common = common;
+            _detail = detail;
+
         }
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(1) > div")]
         public IWebElement ColumnHeaderId { get; set; }
@@ -29,40 +42,41 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(5) > div")]
         public IWebElement ColumnHeaderDetails { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td:nth-child(3) > a")]
+        [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td:nth-child(5) > a")]
         public IWebElement GotoDetailPageOnFirstRow { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td:nth-child(2)")]
         public IWebElement FirstRowContent { get; set; }
 
+        [FindsBy(How = How.CssSelector, Using= "#DataTables_Table_0 > tbody > tr:nth-child(1) > td:nth-child(2)")]
+        public IWebElement Row1Column2Content { get; set; }
+        
         public void VerifyElements()
         {
             VerifyElementsUniqueToPage(); Console.WriteLine("Verified " + PageName + " page elements");
             VarifyElementsCommonToPage();
         }
 
-        public void ValidateElementHasValue()
+        public void VerifyElementHasValue()
         {
-            ColumnHeaderId.ValidateTextIsInThisElement("Id");
-            ColumnHeaderName.ValidateTextIsInThisElement("Name");
-            ColumnHeaderDeliveryTime.ValidateTextIsInThisElement("Delivery Time");
-            ColumnHeaderIsExpidited.ValidateTextIsInThisElement("Is Expedited?");
-            ColumnHeaderDetails.ValidateTextIsInThisElement("Details");
+            ColumnHeaderId.VerifyTextIsInThisElement("Id");
+            ColumnHeaderName.VerifyTextIsInThisElement("Name");
+            ColumnHeaderDeliveryTime.VerifyTextIsInThisElement("Delivery Time");
+            ColumnHeaderIsExpidited.VerifyTextIsInThisElement("Is Expedited?");
+            ColumnHeaderDetails.VerifyTextIsInThisElement("Details");
             Console.WriteLine("Verified " + PageName + "  page Header elements have expected values");
         }
 
         public void RunActions()
         {
-            var page = new MtCommonToMerchandisePages(PageName);
-            page.RunCommonActions();
+            _common.RunCommonActions();
         }
 
-        public MtCommonMerchandiseDetailsPage GotoDetailsPage()
+        public IMtMerchandiseShippingMethodsDetailsPage GotoDetailsPage()
         {
-            var firstRowContentText = FirstRowContent.Text;
             GotoDetailPageOnFirstRow.Click();
-            Console.WriteLine("Verified Navigation to LandingPage");
-            return new MtCommonMerchandiseDetailsPage(firstRowContentText);
+            Console.WriteLine("Verified Navigation to Details Page");
+            return _detail;
         }
 
         private void VerifyElementsUniqueToPage()
@@ -75,8 +89,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
 
         private void VarifyElementsCommonToPage()
         {
-            var page = new MtCommonToMerchandisePages(PageName);
-            page.VerifyCommonElements();
+            _common.VerifyCommonElements();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Autodan.core;
-using Autodan.pages.MerchTool.MtCommonPages;
 using Autodan.pages.MerchTool.MtCommonSitePages;
 using NUnit.Framework;
 
@@ -38,100 +37,127 @@ namespace Autodan.tests.MerchTool
             _home = _loginPage.Login();
             _home.VerifyLandingPage();
             _home.VerifyPersistentNav();
-            _home.NavToMerch();
+            _home.NavigateToMerchPage();
             _home.VerifySideNavigationOptions();
         }
 
         [Test]
         public void MtMerchProductTypesPageTest()
         {
-            var productType = _home.NavToMerch();
-            productType.VerifyProductTypesPageElements();
-            productType.MerchProductTypesTableFilterTest();
+            var productTypePage = _home.NavigateToMerchPage();
+            productTypePage.VerifyElements();
+            productTypePage.MerchProductTypesTableFilterTest();
+            _home.NavigateToMerchPage();
+            productTypePage.ViewTableByAspectRatio();
+            _home.NavigateToMerchPage();
+            productTypePage.DrillIntoProductTypeTable();
+        }
+
+        [Test]
+        public void MtMerchProductTypeAspectRatiosPage()
+        {
+            //todo: create this page class and verify elements
+        }
+
+        [Test]
+        public void MtMerchProductTypeDetailPageTest()
+        {
+            //todo: create this page class and verify elements
         }
 
         [Test]
         public void MtMerchandiseColorsPageTest()
         {
-            _home.NavToMerch();
-            var mtMerchandiseColorsPage = _home.SideNavToColors();
-            mtMerchandiseColorsPage.VerifyColorsPageElements();
-            mtMerchandiseColorsPage.MerchandiseColorFilterColors();
-            mtMerchandiseColorsPage.MerchandiseColorExportToCsvButton();
-            mtMerchandiseColorsPage.MerchandiseColorSelectNumberOfEntries();
-            mtMerchandiseColorsPage.SortAscendingDescendingByTableColumnHeaderClick();
+            _home.NavigateToMerchPage();
+            var page = _home.SideNavToColors();
+            page.VerifyElements();
+            page.RunActions();
         }
 
         [Test]
         public void MtMerchandiseSizePageTest()
         {
-            _home.NavToMerch();
+            _home.NavigateToMerchPage();
             var mtMerchandiseSizesPage = _home.SideNavToSizes();
-            mtMerchandiseSizesPage.VerifySizesPageElements();
-            mtMerchandiseSizesPage.MerchandiseSizeFilterSizes();
-            mtMerchandiseSizesPage.MerchandiseSizeExportToCsvButton();
-            mtMerchandiseSizesPage.MerchandiseSizeSelectNumberOfEntries();
-            mtMerchandiseSizesPage.SortAscendingDescendingByTableColumnHeaderClick();
+            mtMerchandiseSizesPage.VerifyElements();
+            mtMerchandiseSizesPage.RunActions();
         }
 
         [Test]
         public void MtMerchandiseAttributeOptionPageTest()
         {
-            _home.NavToMerch();
-            var mtMerchandiseAttributeOptionsPage = _home.SideNavToAttributes();
-            mtMerchandiseAttributeOptionsPage.VerifyAttributeOptionPageElements();
+            _home.NavigateToMerchPage();
+            var page = _home.SideNavToAttributes();
+            page.VerifyElements();
         }
 
         [Test]
         public void MtMerchandise_ProductCategories_PageTest()
         {
-            _home.NavToMerch();
-            var mtMerchandiseProductCategoriesPage = _home.SideNavToProductCategories();
-            mtMerchandiseProductCategoriesPage.VerifyElements();
-            mtMerchandiseProductCategoriesPage.RunActions();
-        }
-
-        [Test]
-        public void MtMerchandise_SalesChannels_PageTest()
-        {
-            _home.NavToMerch();
-            var mtMerchandiseSaleChannelsPage = _home.SideNavToSalesChannels();
-            mtMerchandiseSaleChannelsPage.VerifyElements();
-            mtMerchandiseSaleChannelsPage.ValidateElementHasValue();
-            mtMerchandiseSaleChannelsPage.RunActions();
-        }
-
-        [Test]
-        public void MtMerchandise_ShipBoxCategories_PageTest()
-        {
-            _home.NavToMerch();
-            var page = _home.SideNavToShipBoxCategories();
+            _home.NavigateToMerchPage();
+            var page = _home.SideNavToProductCategories();
             page.VerifyElements();
-            page.ValidateElementHasValue();
             page.RunActions();
         }
 
         [Test]
-        public void MtMerchandise_ShippingMethods_PageTest()
+        public void SalesChannelsPage_And_DetailsPage_SmokeTest()
         {
-            _home.NavToMerch();
-            var page = _home.SideNavToShippingMethods();
-            page.VerifyElements();
-            page.ValidateElementHasValue();
-            page.RunActions();
-        }
-
-        [Test]
-        public void MtMerchandiseDetailsPageTest()
-        {
-            _home.NavToMerch();
+            _home.NavigateToMerchPage();
             var page = _home.SideNavToSalesChannels();
             page.VerifyElements();
-            page.ValidateElementHasValue();
+            page.VerifyElementContent();
+            page.RunActions();
+            var baton = page.Row1Column2Content.Text;
+
+            var detailsPage = page.GotoDetailsPage();
+            detailsPage.VerifyElements();
+            detailsPage.VerifyElementContent();
+            Assert.AreEqual(detailsPage.NameContent.Text, baton);
+        }
+
+        [Test]
+        public void ShipBoxCategoriesPage_And_DetailPage_SmokeTest()
+        {
+            _home.NavigateToMerchPage();
+            var page = _home.SideNavToShipBoxCategories();
+            page.VerifyElements();
+            page.VerifyElementHasValue();
+            page.RunActions();
+            var baton = page.Row1Column2Content.Text;
+
+            var detailsPage = page.GotoDetailsPage();
+            detailsPage.VerifyElements();
+            detailsPage.VerifyElementContent();
+            Assert.AreEqual(detailsPage.NameContent.Text, baton);
+        }
+
+        [Test]
+        public void ShippingMethodsPage_And_DetailsPage_SmokeTest()
+        {
+            _home.NavigateToMerchPage();
+            var page = _home.SideNavToShippingMethods();
+            page.VerifyElements();
+            page.VerifyElementHasValue();
+            page.RunActions();
+            var baton = page.Row1Column2Content.Text;
+
+            var detailsPage = page.GotoDetailsPage();
+            detailsPage.VerifyElements();
+            detailsPage.VerifyElementContent();
+            Assert.AreEqual(detailsPage.NameContent.Text, baton);
+        }
+
+        [Test]
+        public void MtMerchandiseCommonDetailsPageTest()
+        {
+            _home.NavigateToMerchPage();
+            var page = _home.SideNavToSalesChannels();
+            page.VerifyElements();
+            page.VerifyElementContent();
             page.RunActions();
             var detailsPage = page.GotoDetailsPage();
             detailsPage.VerifyElements();
-            detailsPage.ValidatePresentation();
         }
     }
 }

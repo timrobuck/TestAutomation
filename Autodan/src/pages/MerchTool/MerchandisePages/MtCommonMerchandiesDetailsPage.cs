@@ -1,3 +1,4 @@
+using System;
 using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -5,14 +6,19 @@ using System.Collections.Generic;
 
 namespace Autodan.pages.MerchTool.MerchandisePages
 {
-    public class MtCommonMerchandiseDetailsPage : BaseTest
+    public interface IMtCommonMerchandiseDetailsPage
     {
-        public string FirstRowContentFromLaunchPage { get; }
+        void VerifyElements();
+        void VerifyPresentation();
+        IWebElement BreadCrumbDetails { get; set; }
+        IWebElement Legend { get; set; }
+    }
 
-        public MtCommonMerchandiseDetailsPage(string firstRowContentFromLaunchPage)
+    public class MtCommonMerchandiseDetailsPage : BaseTest, IMtCommonMerchandiseDetailsPage
+    {
+        public MtCommonMerchandiseDetailsPage()
         {
             PageFactory.InitElements(Driver, this);
-            FirstRowContentFromLaunchPage = firstRowContentFromLaunchPage;
         }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul > li.active")]
@@ -21,50 +27,21 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > fieldset > legend")]
         public IWebElement Legend { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > fieldset > div > label:nth-child(1)")]
-        public IWebElement IdLabel { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > fieldset > div > span:nth-child(2)")]
-        public IWebElement IdValue { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > fieldset > div > i:nth-child(3)")]
-        public IWebElement IdText { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > fieldset > div > label:nth-child(4)")]
-        public IWebElement NameLabel { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > fieldset > div > span:nth-child(5)")]
-        public IWebElement NameValue { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > fieldset > div > i:nth-child(6)")]
-        public IWebElement NameText { get; set; }
-
         public void VerifyElements()
         {
             foreach (var element in new List<IWebElement>
             {
                 BreadCrumbDetails,
-                Legend,
-                IdLabel,
-                IdValue,
-                IdText,
-                NameLabel,
-                NameValue,
-                NameText
+                Legend
             })
-                element.Verify();
+            element.Verify();
         }
 
-        public void ValidatePresentation()
+        public void VerifyPresentation()
         {
-            BreadCrumbDetails.ValidateTextIsInThisElement("Details");
-            Legend.ValidateTextIsInThisElement("Details");
-            IdLabel.ValidateTextIsInThisElement("Id");
-            IdValue.ValidateValueIsNumeric();
-            IdText.ValidateTextIsInThisElement("This uniquely identifies this sales channel from other sales channels");
-            NameLabel.ValidateTextIsInThisElement("Name");
-            NameValue.ValidateTextIsInThisElement(FirstRowContentFromLaunchPage);
-            NameText.ValidateTextIsInThisElement("This text is not displayed on the site and is for internal use only");
+            BreadCrumbDetails.VerifyTextIsInThisElement("Details");
+            Legend.VerifyTextIsInThisElement("Details");
+            Console.WriteLine("Verified expected content on detail page.");
         }
     }
 

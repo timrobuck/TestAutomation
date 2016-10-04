@@ -5,64 +5,56 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace Autodan.pages.MerchTool.SmartProductEnginePages
 {
-    public class MtSpeCategoriesPage:BaseTest
-    {
+    public class MtSpePtnExclusionPage:BaseTest
+    { 
         private readonly MtCommonToSpePages _mtCommonToSpePages;
-        private string pageName = "Smart Product Engine Categores Page";
+        private string pageName = "Smart Product Engine PTNExclusion Page";
         private readonly MtCommonToEditDetailPages _mtCommonToEditDetailPages;
 
-        public MtSpeCategoriesPage()
+        public MtSpePtnExclusionPage()
         {
             PageFactory.InitElements(Driver, this);
             _mtCommonToSpePages = new MtCommonToSpePages(pageName);
             _mtCommonToEditDetailPages = new MtCommonToEditDetailPages();
         }
-        [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories_length > label")]
+        [FindsBy(How = How.CssSelector, Using = "#ProductTypeExclusions_length > label")]
         public IWebElement LableShowEntries { get; set; } //always includes "Show " etc
 
-        [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories_length > label > select")]
+        [FindsBy(How = How.CssSelector, Using = "#ProductTypeExclusions_length > label > select")]
         public IWebElement DropDownNumberOfEntriesToShow { get; set; }//always includes "50,25,10
 
-        [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories_filter > label > input")]
+        [FindsBy(How = How.CssSelector, Using = "#ProductTypeExclusions_filter > label > input")]
         public IWebElement InputFilter { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories_filter")]
+        [FindsBy(How = How.CssSelector, Using = "#ProductTypeExclusions_filter")]
         public IWebElement LabelFilter { get; set; }//always includes "Filter:"
 
-        [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories > tbody > tr:nth-child(1) > td:nth-child(4) > label")]
+        [FindsBy(How = How.CssSelector, Using = "#ProductTypeExclusions > tbody > tr:nth-child(1) > td:nth-child(3) > label")]
         private IWebElement CheckBoxRemoveRecord { get; set; } //do not test this until stage is ready.
 
-        //table body record content
-        [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories > tbody > tr:nth-child(1) > td:nth-child(3) > a")]
-        public IWebElement NavigateToEditDetailsPage { get; set; } //click the "edit" to navigate to the details edit page
-
-        [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories_info")]
+       [FindsBy(How = How.CssSelector, Using = "#ProductTypeExclusions_info")]
         public IWebElement ShowingEntries { get; set; }
 
-        //Columns
-        [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories > thead > tr > td:nth-child(1) > div")]
+        [FindsBy(How = How.CssSelector, Using = "#ProductTypeExclusions > thead > tr > td:nth-child(1) > div")]
         public IWebElement Column1Header { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories > thead > tr > td:nth-child(2) > div")]
+        [FindsBy(How = How.CssSelector, Using = "#ProductTypeExclusions > thead > tr > td:nth-child(2) > div")]
         public IWebElement Column2Header { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories > thead > tr > td:nth-child(3) > div")]
+        [FindsBy(How = How.CssSelector, Using = "#ProductTypeExclusions > thead > tr > td:nth-child(3) > div")]
         public IWebElement Column3Header { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories > thead > tr > td:nth-child(4) > div")]
-        public IWebElement Column4Header { get; set; }
+        [FindsBy(How = How.CssSelector, Using = "#ProductTypeExclusions > tbody > tr:nth-child(1) > td.sorting_1")]
+        public IWebElement TableIdValueFromFirstRow { get; set; }
 
-        //assuming there is at least 2 valid rows in the table body
-        [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories > tbody > tr:nth-child(2) > td:nth-child(3) > a")]
-        public IWebElement ClickableEditFrom2ndRow { get; set; }
+        //assuming there is at least one valid row in the table
+        [FindsBy(How = How.CssSelector, Using = "#ProductTypeExclusions > tbody > tr:nth-child(1) > td.sorting_1")]
+        public IWebElement Column1Row1FromTable { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories > tbody > tr:nth-child(2) > td:nth-child(2)")]
-        public IWebElement Column2Row2FromTable { get; set; }
+        [FindsBy(How = How.CssSelector, Using = "#ProductTypeExclusions > tbody > tr:nth-child(1) > td:nth-child(2)")]
+        public IWebElement Column2Row1FromTable { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories > tbody > tr:nth-child(2) > td.sorting_1")]
-        public IWebElement Column1Row2FromTable { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories_info")]
+        [FindsBy(How = How.CssSelector, Using = "#ProductTypeExclusions_info")]
         public IWebElement Showing1ToXofYentries { get; set; }
 
 
@@ -93,28 +85,25 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
             LableShowEntries.Verify();
             DropDownNumberOfEntriesToShow.Verify();
             InputFilter.Verify();
-            NavigateToEditDetailsPage.Verify();
             CheckBoxRemoveRecord.Verify();
             LabelFilter.Verify();
             Column1Header.Verify();
             Column2Header.Verify();
             Column3Header.Verify();
-            Column4Header.Verify();
             ShowingEntries.Verify();
-            Column1Row2FromTable.Verify();
-            Column2Row2FromTable.Verify();
+            TableIdValueFromFirstRow.Verify();
+            Column1Row1FromTable.Verify();
+            Column2Row1FromTable.Verify();
             Showing1ToXofYentries.Verify();
         }
 
         private void VerifyUniqueElementsHaveExpectedContent()
         {
             LableShowEntries.VerifyTextIsInThisElement("Show");
-            NavigateToEditDetailsPage.VerifyTextIsInThisElement("edit");
             CheckBoxRemoveRecord.VerifyTextIsInThisElement("Remove");
-            Column1Header.VerifyTextIsInThisElement("Category Name");
-            Column2Header.VerifyTextIsInThisElement("Number of Product Types");
-            Column3Header.VerifyTextIsInThisElement("Edit");
-            Column4Header.VerifyTextIsInThisElement("Remove?");
+            Column1Header.VerifyTextIsInThisElement("Product Type Id");
+            Column2Header.VerifyTextIsInThisElement("Product Type Name");
+            Column3Header.VerifyTextIsInThisElement("Remove?");
         }
         private void ActionSelectNumberOfLines()
         {
@@ -128,25 +117,21 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
 
         private void ActionSortAscendingDescendingByTableColumnHeaderClick()
         {
-            var beforeSortValue = Column1Row2FromTable.Text;
+            var beforeSortValue = TableIdValueFromFirstRow.Text;
             _mtCommonToSpePages.SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle.Click();
-            var afterSortValue = Column1Row2FromTable.Text;
+            var afterSortValue = TableIdValueFromFirstRow.Text;
             if (beforeSortValue == afterSortValue)
                 throw new Exception("Resorting items does not appear to work");
+
+            Console.WriteLine("Verify Column Sort");
         }
 
         public void VerifyCountFromSpePageMatchesCountOnDetailsPage()
         {
-            var originatingPageCount = Column2Row2FromTable.Text;
-            NavigateToEditDetailsPage.ClickAndWait(Driver, 2);
+            var originatingPageCount = Column1Row1FromTable.Text;
             if (Showing1ToXofYentries.Text.Contains(originatingPageCount))
-                throw new Exception("Compare expected equivalent values between FromPage and LandingPage failed!");
+                throw new Exception("Compare expected equivalent values between FromPage to Detail LandingPage failed!");
         }
 
-        public MtSpeEditPtnCategoryPage GotoAndReturnNewEditPtnCategoryPage()
-        {
-            ClickableEditFrom2ndRow.Click();
-            return new MtSpeEditPtnCategoryPage();
-        }
     }
 }

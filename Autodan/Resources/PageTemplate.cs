@@ -20,7 +20,7 @@ namespace Autodan.Resources
         [FindsBy(How = How.CssSelector, Using = "blah blah")]//todo: remove this line
         public IWebElement BlahId { get; set; }//todo: remove this line
 
-        public void VerifyElements()
+        public void VerifyElementsExists()
         {
             VarifyElementsCommonToPage();
             VerifyElementsUniqueToPage();
@@ -29,7 +29,7 @@ namespace Autodan.Resources
 
         public void VerifyElementHasExpectedValue()
         {
-            //todo:Remove this example: BlahId.ValidateTextIsInThisElement("Id"); 
+            //todo:Remove this example: BlahId.VerifyTextIsInThisElement("Id"); 
             Console.WriteLine("Verified " + PageName + "  page elements have expected values");
         }
 
@@ -38,12 +38,7 @@ namespace Autodan.Resources
             var page = new MtCommonToMerchandisePages(PageName);
             page.RunCommonActions();
 
-            Action1();//todo:add unique actions(below) then call(here) 
-        }
-
-        private void Action1()//todo remove or replace this unique actin example 
-        {
-            BlahId.Click();
+            //Action1();//todo:add unique actions(below) then call(here) 
         }
 
         private void VerifyElementsUniqueToPage()
@@ -58,6 +53,11 @@ namespace Autodan.Resources
         {
             var page = new MtCommonToMerchandisePages(PageName);
             page.VerifyCommonElements();
+        }
+
+        public void VerifyNavigation() //use this to Verify that the landing page is correct
+        {
+
         }
     }
 }

@@ -1,37 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Autodan.core;
+﻿using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace Autodan.pages.MerchTool.MerchandisePages
 {
-    public class MtMerchandiseShipBoxCategoriesPage : BaseTest
+    public interface IMtMerchandiseShipBoxCategoriesPage
+    {
+        void VerifyElements();
+        void VerifyElementContent();
+        void RunActions();
+        IMtMerchandiseShipBoxCategoriesDetailsPage GotToDetailsPage();
+    }
+
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
+    internal class MtMerchandiseShipBoxCategoriesPage : BaseTest, IBaseSmokeTest
     {
         private readonly string _className;
         private readonly string _pageName = "ShipBox Categories";
+        private readonly IMtCommonToMerchandisePages _common;
+        private readonly IMtMerchandiseShipBoxCategoriesDetailsPage _details;
 
-        public MtMerchandiseShipBoxCategoriesPage()
+        public MtMerchandiseShipBoxCategoriesPage() : this(new MtCommonToMerchandisePages(" ShipBox Categories Page "), new MtMerchandiseShipBoxCategoriesDetailsPage()){}
+
+        public MtMerchandiseShipBoxCategoriesPage(IMtCommonToMerchandisePages common, IMtMerchandiseShipBoxCategoriesDetailsPage details)
         {
             PageFactory.InitElements(Driver, this);
-            _className = GetType().ToString();
+            _className = GetType().Name;
+            _common = common;
+            _details = details;
         }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(1) > div")]
-        public IWebElement ColumnHeaderId { get; set; }
+        private IWebElement ColumnHeaderId { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(2) > div")]
-        public IWebElement ColumnHeaderName { get; set; }
+        private IWebElement ColumnHeaderName { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(3) > div")]
-        public IWebElement ColumnHeaderDetails { get; set; }
+        private IWebElement ColumnHeaderDetails { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td:nth-child(3) > a")]
-        public IWebElement GotoDetailPageOnFirstRow { get; set; }
+        private IWebElement GotoDetailPageOnFirstRow { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td:nth-child(2)")]
-        public IWebElement FirstRowContent { get; set; }
+        public IWebElement Row1Column2Content { get; set; }
 
         public void VerifyElements()
         {
@@ -39,25 +55,29 @@ namespace Autodan.pages.MerchTool.MerchandisePages
             VarifyElementsCommonToPage();
         }
 
-        public void ValidateElementHasValue()
+        public void VerifyElementContent()
         {
-            ColumnHeaderId.ValidateTextIsInThisElement("Id");
-            ColumnHeaderName.ValidateTextIsInThisElement("Name");
-            ColumnHeaderDetails.ValidateTextIsInThisElement("Details");
+            throw new NotImplementedException();
+        }
+
+        public void VerifyElementHasValue()
+        {
+            ColumnHeaderId.VerifyTextIsInThisElement("Id");
+            ColumnHeaderName.VerifyTextIsInThisElement("Name");
+            ColumnHeaderDetails.VerifyTextIsInThisElement("Details");
             Console.WriteLine("Verified " + _pageName + "  page Header elements have expected values");
         }
 
         public void RunActions()
         {
-            var page = new MtCommonToMerchandisePages(_className);
-            page.RunCommonActions();
+            _common.RunCommonActions();
         }
 
-        public MtCommonMerchandiseDetailsPage GotoDetailsPage()
+        public IMtMerchandiseShipBoxCategoriesDetailsPage GotoDetailsPage()
         {
-            var firstRowContentText = FirstRowContent.Text;
             GotoDetailPageOnFirstRow.Click();
-            return new MtCommonMerchandiseDetailsPage(firstRowContentText);
+            Console.WriteLine("Verify Navigation to details page.");
+            return _details;
         }
 
         private void VerifyElementsUniqueToPage()

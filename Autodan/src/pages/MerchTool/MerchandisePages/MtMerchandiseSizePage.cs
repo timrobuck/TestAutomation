@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace Autodan.pages.MerchTool.MerchandisePages
 {
-    public class MtMerchandiseSizePage:BaseTest
+    public interface IMtMerchandiseSizePage
+    {
+        void DrillIntoSizeTable();
+        void VerifyElementContent();
+        void RunActions();
+    }
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
+    internal class MtMerchandiseSizePage: BaseTest,IBaseSmokeTest
     {
         public  MtMerchandiseSizePage()
         {
@@ -15,52 +23,52 @@ namespace Autodan.pages.MerchTool.MerchandisePages
 
         //sizes subpage elements
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul.breadcrumb > li:nth-child(1)")]
-        public IWebElement BreadCrumbHome { get; set; }
+        private IWebElement BreadCrumbHome { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul.breadcrumb > li:nth-child(2)")]
-        public IWebElement BreadCrumbSizesList { get; set; }
+        private IWebElement BreadCrumbSizesList { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > fieldset > legend")]
-        public IWebElement LegendCafepressSizeOptions { get; set; }
+        private IWebElement LegendCafepressSizeOptions { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > fieldset > div > a")]
-        public IWebElement BtnExportToCsv { get; set; }
+        private IWebElement BtnExportToCsv { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_length > label")]
-        public IWebElement LabelShow { get; set; }
+        private IWebElement LabelShow { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_length > label > select")]
-        public IWebElement SelectNumberOfEntries { get; set; }
+        private IWebElement SelectNumberOfEntries { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_length > label > select > option:nth-child(3)")]
-        public IWebElement OptionSelected50 { get; set; }
+        private IWebElement OptionSelected50 { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_filter > label")]
-        public IWebElement LabelSearch { get; set; }
+        private IWebElement LabelSearch { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_filter > label > input")]
-        public IWebElement InputSearch { get; set; }
+        private IWebElement InputSearch { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_wrapper")]
-        public IWebElement TableSizes { get; set; }
+        private IWebElement TableSizes { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(3)")]
-        public IWebElement TableHeaders { get; set; }
+        private IWebElement TableHeaders { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_info")]
-        public IWebElement ShowingEntries { get; set; }
+        private IWebElement ShowingEntries { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_paginate")]
-        public IWebElement BtnSetPagination { get; set; }
+        private IWebElement BtnSetPagination { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(2)")]
-        public IWebElement SizeTableSelectSmall { get; set; }
+        private IWebElement SizeTableSelectSmall { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(1) > div > span")]
-        public IWebElement SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle { get; set; }
+        private IWebElement SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td.sorting_1")]
-        public IWebElement GetTableIdValueFromFirstRow { get; set; }
+        private IWebElement GetTableIdValueFromFirstRow { get; set; }
 
         //navigation elements
         public void DrillIntoSizeTable()
@@ -68,7 +76,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
             SizeTableSelectSmall.Click();
         }
 
-        public void VerifySizesPageElements()
+        private void VerifySizesPageElements()
         {
             var pageElements = new List<IWebElement>
             {
@@ -94,7 +102,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
             Console.WriteLine("Verified Size page elements");
         }
 
-        public void MerchandiseSizeFilterSizes()
+        private void MerchandiseSizeFilterSizes()
         {
             InputSearch.ClearAndEnterText("Small");
             WaitForAjax();
@@ -108,31 +116,50 @@ namespace Autodan.pages.MerchTool.MerchandisePages
             Console.WriteLine("Verified that filtering the list of Sizes works.");
         }
 
-        public void MerchandiseSizeExportToCsvButton()
+        private void MerchandiseSizeExportToCsvButton()
         {
             BtnExportToCsv.Click();
             //todo: the code do the download and varify this is not trivial due to various browser specificities. Get back to this after more research and testing. 
-            Console.WriteLine("Verified that the a CSV file is created.");
+            Console.WriteLine("Verified that the Create CSV Button Is Clickable.");
         }
 
-        public void MerchandiseSizeSelectNumberOfEntries()
+        private void MerchandiseSizeSelectNumberOfEntries()
         {
             SelectNumberOfEntries.SelectDropdown("50");
             SelectNumberOfEntries.SelectDropdown("10");
-            Console.WriteLine(ShowingEntries.Text.Contains("10")
-                ? "Verify that the item count changes and corresponds to label shown on bottom of page."
-                : "Failure to Verify that the item count changes and corresponds to label show on bottom of page.");
+            if(!ShowingEntries.Text.Contains("10"))
+                throw new Exception("Failure to Verify that the item count changes and corresponds to label show on bottom of page.");
+            
+            Console.WriteLine("Verify that the item count changes and corresponds to label shown on bottom of page.");
         }
 
-        public bool SortAscendingDescendingByTableColumnHeaderClick()
+        private void SortAscendingDescendingByTableColumnHeaderClick()
         {
             var beforeSortValue = GetTableIdValueFromFirstRow.Text;
             SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle.Click();
             var afterSortValue =  GetTableIdValueFromFirstRow.Text;
-            if (beforeSortValue == afterSortValue) return false;
-            Console.WriteLine("Verified records will sort desc and asc off colunn header ");
-            Console.WriteLine("Verified records that some records return.");
-            return true;
+            Console.WriteLine("Verified that records return.");
+            if (beforeSortValue == afterSortValue)
+                throw new Exception("Sort Asending-Descending By Table ColumnHeader Click Action Failed!");
+
+            Console.WriteLine("Verified Sort Asending-Descending By Table ColumnHeader Click Action");
+        }
+
+        public void VerifyElements()
+        {
+            VerifySizesPageElements();
+        }
+
+        public void VerifyElementContent()
+        {
+            throw new NotImplementedException();
+        }
+        public void RunActions()
+        {
+            MerchandiseSizeExportToCsvButton();
+            MerchandiseSizeSelectNumberOfEntries();
+            SortAscendingDescendingByTableColumnHeaderClick();
+            MerchandiseSizeFilterSizes();
         }
     }
 }

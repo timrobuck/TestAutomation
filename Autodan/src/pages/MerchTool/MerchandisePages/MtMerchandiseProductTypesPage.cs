@@ -1,69 +1,94 @@
-﻿using System;
-using System.Collections.Generic;
-using Autodan.core;
+﻿using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Autodan.pages.MerchTool.MerchandisePages
 {
-    internal class MtMerchProductTypesPageObject : BaseTest
+    public interface IMtMerchProductTypesPage
     {
-        public MtMerchProductTypesPageObject()
+        void DrillIntoProductTypeTable();
+        void ViewTableByAspectRatio();
+        void MerchProductTypesTableFilterTest();
+    }
+
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
+    internal class MtMerchProductTypesPage : BaseTest, IBaseSmokeTest
+    {
+        public MtMerchProductTypesPage()
         {
             PageFactory.InitElements(Driver, this);
         }
 
-        //ProductTypes sub-page eles
-        //bread
+        //ProductTypes sub-page 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul.breadcrumb > li:nth-child(1)")]
-        public IWebElement BreadCrumbHome { get; set; }
+        private IWebElement BreadCrumbHome { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul.breadcrumb > li:nth-child(2)")]
-        public IWebElement BreadCrumbMerch { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul.breadcrumb > li:nth-child(3)")]
-        public IWebElement BreadCrumbMerchDetails { get; set; }
+        private IWebElement BreadCrumbMerch { get; set; }
 
         //table
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul.merch-nav.nav.nav-tabs > li:nth-child(1)")]
-        public IWebElement BtnTableByPtn { get; set; }
+        private IWebElement BtnTableByPtn { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul.merch-nav.nav.nav-tabs > li:nth-child(2)")]
-        public IWebElement BtnTableByAspectRatio { get; set; }
+        private IWebElement BtnTableByAspectRatio { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > div:nth-child(3) > form > div > input")]
-        public IWebElement InputSearchProductTypes { get; set; }
+        private IWebElement InputSearchProductTypes { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > div > form > div > button")]
-        public IWebElement BtnSearchMagGlass { get; set; }
+        private IWebElement BtnSearchMagGlass { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > div:nth-child(3) > h2")]
-        public IWebElement TableHeaderProductTypes { get; set; }
+        private IWebElement TableHeaderProductTypes { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container")]
-        public IWebElement TableContainerProductTypes { get; set; }
+        private IWebElement TableContainerProductTypes { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > div.pagination")]
-        public IWebElement TablePagerProductTypes { get; set; }
+        private IWebElement TablePagerProductTypes { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > table > tbody > tr:nth-child(1) > td:nth-child(2)")]
-        public IWebElement ProductTypesTableMug { get; set; }
+        private IWebElement ProductTypesTableMug { get; set; }
 
 
         //navigation options
         public void DrillIntoProductTypeTable()
         {
             ProductTypesTableMug.Click();
+            Console.WriteLine("Verified ProductTypeTableMugClick Action");
         }
 
         public void ViewTableByAspectRatio()
         {
             BtnTableByAspectRatio.Click();
+            Console.WriteLine("Verified AspectRationClick Action ");
         }
 
+        //todo: create public method for InputSearchProductTypes by PTN or Name into filter textbox returning a detail page
+        //todo: then write fluent method calls for tests.
 
-        //ProductTypes page expected eles
-        public void VerifyProductTypesPageElements()
+        public void MerchProductTypesTableFilterTest()
+        {
+            InputSearchProductTypes.ClearAndEnterText("Mug");
+            BtnSearchMagGlass.Click();
+            WaitForAjax();
+            TableContainerProductTypes.Verify();
+            InputSearchProductTypes.ClearAndEnterText("NoTableTest");
+            BtnSearchMagGlass.Click();
+            WaitForAjax();
+            TableContainerProductTypes.Verify();
+            InputSearchProductTypes.ClearAndEnterText("Shirt");
+            BtnSearchMagGlass.Click();
+            WaitForAjax();
+            VerifyElements();
+            Console.WriteLine("Verified search input and re-tested table container");
+        }
+
+        public void VerifyElements()
         {
             var pageElements = new List<IWebElement>
             {
@@ -79,31 +104,21 @@ namespace Autodan.pages.MerchTool.MerchandisePages
                 ProductTypesTableMug,
             };
 
-            foreach (IWebElement element in pageElements)
+            foreach (var element in pageElements)
             {
                 element.Verify();
             }
             Console.WriteLine("Verified ProductType page elements");
         }
 
-
-
-
-        public void MerchProductTypesTableFilterTest()
+        public void VerifyElementContent()
         {
-            InputSearchProductTypes.ClearAndEnterText("Mug");
-            BtnSearchMagGlass.Click();
-            WaitForAjax();
-            TableContainerProductTypes.Verify();
-            InputSearchProductTypes.ClearAndEnterText("NoTableTest");
-            BtnSearchMagGlass.Click();
-            WaitForAjax();
-            TableContainerProductTypes.Verify();
-            InputSearchProductTypes.ClearAndEnterText("Shirt");
-            BtnSearchMagGlass.Click();
-            WaitForAjax();
-            VerifyProductTypesPageElements();
-            Console.WriteLine("Verified search input and re-tested table container");
+            throw new NotImplementedException();
+        }
+
+        public void RunActions()
+        {
+            throw new NotImplementedException();
         }
     }
 }
