@@ -11,14 +11,13 @@ namespace Autodan.pages.MerchTool.MerchandisePages
     {
         void DrillIntoColorTable();
         void VerifyElements();
-        void VerifyElementContent();
         void RunActions();
     }
 
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
-    internal class MtMerchandiseColorsPage : BaseTest, IBaseSmokeTest
+    public class MtMerchandiseColorsPage : BaseTest, IBaseSmokeTest
     {
-        internal MtMerchandiseColorsPage()
+        public MtMerchandiseColorsPage()
         {
             PageFactory.InitElements(Driver, this);
         }
@@ -156,12 +155,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         public void VerifyElements()
         {
             VerifyColorsPageElements();
-        }
-
-        public void VerifyElementContent()
-        {
-            throw new NotImplementedException();
-        }
+        } 
 
         public void RunActions()
         {

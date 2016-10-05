@@ -11,11 +11,11 @@ namespace Autodan.pages.MerchTool.MtCommonSitePages
 {
     
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
-    internal class MtHomePageObject
+    public class MtHomePageObject:BaseTest
     {
         public MtHomePageObject()
         {
-            PageFactory.InitElements(BaseTest.Driver, this);
+            PageFactory.InitElements(Driver, this);
         }
 
         //common & shared navigation elements

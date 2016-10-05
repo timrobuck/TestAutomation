@@ -15,7 +15,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
     }
 
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
-    internal class MtMerchandiseSalesChannelsPage : BaseTest, IBaseSmokeTest
+    public class MtMerchandiseSalesChannelsPage : BaseTest, IBaseSmokeTest
     {
         private readonly IMtCommonToMerchandisePages _commonPage;
         private readonly IMtMerchandiseSalesChannelDetailsPage _detailsPage;

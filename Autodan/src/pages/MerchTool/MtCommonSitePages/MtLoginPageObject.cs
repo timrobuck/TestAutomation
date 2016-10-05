@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Autodan.core;
+using Autodan.tests.MerchTool.MtSmokeTestUtilites;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace Autodan.pages.MerchTool.MtCommonSitePages
 {
-    internal class MtLoginPageObject
+    public class MtLoginPageObject
     {
         public MtLoginPageObject()
         {

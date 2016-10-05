@@ -1,22 +1,14 @@
 using System;
+using System.Collections.Generic;
 using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using System.Collections.Generic;
 
 namespace Autodan.pages.MerchTool.MerchandisePages
 {
-    public interface IMtCommonMerchandiseDetailsPage
+    public class MtCommonToMerchandiseDetailsPage : BaseTest, IMtCommonToMerchandiseDetailsPage
     {
-        void VerifyElements();
-        void VerifyPresentation();
-        IWebElement BreadCrumbDetails { get; set; }
-        IWebElement Legend { get; set; }
-    }
-
-    public class MtCommonMerchandiseDetailsPage : BaseTest, IMtCommonMerchandiseDetailsPage
-    {
-        public MtCommonMerchandiseDetailsPage()
+        public MtCommonToMerchandiseDetailsPage()
         {
             PageFactory.InitElements(Driver, this);
         }
@@ -34,7 +26,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
                 BreadCrumbDetails,
                 Legend
             })
-            element.Verify();
+                element.Verify();
         }
 
         public void VerifyPresentation()
@@ -44,5 +36,4 @@ namespace Autodan.pages.MerchTool.MerchandisePages
             Console.WriteLine("Verified expected content on detail page.");
         }
     }
-
 }

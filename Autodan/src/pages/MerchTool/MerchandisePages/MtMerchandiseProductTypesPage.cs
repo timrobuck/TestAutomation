@@ -15,7 +15,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
     }
 
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
-    internal class MtMerchProductTypesPage : BaseTest, IBaseSmokeTest
+    public class MtMerchProductTypesPage : BaseTest, IBaseSmokeTest
     {
         public MtMerchProductTypesPage()
         {
@@ -110,12 +110,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
             }
             Console.WriteLine("Verified ProductType page elements");
         }
-
-        public void VerifyElementContent()
-        {
-            throw new NotImplementedException();
-        }
-
+       
         public void RunActions()
         {
             throw new NotImplementedException();

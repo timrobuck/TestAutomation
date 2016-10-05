@@ -1,25 +1,21 @@
 ﻿using Autodan.core;
 using Autodan.pages.MerchTool.MtCommonSitePages;
+using Autodan.tests.MerchTool.MtSmokeTestUtilites;
 using NUnit.Framework;
 
-namespace Autodan.tests.MerchTool
+namespace Autodan.tests.MerchTool.MtSmokeMerchandiseTests
 {
     [TestFixture]
     [Parallelizable(ParallelScope.None)]
     public class MtSmokeMerchandiseTest : BaseTest
     {
-        private MtLoginPageObject _loginPage;
         private MtHomePageObject _home;
 
         [SetUp]
         public void Setup()
         {
-            if (CheckForSkipSetup())
-                return;
-
-            Setup("chrome", "merchtool");
-            _loginPage = new MtLoginPageObject();
-            _home = _loginPage.Login();
+            var homePageLogin = new LoginToHomePageUtility();
+            _home = homePageLogin.GetHomePage();
         }
 
         [TearDown]
@@ -27,14 +23,10 @@ namespace Autodan.tests.MerchTool
         {
             Cleanup();
         }
-
-        [Test, Category("SkipSetup")]
+       
+        [Test]
         public void MtLoginPageTest()
         {
-            Setup("chrome", "merchtool");
-            _loginPage = new MtLoginPageObject();
-            _loginPage.VerifyLoginPageElements();
-            _home = _loginPage.Login();
             _home.VerifyLandingPage();
             _home.VerifyPersistentNav();
             _home.NavigateToMerchPage();
@@ -42,7 +34,7 @@ namespace Autodan.tests.MerchTool
         }
 
         [Test]
-        public void MtMerchProductTypesPageTest()
+        public void ProductTypesPageTest()
         {
             var productTypePage = _home.NavigateToMerchPage();
             productTypePage.VerifyElements();
@@ -54,19 +46,24 @@ namespace Autodan.tests.MerchTool
         }
 
         [Test]
-        public void MtMerchProductTypeAspectRatiosPage()
+        public void ProductCategories_PageTest()
         {
-            //todo: create this page class and verify elements
+            _home.NavigateToMerchPage();
+            var page = _home.SideNavToProductCategories();
+            page.VerifyElements();
+            page.RunActions();
         }
 
         [Test]
-        public void MtMerchProductTypeDetailPageTest()
+        public void AttributeOptionPageTest()
         {
-            //todo: create this page class and verify elements
+            _home.NavigateToMerchPage();
+            var page = _home.SideNavToAttributes();
+            page.VerifyElements();
         }
 
         [Test]
-        public void MtMerchandiseColorsPageTest()
+        public void ColorsPageTest()
         {
             _home.NavigateToMerchPage();
             var page = _home.SideNavToColors();
@@ -75,7 +72,19 @@ namespace Autodan.tests.MerchTool
         }
 
         [Test]
-        public void MtMerchandiseSizePageTest()
+        public void CommonDetailsPageTest()
+        {
+            _home.NavigateToMerchPage();
+            var page = _home.SideNavToSalesChannels();
+            page.VerifyElements();
+            page.VerifyElementContent();
+            page.RunActions();
+            var detailsPage = page.GotoDetailsPage();
+            detailsPage.VerifyElements();
+        }
+
+        [Test]
+        public void SizePageTest()
         {
             _home.NavigateToMerchPage();
             var mtMerchandiseSizesPage = _home.SideNavToSizes();
@@ -84,20 +93,15 @@ namespace Autodan.tests.MerchTool
         }
 
         [Test]
-        public void MtMerchandiseAttributeOptionPageTest()
+        public void ProductTypeAspectRatiosPage()
         {
-            _home.NavigateToMerchPage();
-            var page = _home.SideNavToAttributes();
-            page.VerifyElements();
+            //todo: create this page class and verify elements
         }
 
         [Test]
-        public void MtMerchandise_ProductCategories_PageTest()
+        public void ProductTypeDetailPageTest()
         {
-            _home.NavigateToMerchPage();
-            var page = _home.SideNavToProductCategories();
-            page.VerifyElements();
-            page.RunActions();
+            //todo: create this page class and verify elements
         }
 
         [Test]
@@ -146,18 +150,6 @@ namespace Autodan.tests.MerchTool
             detailsPage.VerifyElements();
             detailsPage.VerifyElementContent();
             Assert.AreEqual(detailsPage.NameContent.Text, baton);
-        }
-
-        [Test]
-        public void MtMerchandiseCommonDetailsPageTest()
-        {
-            _home.NavigateToMerchPage();
-            var page = _home.SideNavToSalesChannels();
-            page.VerifyElements();
-            page.VerifyElementContent();
-            page.RunActions();
-            var detailsPage = page.GotoDetailsPage();
-            detailsPage.VerifyElements();
         }
     }
 }

@@ -14,17 +14,17 @@ namespace Autodan.pages.MerchTool.MerchandisePages
     }
 
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
-    internal class MtMerchandiseShippingMethodsDetailsPage : BaseTest, IMtMerchandiseShippingMethodsDetailsPage, IBaseSmokeTest
+    public class MtMerchandiseShippingMethodsDetailsPage : BaseTest, IMtMerchandiseShippingMethodsDetailsPage, IBaseSmokeTest
     {
-        private readonly IMtCommonMerchandiseDetailsPage _commonPage; // i like as it reduces noise an makes allows better readability by grouping common paths stacked in single lines without anything in between.
+        private readonly IMtCommonToMerchandiseDetailsPage _commonPage; // i like as it reduces noise an makes allows better readability by grouping common paths stacked in single lines without anything in between.
         private const string IdLabelSelector = "body > div.container > div.row > div.span9.view-container > fieldset > div > label:nth-child(1)";
         private const string IdContentSelector = "body > div.container > div.row > div.span9.view-container > fieldset > div > span:nth-child(2)";
         private const string NameLabelSelector = "body > div.container > div.row > div.span9.view-container > fieldset > div > label:nth-child(3)";
         private const string NameContentSelector = "body > div.container > div.row > div.span9.view-container > fieldset > div > span:nth-child(4)";
         
 
-        public MtMerchandiseShippingMethodsDetailsPage() : this(new MtCommonMerchandiseDetailsPage()) { }
-        public MtMerchandiseShippingMethodsDetailsPage(IMtCommonMerchandiseDetailsPage commonPage)
+        public MtMerchandiseShippingMethodsDetailsPage() : this(new MtCommonToMerchandiseDetailsPage()) { }
+        public MtMerchandiseShippingMethodsDetailsPage(IMtCommonToMerchandiseDetailsPage commonPage)
         {
             PageFactory.InitElements(Driver, this);
             _commonPage = commonPage;

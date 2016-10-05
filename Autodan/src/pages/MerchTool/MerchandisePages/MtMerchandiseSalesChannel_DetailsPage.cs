@@ -14,9 +14,9 @@ namespace Autodan.pages.MerchTool.MerchandisePages
     }
 
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
-    internal class MtMerchandiseSalesChannelDetailsPage : BaseTest, IMtMerchandiseSalesChannelDetailsPage, IBaseSmokeTest
+    public class MtMerchandiseSalesChannelDetailsPage : BaseTest, IMtMerchandiseSalesChannelDetailsPage, IBaseSmokeTest
     {
-        private readonly IMtCommonMerchandiseDetailsPage _commonPage; // i like as it reduces noise an makes allows better readability by grouping common paths stacked in single lines without anything in between.
+        private readonly IMtCommonToMerchandiseDetailsPage _commonPage; // i like as it reduces noise an makes allows better readability by grouping common paths stacked in single lines without anything in between.
         private const string IdLabelSelector =     "body > div.container > div.row > div.span9.view-container > fieldset > div > label:nth-child(1)";
         private const string IdContentSelector =   "body > div.container > div.row > div.span9.view-container > fieldset > div > span:nth-child(2)";
         private const string IdTextSelector =      "body > div.container > div.row > div.span9.view-container > fieldset > div > i:nth-child(3)";
@@ -24,8 +24,8 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         private const string NameContentSelector = "body > div.container > div.row > div.span9.view-container > fieldset > div > span:nth-child(5)";
         private const string NameSubTextSelector = "body > div.container > div.row > div.span9.view-container > fieldset > div > i:nth-child(6)";
 
-        public MtMerchandiseSalesChannelDetailsPage() : this(new MtCommonMerchandiseDetailsPage()){}
-        public MtMerchandiseSalesChannelDetailsPage(IMtCommonMerchandiseDetailsPage commonPage)
+        public MtMerchandiseSalesChannelDetailsPage() : this(new MtCommonToMerchandiseDetailsPage()){}
+        public MtMerchandiseSalesChannelDetailsPage(IMtCommonToMerchandiseDetailsPage commonPage)
         {
             PageFactory.InitElements(Driver, this);
             _commonPage = commonPage;

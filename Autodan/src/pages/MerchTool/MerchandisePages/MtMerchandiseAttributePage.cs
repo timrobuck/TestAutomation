@@ -1,29 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using Autodan.core;
+﻿using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Autodan.pages.MerchTool.MerchandisePages
 {
     public interface IMtMerchandiseAttributeOptionsPage
     {
         void VerifyElements();
-        void VerifyElementContent();
         void RunActions();
     }
 
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
-    internal class MtMerchandiseAttributeOptionsPage:BaseTest, IBaseSmokeTest
+    public class MtMerchandiseAttributeOptionsPage : BaseTest, IBaseSmokeTest
     {
-        internal MtMerchandiseAttributeOptionsPage()
+        public MtMerchandiseAttributeOptionsPage()
         {
             PageFactory.InitElements(Driver, this);
         }
         //AttributeOption subpage elements
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul.breadcrumb > li:nth-child(1)")]
-        private  IWebElement BreadCrumbHome { get; set; }
+        private IWebElement BreadCrumbHome { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul.breadcrumb > li:nth-child(2)")]
         private IWebElement BreadCrumbAttributeList { get; set; }
@@ -53,11 +52,6 @@ namespace Autodan.pages.MerchTool.MerchandisePages
                 element.Verify();
             }
             Console.WriteLine("Verified AttributeOptions page elements");
-        }
-
-        public void VerifyElementContent()
-        {
-            throw new NotImplementedException();
         }
 
         public void RunActions()

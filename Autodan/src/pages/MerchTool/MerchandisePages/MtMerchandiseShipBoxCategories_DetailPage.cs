@@ -15,13 +15,13 @@ namespace Autodan.pages.MerchTool.MerchandisePages
     }
 
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
-    internal class MtMerchandiseShipBoxCategoriesDetailsPage : BaseTest, IBaseSmokeTest, IMtMerchandiseShipBoxCategoriesDetailsPage
+    public class MtMerchandiseShipBoxCategoriesDetailsPage : BaseTest, IBaseSmokeTest, IMtMerchandiseShipBoxCategoriesDetailsPage
     {
-        private readonly IMtCommonMerchandiseDetailsPage _common;
+        private readonly IMtCommonToMerchandiseDetailsPage _common;
         private readonly string _pageName;
 
-        public MtMerchandiseShipBoxCategoriesDetailsPage() : this(new MtCommonMerchandiseDetailsPage()) { }
-        public MtMerchandiseShipBoxCategoriesDetailsPage(IMtCommonMerchandiseDetailsPage common)
+        public MtMerchandiseShipBoxCategoriesDetailsPage() : this(new MtCommonToMerchandiseDetailsPage()) { }
+        public MtMerchandiseShipBoxCategoriesDetailsPage(IMtCommonToMerchandiseDetailsPage common)
         {
             PageFactory.InitElements(Driver, this);
             _common = common;

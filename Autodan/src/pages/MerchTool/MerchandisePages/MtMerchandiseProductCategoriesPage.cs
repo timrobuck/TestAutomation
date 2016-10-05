@@ -14,12 +14,12 @@ namespace Autodan.pages.MerchTool.MerchandisePages
     }
 
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
-    internal class MtMerchandiseProductCategoriesPage : BaseTest, IBaseSmokeTest
+    public class MtMerchandiseProductCategoriesPage : BaseTest, IBaseSmokeTest
     {
         private readonly IMtCommonToMerchandisePages _common;
 
-        internal MtMerchandiseProductCategoriesPage() : this(new MtCommonToMerchandisePages("Product Categories Page")) { }
-        internal MtMerchandiseProductCategoriesPage(IMtCommonToMerchandisePages common)
+        public MtMerchandiseProductCategoriesPage() : this(new MtCommonToMerchandisePages("Product Categories Page")) { }
+        public MtMerchandiseProductCategoriesPage(IMtCommonToMerchandisePages common)
         {
             _common = common;
             PageFactory.InitElements(Driver, this);
@@ -44,11 +44,6 @@ namespace Autodan.pages.MerchTool.MerchandisePages
             }
             Console.WriteLine("Verified ProductCategories page elements");
             VarifyElementsCommonToPage();
-        }
-
-        public void VerifyElementContent()
-        {
-            throw new NotImplementedException();
         }
 
         private void VarifyElementsCommonToPage()

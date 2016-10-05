@@ -10,11 +10,10 @@ namespace Autodan.pages.MerchTool.MerchandisePages
     public interface IMtMerchandiseSizePage
     {
         void DrillIntoSizeTable();
-        void VerifyElementContent();
         void RunActions();
     }
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
-    internal class MtMerchandiseSizePage: BaseTest,IBaseSmokeTest
+    public class MtMerchandiseSizePage: BaseTest,IBaseSmokeTest
     {
         public  MtMerchandiseSizePage()
         {
@@ -150,10 +149,6 @@ namespace Autodan.pages.MerchTool.MerchandisePages
             VerifySizesPageElements();
         }
 
-        public void VerifyElementContent()
-        {
-            throw new NotImplementedException();
-        }
         public void RunActions()
         {
             MerchandiseSizeExportToCsvButton();

@@ -11,13 +11,12 @@ namespace Autodan.pages.MerchTool.MerchandisePages
     public interface IMtMerchandiseShipBoxCategoriesPage
     {
         void VerifyElements();
-        void VerifyElementContent();
         void RunActions();
         IMtMerchandiseShipBoxCategoriesDetailsPage GotToDetailsPage();
     }
 
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
-    internal class MtMerchandiseShipBoxCategoriesPage : BaseTest, IBaseSmokeTest
+    public class MtMerchandiseShipBoxCategoriesPage : BaseTest, IBaseSmokeTest
     {
         private readonly string _className;
         private readonly string _pageName = "ShipBox Categories";
@@ -53,11 +52,6 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         {
             VerifyElementsUniqueToPage();
             VarifyElementsCommonToPage();
-        }
-
-        public void VerifyElementContent()
-        {
-            throw new NotImplementedException();
         }
 
         public void VerifyElementHasValue()
