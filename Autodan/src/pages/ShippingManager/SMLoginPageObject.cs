@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Autodan.core;
-using NUnit.Framework;
+﻿using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System;
+using System.Collections.Generic;
 
 namespace Autodan.pages.ShippingManager
 {

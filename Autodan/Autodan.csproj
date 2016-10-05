@@ -93,7 +93,6 @@
     <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseShipBoxCategoriesPage.cs" />
     <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseAttributePage.cs" />
     <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseColorsPage.cs" />
-    <Compile Include="src\pages\MerchTool\MerchandisePages\MtCommonToMerchandiesDetailsPage.cs" />
     <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseProductCategoriesPage.cs" />
     <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseProductTypesPage.cs" />
     <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseSalesChannelsPage.cs" />

@@ -6,6 +6,14 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace Autodan.pages.MerchTool.MerchandisePages
 {
+    public interface IMtCommonToMerchandiseDetailsPage
+    {
+        void VerifyPresentation();
+        void VerifyElements();
+        IWebElement Legend { get; set; }
+        IWebElement BreadCrumbDetails { get; set; }
+    }
+
     public class MtCommonToMerchandiseDetailsPage : BaseTest, IMtCommonToMerchandiseDetailsPage
     {
         public MtCommonToMerchandiseDetailsPage()
