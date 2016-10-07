@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -67,10 +68,15 @@ namespace Autodan.core
         /// <param name="element"></param>
         /// <param name="driver"></param>
         /// <param name="value"></param>
-        public static void ClickAndWait(this IWebElement element, IWebDriver driver, int value)
+        public static void ClickAndWait(this IWebElement element, int value)
         {
             element.Click();
-            driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(value));
+            Thread.Sleep(value);
+        }
+
+        public static void Wait(this IWebDriver driver, int value)
+        {
+            Thread.Sleep(value);
         }
 
         public static string GetText(this IWebElement element)

@@ -58,6 +58,18 @@
       <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\NUnit.VisualStudio.TestAdapter.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Selenium.WebDriver.Extensions, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.Extensions.2.0.0\lib\net45\Selenium.WebDriver.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Selenium.WebDriver.Extensions.Core, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.Extensions.Core.1.7.485\lib\net45\Selenium.WebDriver.Extensions.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Selenium.WebDriver.Extensions.Sizzle, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.Extensions.Sizzle.1.7.485\lib\net45\Selenium.WebDriver.Extensions.Sizzle.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -89,7 +101,7 @@
     <Compile Include="src\pages\MerchTool\MtMerchandiseColorsPageObject.cs" />
     <Compile Include="src\pages\MerchTool\MtMerchandiseProductTypesPageObject.cs" />
     <Compile Include="src\pages\MerchTool\MtMerchandiseSizePage.cs" />
-    <Compile Include="tests\cafepress.com\cart\CpCartSmokeTest.cs" />
+    <Compile Include="tests\cafepress.com\cart\CafePressCart.cs" />
     <Compile Include="tests\cafepress.com\checkout\CpCheckoutSmokeTest.cs" />
     <Compile Include="tests\MerchTool\MtSmokeTest.cs" />
     <Compile Include="src\pages\ShippingManager\SmCommonPageObject.cs" />
