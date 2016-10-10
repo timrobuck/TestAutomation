@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Autodan.pages.MerchTool.MerchandisePages
 {
-    public interface IMtMerchProductTypesPage
+    public interface IMtMerchProductTypesByPtnPage
     {
         void DrillIntoProductTypeTable();
         void ViewTableByAspectRatio();
@@ -15,9 +15,9 @@ namespace Autodan.pages.MerchTool.MerchandisePages
     }
 
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
-    public class MtMerchProductTypesPage : BaseTest, IBaseSmokeTest
+    public class MtMerchProductTypesByPtnPage : BaseTest, IBaseSmokeTest, IMtMerchProductTypesByPtnPage
     {
-        public MtMerchProductTypesPage()
+        public MtMerchProductTypesByPtnPage()
         {
             PageFactory.InitElements(Driver, this);
         }
@@ -101,7 +101,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
                 TableHeaderProductTypes,
                 TableContainerProductTypes,
                 TablePagerProductTypes,
-                ProductTypesTableMug,
+                ProductTypesTableMug
             };
 
             foreach (var element in pageElements)
@@ -110,10 +110,21 @@ namespace Autodan.pages.MerchTool.MerchandisePages
             }
             Console.WriteLine("Verified ProductType page elements");
         }
-       
+
         public void RunActions()
         {
             throw new NotImplementedException();
+        }
+
+        public IMtMerchProductTypesByPtnPage NavigateToProductTypesByPtnPage()
+        {
+            BtnTableByPtn.Click();
+            return new MtMerchProductTypesByPtnPage();
+        }
+        public IMtMerchProductTypesByAspectRatioPage NavigateToProductTypesByAspectRatioPage()
+        {
+            BtnTableByAspectRatio.Click();
+            return new MtMerchProductTypesByAspectRatioPage();
         }
     }
 }

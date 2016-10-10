@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using Autodan.core;
+﻿using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Autodan.pages.MerchTool.MerchandisePages
 {
@@ -14,11 +14,11 @@ namespace Autodan.pages.MerchTool.MerchandisePages
     }
 
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]//a selenium specificity unhandled by resharper
-    public class MtCommonToMerchandisePages:BaseTest, IMtCommonToMerchandisePages
+    public class MtCommonToMerchandisePages : BaseTest, IMtCommonToMerchandisePages
     {
         private readonly string _comsummingPageName;
 
-        public  MtCommonToMerchandisePages(string consummingPageName)
+        public MtCommonToMerchandisePages(string consummingPageName)
         {
             PageFactory.InitElements(Driver, this);
             _comsummingPageName = consummingPageName;
@@ -68,10 +68,10 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         private IWebElement BtnSetPagination { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(1) > div > span")]
-        private IWebElement SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle { get; set; }
+        private IWebElement SortAscendingDescendingByTableColumnHeaderId { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td.sorting_1")]
-        private IWebElement GetTableIdValueFromFirstRow { get; set; }
+        private IWebElement GetTableDataValueFromC1R1 { get; set; }
 
         public void VerifyCommonElements()
         {
@@ -101,16 +101,16 @@ namespace Autodan.pages.MerchTool.MerchandisePages
 
         public void RunCommonActions()
         {
-            ActionExportToCsvButton(); 
-            ActionSelectNumberOfLines(); 
+            ActionExportToCsvBtn();
+            ActionSelectNumberOfLines();
             ActionSortAscendingDescendingByTableColumnHeaderClick();
-            
+
         }
-        private void ActionExportToCsvButton()
+        private void ActionExportToCsvBtn()
         {
             BtnExportToCsv.Click();
             //todo: the code do the download and varify this is not trivial due to various browser specificities. Get back to this after more research and testing. 
-            Console.WriteLine("Verified that the button to download a CSV file is clickable on " + _comsummingPageName);
+            Console.WriteLine("Verified that the Btn to download a CSV file is clickable on " + _comsummingPageName);
         }
 
         private void ActionSelectNumberOfLines()
@@ -121,19 +121,17 @@ namespace Autodan.pages.MerchTool.MerchandisePages
                 throw new Exception("Select Number Of Lines to Show [50 to 10] on table did not work");
 
             Console.WriteLine("Verified the dropdown to change number of lines visible on table from 50 to 10 on " + _comsummingPageName);
-        } 
+        }
 
         private void ActionSortAscendingDescendingByTableColumnHeaderClick()
         {
-            var beforeSortValue = GetTableIdValueFromFirstRow.Text;
-            SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle.Click();
-            var afterSortValue = GetTableIdValueFromFirstRow.Text;
+            var beforeSortValue = GetTableDataValueFromC1R1.Text;
+            SortAscendingDescendingByTableColumnHeaderId.Click();
+            var afterSortValue = GetTableDataValueFromC1R1.Text;
             if (beforeSortValue == afterSortValue)
                 throw new Exception("Resorting items does not appear to work. ");
 
             Console.WriteLine("Verified Resorting records from column header works. ");
         }
-
-
     }
 }

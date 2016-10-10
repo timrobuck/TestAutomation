@@ -70,7 +70,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         public IMtMerchandiseShipBoxCategoriesDetailsPage GotoDetailsPage()
         {
             GotoDetailPageOnFirstRow.Click();
-            Console.WriteLine("Verify Navigation to details page.");
+            Console.WriteLine("Verified Navigation to details page.");
             return _details;
         }
 

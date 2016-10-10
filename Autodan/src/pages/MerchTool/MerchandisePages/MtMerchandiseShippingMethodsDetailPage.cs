@@ -53,7 +53,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
             NameLabel.Verify();
             NameContent.Verify();
             _commonPage.VerifyElements();
-            Console.WriteLine("Verify Elements on " + GetType().Name);
+            Console.WriteLine("Verified Elements on " + GetType().Name);
         }
         public void VerifyElementContent()
         {

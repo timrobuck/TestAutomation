@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using Autodan.core;
+﻿using Autodan.core;
 using Autodan.pages.MerchTool.MerchandisePages;
 using Autodan.pages.MerchTool.SmartProductEnginePages;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Autodan.pages.MerchTool.MtCommonSitePages
 {
-    
+
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
-    public class MtHomePageObject:BaseTest
+    public class MtHomePageObject : BaseTest
     {
         public MtHomePageObject()
         {
@@ -26,13 +26,13 @@ namespace Autodan.pages.MerchTool.MtCommonSitePages
         private IWebElement BtnLogout { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.navbar > div.navbar-inner > ul > li:nth-child(1) > a")]
-        private IWebElement NavBtnHome { get; set; }
+        private IWebElement BtnNavigateHome { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.navbar > div.navbar-inner > ul > li:nth-child(2) > a")]
-        private IWebElement NavBtnMerchandise { get; set; }
+        private IWebElement BtnNavigateMerchandise { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.navbar > div.navbar-inner > ul > li:nth-child(3) > a")]
-        private IWebElement NavBtnSmartProductEngine { get; set; }
+        private IWebElement BtnNavSmartProductEngine { get; set; }
 
         //landingpage eles
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div > ul.home-buttons > li.merch-list")]
@@ -68,15 +68,15 @@ namespace Autodan.pages.MerchTool.MtCommonSitePages
         private IWebElement SideNavShippingMethods { get; set; }
 
         //common page actions
-        public MtMerchProductTypesPage NavigateToMerchPage()
+        public MtMerchProductTypesByPtnPage NavigateToMerchPage()
         {
-            NavBtnMerchandise.Click();
-            return new MtMerchProductTypesPage();
+            BtnNavigateMerchandise.Click();
+            return new MtMerchProductTypesByPtnPage();
         }
 
         public MtAdministativeFunctionPage NavgateToSmartProductEnginePage()
         {
-            NavBtnSmartProductEngine.Click();
+            BtnNavSmartProductEngine.Click();
             return new MtAdministativeFunctionPage();
         }
 
@@ -86,9 +86,10 @@ namespace Autodan.pages.MerchTool.MtCommonSitePages
         }
 
         //Merchandise - Side nav options
-        public void SideNavToProductTypes()
+        public MtMerchProductTypesByPtnPage SideNavToProductTypes()
         {
             SideNavProductTypes.Click();
+            return new MtMerchProductTypesByPtnPage();
         }
 
         public MtMerchandiseColorsPage SideNavToColors()
@@ -108,7 +109,7 @@ namespace Autodan.pages.MerchTool.MtCommonSitePages
             SideNavAttributes.Click();
             return new MtMerchandiseAttributeOptionsPage();
         }
-       
+
         public MtMerchandiseProductCategoriesPage SideNavToProductCategories()
         {
             SideNavProductCategories.Click();
@@ -139,9 +140,9 @@ namespace Autodan.pages.MerchTool.MtCommonSitePages
             var navElements = new List<IWebElement>
             {
                 MerchMgtPageTitle,
-                NavBtnHome,
-                NavBtnMerchandise,
-                NavBtnSmartProductEngine,
+                BtnNavigateHome,
+                BtnNavigateMerchandise,
+                BtnNavSmartProductEngine,
                 BtnLogout,
             };
             foreach (var element in navElements)

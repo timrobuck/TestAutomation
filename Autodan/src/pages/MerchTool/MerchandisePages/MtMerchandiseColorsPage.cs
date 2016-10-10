@@ -63,7 +63,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         private IWebElement ShowingEntries { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_paginate")]
-        private IWebElement ButtonSetPagination { get; set; }
+        private IWebElement BtnSetPagination { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(2)")]
         private IWebElement ColorTableSelectWhite { get; set; }
@@ -81,13 +81,13 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         private void DrillIntoColorTable()
         {
             ColorTableSelectWhite.Click();
-            Console.WriteLine("Verify Drill Into Color Table Selecting a Color and Goto the Detail page");
+            Console.WriteLine("Verified Drill Into Color Table Selecting a Color and Goto the Detail page");
         }
 
-        private void ClickTheExportToCvsButton()
+        private void ClickTheExportToCvsBtn()
         {
             ExportToCvs.Click();
-            Console.WriteLine("Verify ExportToCvs button can be clicked");
+            Console.WriteLine("Verified ExportToCvs Btn can be clicked");
         }
 
         private void VerifyColorsPageElements()
@@ -107,7 +107,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
                 TableColors,
                 TableHeaders,
                 ShowingEntries,
-                ButtonSetPagination
+                BtnSetPagination
             };
 
             foreach (var element in pageElements)
@@ -138,7 +138,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
             if (!ShowingEntries.Text.Contains("10"))
                 throw new Exception("Failure to Verify that the item count changes and corresponds to label show on bottom of page.");
 
-            Console.WriteLine("Verify that the item count changes and corresponds to label shown on bottom of page.");
+            Console.WriteLine("Verified that the item count changes and corresponds to label shown on bottom of page.");
         }
 
         private void SortAscendingDescendingByTableColumnHeaderClick()
@@ -160,7 +160,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         public void RunActions()
         {
             MerchandiseColorFilterColors();
-            ClickTheExportToCvsButton();
+            ClickTheExportToCvsBtn();
             DrillIntoColorTable();
             MerchandiseColorSelectNumberOfEntries();
             SortAscendingDescendingByTableColumnHeaderClick();

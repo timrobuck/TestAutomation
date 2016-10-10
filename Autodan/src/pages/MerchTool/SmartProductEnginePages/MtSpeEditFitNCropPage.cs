@@ -33,20 +33,20 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
         public IWebElement DropDownProductType { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div > fieldset:nth-child(3) > form > div > input")]
-        public IWebElement ButtonLoadProductType { get; set; }
+        public IWebElement BtnLoadProductType { get; set; }
 
-        //only after the ButtonLoadProductType is clicked does the configuration for that ptn appear. So
+        //only after the BtnLoadProductType is clicked does the configuration for that ptn appear. So
         //1)before varify above elements
         //a)test that the ConfigurationEntryTable does not exist beforehand  
-        //b)that the SaveChangesButton does not exist
+        //b)that the SaveChangesBtn does not exist
 
         [FindsBy(How = How.CssSelector, Using = "#FitAndFillConfigurationsForm > table")]
         public IWebElement ConfigurationEntryTable { get; set; }//Make sure we can do a dropdown and select a Detail page 
 
         [FindsBy(How = How.CssSelector, Using = "#FitAndFillConfigurationsForm > input.btn.btn-primary")]
-        public IWebElement ButtonSaveChanges { get; set; }
+        public IWebElement BtnSaveChanges { get; set; }
 
-        //2)after the button click,
+        //2)after the Btn click,
         //a) see that the ConfigurationEntryTable does exist and
         //b)that the table matches up with the selection in the drop down
         [FindsBy(How = How.CssSelector, Using = "#productTypeId > option:nth-child(1)")]
@@ -59,7 +59,7 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
         public IWebElement LegendEdit { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div > fieldset:nth-child(4) > i")]
-        public IWebElement InstructionNoteForSaveChangesButton { get; set; }
+        public IWebElement InstructionNoteForSaveChangesBtn { get; set; }
 
         //column headers
         [FindsBy(How = How.CssSelector, Using = "#FitAndFillConfigurationsForm > table > thead > tr > td:nth-child(1)")]
@@ -108,7 +108,7 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
 
         public void ActionSelectPtnFromDropdown()
         {
-            ButtonLoadProductType.ClickAndWait(Driver, 5);
+           BtnLoadProductType.ClickAndWait(Driver, 5);
         }
 
         private void VerifyElementsExistBeforeSelection()
@@ -120,7 +120,7 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
                 InstructionNoteForTheDropDown,
                 LegendSelect,
                 DropDownProductType,
-                ButtonLoadProductType
+                BtnLoadProductType
             };
             foreach (var element in pageElements)
             {
@@ -133,11 +133,11 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
             var pageElements = new List<IWebElement>
             {
                 ConfigurationEntryTable,
-                ButtonSaveChanges,
+                BtnSaveChanges,
                 FirstItemInDropDown,
                 HiddenIdRequired,
                 LegendEdit,
-                InstructionNoteForSaveChangesButton,
+                InstructionNoteForSaveChangesBtn,
                 ColumnHeader1,
                 ColumnHeader2,
                 ColumnHeader3,
@@ -162,13 +162,13 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
         public void VerifyElementsHaveExpectedContent()
         {
             _mtCommonToSpePages.VerifyCommonElementsHaveExpectedContent();
-            Console.WriteLine("Verify Elements have Expected Content on " + _pageName);
+            Console.WriteLine("Verified Elements have Expected Content on " + _pageName);
         }
 
         public void RunActions()
         {
             //todo: until we have a stage enviroment to work against. To dangerous to build out.
-            Console.WriteLine("Verify the number of entries dropdown works.");
+            Console.WriteLine("Verified the number of entries dropdown works.");
 
         }
     }

@@ -86,9 +86,10 @@
     <Compile Include="Resources\PageTemplate.cs" />
     <Compile Include="src\pages\MerchTool\MerchandisePages\MtCommonToMerchandiseDetailsPage.cs" />
     <Compile Include="src\pages\MerchTool\MerchandisePages\MtCommonToMerchandisePages.cs" />
-    <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseSalesChannel_DetailsPage.cs" />
+    <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseSalesChannelDetailsPage.cs" />
     <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseShipBoxCategories_DetailPage.cs" />
     <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseShippingMethodsDetailPage.cs" />
+    <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchProductTypesByAspectRatioPage.cs" />
     <Compile Include="src\pages\MerchTool\MtCommonSitePages\MtLoginPageObject.cs" />
     <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseShipBoxCategoriesPage.cs" />
     <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseAttributePage.cs" />

@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Autodan.pages.MerchTool.MerchandisePages
@@ -51,14 +52,21 @@ namespace Autodan.pages.MerchTool.MerchandisePages
 
         public void VerifyElements()
         {
-            IdLabel.Verify();
-            IdText.Verify();
-            IdContent.Verify();
-            NameLabel.Verify();
-            NameContent.Verify();
-            NameSubText.Verify();
+            var pageElements = new List<IWebElement>
+            {
+                IdLabel,
+                IdText,
+                IdContent,
+                NameLabel,
+                NameContent,
+                NameSubText
+            };
+            foreach (var e in pageElements)
+            {
+                e.Verify();
+            }
             _commonPage.VerifyElements();
-            Console.WriteLine("Verify Elements on " + GetType().Name);
+            Console.WriteLine("Verified Elements on " + GetType().Name);
         }
         public void VerifyElementContent()
         {

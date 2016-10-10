@@ -69,15 +69,15 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
         {
             _mtCommonToSpePages.VerifyCommonElementsHaveExpectedContent();
             VerifyUniqueElementsHaveExpectedContent();
-            Console.WriteLine("Verify Elements have Expected Content on " + pageName);
+            Console.WriteLine("Verified Elements have Expected Content on " + pageName);
         }
 
         public void RunActions()
         {
             ActionSelectNumberOfLines();
-            Console.WriteLine("Verify the number of entries dropdown works.");
+            Console.WriteLine("Verified the number of entries dropdown works.");
             ActionSortAscendingDescendingByTableColumnHeaderClick();
-            Console.WriteLine("Verify Sort mechanism on each column header works.");
+            Console.WriteLine("Verified Sort mechanism on each column header works.");
             //todo: UpdateExistigProductTypesExclusions.Click  do this only after stage is available
         }
 

@@ -37,16 +37,16 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
         public IWebElement ShowingEntries { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories > thead > tr > td:nth-child(1) > div")]
-        public IWebElement Column1Header { get; set; }
+        public IWebElement ColumnHeader1 { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories > thead > tr > td:nth-child(2) > div")]
-        public IWebElement Column2Header { get; set; }
+        public IWebElement ColumnHeader2 { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories > thead > tr > td:nth-child(3) > div")]
-        public IWebElement Column3Header { get; set; }
+        public IWebElement ColumnHeader3 { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories > thead > tr > td:nth-child(4) > div")]
-        public IWebElement Column4Header { get; set; }
+        public IWebElement ColumnHeader4 { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories > tbody > tr:nth-child(1) > td.sorting_1")]
         public IWebElement TableIdValueFromFirstRow { get; set; }
@@ -72,15 +72,15 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
         {
             _mtCommonToSpePages.VerifyCommonElementsHaveExpectedContent();
             VerifyUniqueElementsHaveExpectedContent();
-            Console.WriteLine("Verify Elements have Expected Content on " + pageName);
+            Console.WriteLine("Verified Elements have Expected Content on " + pageName);
         }
 
         public void RunActions()
         {
             ActionSelectNumberOfLines();
-            Console.WriteLine("Verify the number of entries dropdown works.");
+            Console.WriteLine("Verified the number of entries dropdown works.");
             ActionSortAscendingDescendingByTableColumnHeaderClick();
-            Console.WriteLine("Verify Sort mechanism on each column header works.");
+            Console.WriteLine("Verified Sort mechanism on each column header works.");
             //todo: UpdateExistigProductTypesExclusions.Click  do this only after stage is available
         }
 
@@ -91,27 +91,27 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
             InputFilter.Verify();
             CheckBoxRemoveRecord.Verify();
             LabelFilter.Verify();
-            Column1Header.Verify();
-            Column2Header.Verify();
-            Column3Header.Verify();
-            Column4Header.Verify();
+            ColumnHeader1.Verify();
+            ColumnHeader2.Verify();
+            ColumnHeader3.Verify();
+            ColumnHeader4.Verify();
             ShowingEntries.Verify();
             TableIdValueFromFirstRow.Verify();
             Column1Row1FromTable.Verify();
             Column2Row1FromTable.Verify();
             Showing1ToXofYentries.Verify();
-            Console.WriteLine("Verify elements show expected content");
+            Console.WriteLine("Verified elements show expected content");
         }
 
         private void VerifyUniqueElementsHaveExpectedContent()
         {
             LableShowEntries.VerifyTextIsInThisElement("Show");
             CheckBoxRemoveRecord.VerifyTextIsInThisElement("Remove");
-            Column1Header.VerifyTextIsInThisElement("Product Type Id");
-            Column2Header.VerifyTextIsInThisElement("Product Type Name");
-            Column3Header.VerifyTextIsInThisElement("In Smart Product ");
-            Column4Header.VerifyTextIsInThisElement("Remove?");
-            Console.WriteLine("Verify elements show expected content");
+            ColumnHeader1.VerifyTextIsInThisElement("Product Type Id");
+            ColumnHeader2.VerifyTextIsInThisElement("Product Type Name");
+            ColumnHeader3.VerifyTextIsInThisElement("In Smart Product ");
+            ColumnHeader4.VerifyTextIsInThisElement("Remove?");
+            Console.WriteLine("Verified elements show expected content");
         }
         private void ActionSelectNumberOfLines()
         {

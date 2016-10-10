@@ -23,7 +23,7 @@ namespace Autodan.tests.MerchTool.MtSmokeMerchandiseTests
         {
             Cleanup();
         }
-       
+
         [Test]
         public void MtLoginPageTest()
         {
@@ -96,6 +96,13 @@ namespace Autodan.tests.MerchTool.MtSmokeMerchandiseTests
         public void ProductTypeAspectRatiosPage()
         {
             //todo: create this page class and verify elements
+            _home.NavigateToMerchPage();
+            var ptnPage = _home.SideNavToProductTypes();
+            var page = ptnPage.NavigateToProductTypesByAspectRatioPage();
+            //page.IsAt("");
+            page.VerifyElements();
+            page.VerifyElementContent();
+            page.RunActions();
         }
 
         [Test]

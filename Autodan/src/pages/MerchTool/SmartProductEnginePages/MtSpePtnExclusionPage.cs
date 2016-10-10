@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -68,33 +69,39 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
         {
             _mtCommonToSpePages.VerifyCommonElementsHaveExpectedContent();
             VerifyUniqueElementsHaveExpectedContent();
-            Console.WriteLine("Verify Elements have Expected Content on " + pageName);
+            Console.WriteLine("Verified Elements have Expected Content on " + pageName);
         }
 
         public void RunActions()
         {
             ActionSelectNumberOfLines();
-            Console.WriteLine("Verify the number of entries dropdown works.");
+            Console.WriteLine("Verified the number of entries dropdown works.");
             ActionSortAscendingDescendingByTableColumnHeaderClick();
-            Console.WriteLine("Verify Sort mechanism on each column header works.");
+            Console.WriteLine("Verified Sort mechanism on each column header works.");
             //todo: UpdateExistigProductTypesExclusions.Click  do this only after stage is available
         }
 
         private void VerifyUniqueElementsExist()
         {
-            LableShowEntries.Verify();
-            DropDownNumberOfEntriesToShow.Verify();
-            InputFilter.Verify();
-            CheckBoxRemoveRecord.Verify();
-            LabelFilter.Verify();
-            Column1Header.Verify();
-            Column2Header.Verify();
-            Column3Header.Verify();
-            ShowingEntries.Verify();
-            TableIdValueFromFirstRow.Verify();
-            Column1Row1FromTable.Verify();
-            Column2Row1FromTable.Verify();
-            Showing1ToXofYentries.Verify();
+            var pageElements = new List<IWebElement>
+            {
+                LableShowEntries,
+                DropDownNumberOfEntriesToShow,
+                InputFilter,
+                CheckBoxRemoveRecord,
+                LabelFilter,
+                Column1Header,
+                Column2Header,
+                Column3Header,
+                ShowingEntries,
+                TableIdValueFromFirstRow,
+                Column1Row1FromTable,
+                Column2Row1FromTable,
+                Showing1ToXofYentries
+            };
+            foreach (var e in pageElements)
+                e.Verify();
+
         }
 
         private void VerifyUniqueElementsHaveExpectedContent()
@@ -123,7 +130,7 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
             if (beforeSortValue == afterSortValue)
                 throw new Exception("Resorting items does not appear to work");
 
-            Console.WriteLine("Verify Column Sort");
+            Console.WriteLine("Verified Column Sort");
         }
 
         public void VerifyCountFromSpePageMatchesCountOnDetailsPage()

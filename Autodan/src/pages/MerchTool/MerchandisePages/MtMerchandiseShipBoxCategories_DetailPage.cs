@@ -76,7 +76,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
             Row1Column2.Verify();
             Row1Column3.Verify();
             _common.VerifyElements();
-            Console.WriteLine("Verify Elements on " + _pageName);
+            Console.WriteLine("Verified Elements on " + _pageName);
         }
 
         public void VerifyElementContent()
