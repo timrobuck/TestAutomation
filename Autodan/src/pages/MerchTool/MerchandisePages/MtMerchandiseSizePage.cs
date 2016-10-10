@@ -9,6 +9,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
 {
     public interface IMtMerchandiseSizePage
     {
+        void DrillIntoSizeTable();
         void RunActions();
     }
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
@@ -58,19 +59,13 @@ namespace Autodan.pages.MerchTool.MerchandisePages
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_paginate")]
         private IWebElement BtnSetPagination { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(2)")]
-        private IWebElement SizeTableSelectSmall { get; set; }
-
-
+        
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(1) > div > span")]
         private IWebElement SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td.sorting_1")]
         private IWebElement GetTableIdValueFromFirstRow { get; set; }
-
-       
-
+        
         private void VerifySizesPageElements()
         {
             var pageElements = new List<IWebElement>
@@ -111,13 +106,6 @@ namespace Autodan.pages.MerchTool.MerchandisePages
             Console.WriteLine("Verified that filtering the list of Sizes works.");
         }
 
-        private void MerchandiseSizeExportToCsvBtn()
-        {
-            BtnExportToCsv.Click();
-            //todo: the code do the download and varify this is not trivial due to various browser specificities. Get back to this after more research and testing. 
-            Console.WriteLine("Verified that the Create CSV Btn Is Clickable.");
-        }
-
         private void MerchandiseSizeSelectNumberOfEntries()
         {
             SelectNumberOfEntries.SelectDropdown("50");
@@ -125,7 +113,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
             if(!ShowingEntries.Text.Contains("10"))
                 throw new Exception("Failure to Verify that the item count changes and corresponds to label show on bottom of page.");
             
-            Console.WriteLine("Verified that the item count changes and corresponds to label shown on bottom of page.");
+            Console.WriteLine("Verify that the item count changes and corresponds to label shown on bottom of page.");
         }
 
         private void SortAscendingDescendingByTableColumnHeaderClick()
@@ -147,7 +135,6 @@ namespace Autodan.pages.MerchTool.MerchandisePages
 
         public void RunActions()
         {
-            MerchandiseSizeExportToCsvBtn();
             MerchandiseSizeSelectNumberOfEntries();
             SortAscendingDescendingByTableColumnHeaderClick();
             MerchandiseSizeFilterSizes();

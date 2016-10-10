@@ -101,16 +101,8 @@ namespace Autodan.pages.MerchTool.MerchandisePages
 
         public void RunCommonActions()
         {
-            ActionExportToCsvBtn();
             ActionSelectNumberOfLines();
             ActionSortAscendingDescendingByTableColumnHeaderClick();
-
-        }
-        private void ActionExportToCsvBtn()
-        {
-            BtnExportToCsv.Click();
-            //todo: the code do the download and varify this is not trivial due to various browser specificities. Get back to this after more research and testing. 
-            Console.WriteLine("Verified that the Btn to download a CSV file is clickable on " + _comsummingPageName);
         }
 
         private void ActionSelectNumberOfLines()

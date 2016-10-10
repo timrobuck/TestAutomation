@@ -74,22 +74,13 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(1) > div > span")]
         private IWebElement SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > fieldset > div > a")]
-        private IWebElement ExportToCvs { get; set; }
-
         //navigation elements
         private void DrillIntoColorTable()
         {
             ColorTableSelectWhite.Click();
             Console.WriteLine("Verified Drill Into Color Table Selecting a Color and Goto the Detail page");
         }
-
-        private void ClickTheExportToCvsBtn()
-        {
-            ExportToCvs.Click();
-            Console.WriteLine("Verified ExportToCvs Btn can be clicked");
-        }
-
+       
         private void VerifyColorsPageElements()
         {
             var pageElements = new List<IWebElement>
@@ -160,7 +151,6 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         public void RunActions()
         {
             MerchandiseColorFilterColors();
-            ClickTheExportToCvsBtn();
             DrillIntoColorTable();
             MerchandiseColorSelectNumberOfEntries();
             SortAscendingDescendingByTableColumnHeaderClick();
