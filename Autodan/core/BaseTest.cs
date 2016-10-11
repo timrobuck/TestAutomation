@@ -76,10 +76,8 @@ namespace Autodan.core
         }
 
 
-        /// <summary>
+        
         /// sleeps on ajax requests
-        /// </summary>
-        /// <param name="timeout"></param>
         public void WaitForAjax(int timeout = 30)
         {
             var sw = new Stopwatch();
@@ -101,7 +99,7 @@ namespace Autodan.core
             var categories = TestContext.CurrentContext.Test
                 .Properties["Category"];
 
-            bool skipSetup = categories != null && categories.Contains(SkipSetup);
+            var skipSetup = categories != null && categories.Contains(SkipSetup);
             return skipSetup;
         }
     }

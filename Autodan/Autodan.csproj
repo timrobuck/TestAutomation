@@ -90,9 +90,43 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="core\BaseTest.cs" />
+    <Compile Include="core\IBaseSmokeTest.cs" />
     <Compile Include="core\PropertiesCollection.cs" />
+    <Compile Include="core\WebElementWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="core\SelExtensionMethods.cs" />
+<<<<<<< HEAD
+    <Compile Include="Resources\PageTemplate.cs" />
+    <Compile Include="src\pages\MerchTool\MerchandisePages\MtCommonToMerchandiseDetailsPage.cs" />
+    <Compile Include="src\pages\MerchTool\MerchandisePages\MtCommonToMerchandisePages.cs" />
+    <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseProductTypeDetailPage.cs" />
+    <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseSalesChannelDetailsPage.cs" />
+    <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseShipBoxCategories_DetailPage.cs" />
+    <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseShippingMethodsDetailPage.cs" />
+    <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchProductTypesByAspectRatioPage.cs" />
+    <Compile Include="src\pages\MerchTool\MtCommonSitePages\MtLoginPageObject.cs" />
+    <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseShipBoxCategoriesPage.cs" />
+    <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseAttributePage.cs" />
+    <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseColorsPage.cs" />
+    <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseProductCategoriesPage.cs" />
+    <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseProductTypesPage.cs" />
+    <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseSalesChannelsPage.cs" />
+    <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseShippingMethodsPage.cs" />
+    <Compile Include="src\pages\MerchTool\MerchandisePages\MtMerchandiseSizePage.cs" />
+    <Compile Include="src\pages\MerchTool\SmartProductEnginePages\MtCommonToEditDetailPages.cs" />
+    <Compile Include="src\pages\MerchTool\SmartProductEnginePages\MtCommonToSpePages.cs" />
+    <Compile Include="src\pages\MerchTool\SmartProductEnginePages\MtAdministativeFunctionPage.cs" />
+    <Compile Include="src\pages\MerchTool\SmartProductEnginePages\MtSpeCategoriesPage.cs" />
+    <Compile Include="src\pages\MerchTool\SmartProductEnginePages\MtSpeEditPtnCategoryPage.cs" />
+    <Compile Include="src\pages\MerchTool\SmartProductEnginePages\MtSpeEditFitNCropPage.cs" />
+    <Compile Include="src\pages\MerchTool\SmartProductEnginePages\MtSpeMemberExclusionPage.cs" />
+    <Compile Include="src\pages\MerchTool\SmartProductEnginePages\MtSpePtnExclusionPage.cs" />
+    <Compile Include="tests\MerchTool\MtSmokeMerchandiseTests\AttributeOptionPageTest.cs" />
+    <Compile Include="tests\MerchTool\MtSmokeMerchandiseTests\ColorsPageTest.cs" />
+    <Compile Include="tests\MerchTool\MtSmokeMerchandiseTests\CommonDetailsPageTest.cs" />
+    <Compile Include="tests\MerchTool\MtSmokeMerchandiseTests\LoginPageTest.cs" />
+    <Compile Include="tests\MerchTool\MtSmokeMerchandiseTests\MtSmokeMerchandiseTest.cs" />
+=======
     <Compile Include="src\pages\cafepress.com\CpCartPageObject.cs" />
     <Compile Include="src\pages\cafepress.com\CpCommonPageObject.cs" />
     <Compile Include="src\pages\cafepress.com\CpProductDescriptionPageObject.cs" />
@@ -104,13 +138,22 @@
     <Compile Include="tests\cafepress.com\cart\CafePressCart.cs" />
     <Compile Include="tests\cafepress.com\checkout\CpCheckoutSmokeTest.cs" />
     <Compile Include="tests\MerchTool\MtSmokeTest.cs" />
+>>>>>>> refs/remotes/origin/master
     <Compile Include="src\pages\ShippingManager\SmCommonPageObject.cs" />
     <Compile Include="src\pages\ShippingManager\SmLoginPageObject.cs" />
     <Compile Include="src\pages\ShippingManager\SmFacilitiesPageObject.cs" />
     <Compile Include="src\pages\ShippingManager\SmReportsPageObject.cs" />
     <Compile Include="src\pages\ShippingManager\SmSlaPageObject.cs" />
     <Compile Include="src\pages\ShippingManager\SmStockStatusPageObject.cs" />
-    <Compile Include="src\pages\MerchTool\MtCommonPageObject.cs" />
+    <Compile Include="src\pages\MerchTool\MtCommonSitePages\MtHomePageObject.cs" />
+    <Compile Include="tests\MerchTool\MtSmokeMerchandiseTests\ProductCategoriesPageTest.cs" />
+    <Compile Include="tests\MerchTool\MtSmokeMerchandiseTests\ProductTypePageTest.cs" />
+    <Compile Include="tests\MerchTool\MtSmokeMerchandiseTests\SalesChannelsPageWithDetailsPageTests.cs" />
+    <Compile Include="tests\MerchTool\MtSmokeMerchandiseTests\ShipBoxCategoriesPageWithDetailPageTests.cs" />
+    <Compile Include="tests\MerchTool\MtSmokeMerchandiseTests\ShippingMethodsPageWithDetailsPageTests.cs" />
+    <Compile Include="tests\MerchTool\MtSmokeMerchandiseTests\SizePageTest.cs" />
+    <Compile Include="tests\MerchTool\MtSmokeProductEngineTests\MtSmokeProductEngineTest.cs" />
+    <Compile Include="tests\MerchTool\MtSmokeTestUtilites\LoginToHomePageUtility.cs" />
     <Compile Include="tests\ShippingManager\SmSmokeTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +168,17 @@
     <Content Include="chromedriver-license.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="src\pages\MerchTool\MerchandisePages\ScreenShots\MtCommonMerchandiseDetailsPage.png" />
+    <Content Include="src\pages\MerchTool\MtCommonSitePages\ScreenShots\MtHomePageObject.png" />
+    <Content Include="src\pages\MerchTool\MerchandisePages\ScreenShots\MtCommonToMerchandisePages.png" />
+    <Content Include="src\pages\MerchTool\MerchandisePages\ScreenShots\MtCommonToMerchandisePage_Sidebar.png" />
+    <Content Include="src\pages\MerchTool\MtCommonSitePages\ScreenShots\MtLoginPageObject.png" />
+    <Content Include="src\pages\MerchTool\SmartProductEnginePages\ScreenShots\MtCommonToSpePages.png" />
+    <Content Include="src\pages\MerchTool\SmartProductEnginePages\ScreenShots\MtAdministrativeFunction.png" />
+    <Content Include="src\pages\MerchTool\SmartProductEnginePages\ScreenShots\MtSpeCategories.png" />
+    <Content Include="src\pages\MerchTool\SmartProductEnginePages\ScreenShots\MtSpeMemberExclusions.png" />
+    <Content Include="src\pages\MerchTool\SmartProductEnginePages\ScreenShots\MtSpeProductTypeExclusions.png" />
+    <Content Include="src\pages\MerchTool\SmartProductEnginePages\ScreenShots\MtSpeEditFitNCrop.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
