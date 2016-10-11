@@ -17,7 +17,7 @@ namespace Autodan.tests.cafepress.com.cart
         [SetUp]
         public void Setup()
         {
-            if(CheckForSkipSetup())
+            if (CheckForSkipSetup())
                 return;
 
             Setup("headless", "cafepress.dev");
