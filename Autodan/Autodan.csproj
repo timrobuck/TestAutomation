@@ -95,7 +95,6 @@
     <Compile Include="core\WebElementWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="core\SelExtensionMethods.cs" />
-<<<<<<< HEAD
     <Compile Include="Resources\PageTemplate.cs" />
     <Compile Include="src\pages\MerchTool\MerchandisePages\MtCommonToMerchandiseDetailsPage.cs" />
     <Compile Include="src\pages\MerchTool\MerchandisePages\MtCommonToMerchandisePages.cs" />
@@ -126,7 +125,6 @@
     <Compile Include="tests\MerchTool\MtSmokeMerchandiseTests\CommonDetailsPageTest.cs" />
     <Compile Include="tests\MerchTool\MtSmokeMerchandiseTests\LoginPageTest.cs" />
     <Compile Include="tests\MerchTool\MtSmokeMerchandiseTests\MtSmokeMerchandiseTest.cs" />
-=======
     <Compile Include="src\pages\cafepress.com\CpCartPageObject.cs" />
     <Compile Include="src\pages\cafepress.com\CpCommonPageObjectGlobalNavUpdate.cs" />
     <Compile Include="src\pages\cafepress.com\CpCommonPageObject.cs" />
@@ -139,8 +137,6 @@
     <Compile Include="tests\cafepress.com\cart\CafePressCartGlobalNavUpdate.cs" />
     <Compile Include="tests\cafepress.com\cart\CafePressCart.cs" />
     <Compile Include="tests\cafepress.com\checkout\CpCheckoutSmokeTest.cs" />
-    <Compile Include="tests\MerchTool\MtSmokeTest.cs" />
->>>>>>> refs/remotes/origin/master
     <Compile Include="src\pages\ShippingManager\SmCommonPageObject.cs" />
     <Compile Include="src\pages\ShippingManager\SmLoginPageObject.cs" />
     <Compile Include="src\pages\ShippingManager\SmFacilitiesPageObject.cs" />
