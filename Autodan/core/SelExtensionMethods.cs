@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 ﻿using OpenQA.Selenium;
+=======
+﻿using System;
+using System.Linq;
+using System.Threading;
+using OpenQA.Selenium;
+>>>>>>> refs/remotes/origin/master
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -83,10 +90,28 @@ namespace Autodan.core
             }
         }
 
+<<<<<<< HEAD
         public static void ClickAndWait(this IWebElement element, IWebDriver driver, int seconds)
         {
             element.Click();
             driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(seconds));
+=======
+        /// <summary>
+        /// click and wait for up to value in seconds before error
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="driver"></param>
+        /// <param name="value"></param>
+        public static void ClickAndWait(this IWebElement element, int value)
+        {
+            element.Click();
+            Thread.Sleep(value);
+        }
+
+        public static void Wait(this IWebDriver driver, int value)
+        {
+            Thread.Sleep(value);
+>>>>>>> refs/remotes/origin/master
         }
 
         public static string GetText(this IWebElement element)

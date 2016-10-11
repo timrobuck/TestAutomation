@@ -35,7 +35,7 @@ namespace Autodan.tests.ShippingManager
             Setup("chrome", "shippingmanager");
             _loginPage = new SmLoginPageObject();
             _loginPage.VerifyLoginPageElements();
-            _loginPage.Login();         
+            _loginPage.Login();    
         }
         public void SmDashboardPage_VerifyLandingPageTest()
         {
