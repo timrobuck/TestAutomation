@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace Autodan.pages.MerchTool.SmartProductEnginePages
 {
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
     public class MtSpeCategoriesPage:BaseTest
     {
         private readonly MtCommonToSpePages _mtCommonToSpePages;
-        private string pageName = "Smart Product Engine Categores Page";
-        private readonly MtCommonToEditDetailPages _mtCommonToEditDetailPages;
+        public string PageName { get; } = "Smart Product Engine Categores Page";
 
         public MtSpeCategoriesPage()
         {
             PageFactory.InitElements(Driver, this);
-            _mtCommonToSpePages = new MtCommonToSpePages(pageName);
-            _mtCommonToEditDetailPages = new MtCommonToEditDetailPages();
+            _mtCommonToSpePages = new MtCommonToSpePages(PageName);
         }
         [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories_length > label")]
         public IWebElement LableShowEntries { get; set; } //always includes "Show " etc
@@ -55,7 +55,7 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
 
         //assuming there is at least 2 valid rows in the table body
         [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories > tbody > tr:nth-child(2) > td:nth-child(3) > a")]
-        public IWebElement ClickableEditFrom2ndRow { get; set; }
+        public IWebElement EditFrom2NdRow { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories > tbody > tr:nth-child(2) > td:nth-child(2)")]
         public IWebElement Column2Row2FromTable { get; set; }
@@ -66,18 +66,17 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
         [FindsBy(How = How.CssSelector, Using = "#SmartProductCategories_info")]
         public IWebElement Showing1ToXofYentries { get; set; }
 
-
         public void VerifyElementsExist()
         {
             _mtCommonToSpePages.VerifyCommonElementsExist();
             VerifyUniqueElementsExist();
-            Console.WriteLine("Verified Elements Exist on " + pageName);
+            Console.WriteLine("Verified Elements Exist on " + PageName);
         }
         public void VerifyElementsHaveExpectedContent()
         {
             _mtCommonToSpePages.VerifyCommonElementsHaveExpectedContent();
             VerifyUniqueElementsHaveExpectedContent();
-            Console.WriteLine("Verified Elements have Expected Content on " + pageName);
+            Console.WriteLine("Verified Elements have Expected Content on " + PageName);
         }
 
         public void RunActions()
@@ -130,16 +129,16 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
             if (!ShowingEntries.Text.Contains("10"))
                 throw new Exception("Select Number Of Lines to Show [50 to 10] did not work");
 
-            Console.WriteLine("Verified the dropdown to filter lines from 50 to 10 for " + pageName);
+            Console.WriteLine("Verified the dropdown to filter lines from 50 to 10 for " + PageName);
         }
 
         private void ActionSortAscendingDescendingByTableColumnHeaderClick()
         {
             var beforeSortValue = Column1Row2FromTable.Text;
-            _mtCommonToSpePages.SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle.Click();
+            _mtCommonToSpePages.ColumnHeaderSort.Click();
             var afterSortValue = Column1Row2FromTable.Text;
             if (beforeSortValue == afterSortValue)
-                throw new Exception("Resorting items does not appear to work");
+                throw new Exception("Resorting items does not appear to work on " + PageName);
         }
 
         public void VerifyCountFromSpePageMatchesCountOnDetailsPage()
@@ -147,12 +146,12 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
             var originatingPageCount = Column2Row2FromTable.Text;
             NavigateToEditDetailsPage.ClickAndWait(Driver, 2);
             if (Showing1ToXofYentries.Text.Contains(originatingPageCount))
-                throw new Exception("Compare expected equivalent values between FromPage and LandingPage failed!");
+                throw new Exception("Compare expected equivalent values between FromPage and LandingPage failed! Exception thrown from " + PageName);
         }
 
         public MtSpeEditPtnCategoryPage GotoAndReturnNewEditPtnCategoryPage()
         {
-            ClickableEditFrom2ndRow.Click();
+            EditFrom2NdRow.Click();
             return new MtSpeEditPtnCategoryPage();
         }
     }

@@ -15,10 +15,10 @@ namespace Autodan.pages.ShippingManager
 
         //login page elements
         [FindsBy(How = How.CssSelector, Using = "#UserName")]
-        public IWebElement UserName { get; set; }
+        public IWebElement InputUserName { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#Password")]
-        public IWebElement Password { get; set; }
+        public IWebElement InputPassword { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div > div > form > button")]
         public IWebElement BtnLogin { get; set; }
@@ -35,8 +35,8 @@ namespace Autodan.pages.ShippingManager
         {
             var loginPageElements = new List<IWebElement>
             {
-                UserName,
-                Password,
+                InputUserName,
+                InputPassword,
                 BtnLogin,
                 PageTitle,
                 PageFooter,
@@ -55,8 +55,8 @@ namespace Autodan.pages.ShippingManager
         public SmCommonPageObject Login()
         {
             //username + pw + submit
-            UserName.SendKeys("CORP_Webdriver");
-            Password.SendKeys("ANapPqH<");
+            InputUserName.SendKeys("CORP_Webdriver");
+            InputPassword.SendKeys("ANapPqH<");
             BtnLogin.Submit();
 
             Console.WriteLine("input credentials, logged into Shipping Manager");

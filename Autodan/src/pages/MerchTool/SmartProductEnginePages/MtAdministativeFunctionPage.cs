@@ -3,10 +3,12 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Autodan.pages.MerchTool.SmartProductEnginePages
 {
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
     public class MtAdministativeFunctionPage
     {
         private string PageName { get; } = "Administative Functions Page";
@@ -22,16 +24,16 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
         private IWebElement LegendElement { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div > fieldset > ul > li:nth-child(1) > a")]
-        private IWebElement NavigateManageMemberExclusionsClickableElement { get; set; }
+        private IWebElement NavigateManageMemberExclusions { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div > fieldset > ul > li:nth-child(2) > a")]
-        private IWebElement NavigateManagePtnExclusionsClickableElement { get; set; }
+        private IWebElement NavigateManagePtnExclusions { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div > fieldset > ul > li:nth-child(3) > a")]
-        private IWebElement NavigateManagePtnCategoriesClickableElement { get; set; }
+        private IWebElement NavigateManagePtnCategories { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div > fieldset > ul > li:nth-child(4) > a")]
-        private IWebElement NavigateManagePtnFitAndFillConfigurationsClickableElement { get; set; }
+        private IWebElement NavigateManagePtnFitAndFillConfigurations { get; set; }
 
         public void VerifyElements()
         {
@@ -43,10 +45,10 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
             foreach (var element in new List<IWebElement>
             { BreadCrumbSmartProductEngineElement,
                 LegendElement,
-                NavigateManageMemberExclusionsClickableElement,
-                NavigateManagePtnCategoriesClickableElement,
-                NavigateManagePtnExclusionsClickableElement,
-                NavigateManagePtnFitAndFillConfigurationsClickableElement
+                NavigateManageMemberExclusions,
+                NavigateManagePtnCategories,
+                NavigateManagePtnExclusions,
+                NavigateManagePtnFitAndFillConfigurations
             }.ToList())
                 element.Verify();
         }
@@ -54,31 +56,31 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
         {
             BreadCrumbSmartProductEngineElement.VerifyTextIsInThisElement("Smart Product Engine");
             LegendElement.VerifyTextIsInThisElement("Smart Product Administrative Functions");
-            NavigateManageMemberExclusionsClickableElement.VerifyTextIsInThisElement("Manage Member Exclusions");
-            NavigateManagePtnExclusionsClickableElement.VerifyTextIsInThisElement("Manage PTN Exclusions");
-            NavigateManagePtnCategoriesClickableElement.VerifyTextIsInThisElement("Manage PTN Categories");
-            NavigateManagePtnFitAndFillConfigurationsClickableElement.VerifyTextIsInThisElement("Manage PTN Fit and Fill Configurations");
+            NavigateManageMemberExclusions.VerifyTextIsInThisElement("Manage Member Exclusions");
+            NavigateManagePtnExclusions.VerifyTextIsInThisElement("Manage PTN Exclusions");
+            NavigateManagePtnCategories.VerifyTextIsInThisElement("Manage PTN Categories");
+            NavigateManagePtnFitAndFillConfigurations.VerifyTextIsInThisElement("Manage PTN Fit and Fill Configurations");
             Console.WriteLine("Verified " + PageName + " elements have expected values");
         }
 
         public MtSpeMemberExclusionPage GotoMemberExclusionPages()
         {
-            NavigateManageMemberExclusionsClickableElement.Click();
+            NavigateManageMemberExclusions.Click();
             return new MtSpeMemberExclusionPage();
         }
         public MtSpePtnExclusionPage GoToPtnExclusionPage()
         {
-            NavigateManagePtnExclusionsClickableElement.Click();
+            NavigateManagePtnExclusions.Click();
             return new MtSpePtnExclusionPage();
         }
         public MtSpeCategoriesPage GotoCategoriesPage()
         {
-            NavigateManagePtnCategoriesClickableElement.Click();
+            NavigateManagePtnCategories.Click();
             return new MtSpeCategoriesPage();
         }
         public MtSpeEditFitNCropPage GotoMtSpeEditFitNCropPage()
         {
-            NavigateManagePtnFitAndFillConfigurationsClickableElement.Click();
+            NavigateManagePtnFitAndFillConfigurations.Click();
             return new MtSpeEditFitNCropPage();
         }
     }

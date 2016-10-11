@@ -72,7 +72,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         private IWebElement GetTableIdValueFromFirstRow { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(1) > div > span")]
-        private IWebElement SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle { get; set; }
+        private IWebElement ColumnHeaderSort { get; set; }
 
         //navigation elements
         private void DrillIntoColorTable()
@@ -135,7 +135,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         private void SortAscendingDescendingByTableColumnHeaderClick()
         {
             var beforeSortValue = GetTableIdValueFromFirstRow.Text;
-            SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle.Click();
+            ColumnHeaderSort.Click();
             var afterSortValue = GetTableIdValueFromFirstRow.Text;
             if (beforeSortValue == afterSortValue)
                 throw new Exception("Sort Asending-Descending By Table ColumnHeader Click Action Failed!");

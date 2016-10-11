@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Autodan.core;
 using OpenQA.Selenium;
@@ -12,6 +13,8 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         void VerifyElements();
         void RunActions();
     }
+
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
     public class MtMerchandiseShippingMethodsPage:BaseTest, IBaseSmokeTest, IMtMerchandiseShippingMethodsPage
     {
         private readonly IMtCommonToMerchandisePages _common;
@@ -19,7 +22,6 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         private static string PageName { get; } = "ShippingMethods";
 
         public MtMerchandiseShippingMethodsPage(): this(new MtCommonToMerchandisePages(PageName),new MtMerchandiseShippingMethodsDetailsPage()) {}
-
         public MtMerchandiseShippingMethodsPage(IMtCommonToMerchandisePages common, IMtMerchandiseShippingMethodsDetailsPage detail)
         {
             PageFactory.InitElements(Driver, this);
@@ -28,22 +30,22 @@ namespace Autodan.pages.MerchTool.MerchandisePages
 
         }
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(1) > div")]
-        public IWebElement ColumnHeaderId { get; set; }
+        private IWebElement ColumnHeaderId { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(2) > div")]
-        public IWebElement ColumnHeaderName { get; set; }
+        private IWebElement ColumnHeaderName { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(3) > div")]
-        public IWebElement ColumnHeaderDeliveryTime { get; set; }
+        private IWebElement ColumnHeaderDeliveryTime { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(4) > div")]
-        public IWebElement ColumnHeaderIsExpidited { get; set; }
+        private IWebElement ColumnHeaderIsExpidited { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(5) > div")]
-        public IWebElement ColumnHeaderDetails { get; set; }
+        private IWebElement ColumnHeaderDetails { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td:nth-child(5) > a")]
-        public IWebElement GotoDetailPageOnFirstRow { get; set; }
+        private IWebElement GotoDetailPageOnFirstRow { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td:nth-child(2)")]
         public IWebElement FirstRowContent { get; set; }

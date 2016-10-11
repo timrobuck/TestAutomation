@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Autodan.core;
-using Autodan.tests.MerchTool.MtSmokeTestUtilites;
+﻿using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System;
+using System.Collections.Generic;
 
 namespace Autodan.pages.MerchTool.MtCommonSitePages
 {
@@ -19,10 +18,10 @@ namespace Autodan.pages.MerchTool.MtCommonSitePages
         public IWebElement PageTitle { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#UserName")]
-        public IWebElement UserName { get; set; }
+        public IWebElement InputUserName { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#Password")]
-        public IWebElement Password { get; set; }
+        public IWebElement InputPassword { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div > form > fieldset > input")]
         public IWebElement BtnLogin { get; set; }
@@ -32,8 +31,8 @@ namespace Autodan.pages.MerchTool.MtCommonSitePages
         //login to merchtool and passes common page object
         public MtHomePageObject Login()
         {
-            UserName.EnterText("CORP_Webdriver");
-            Password.EnterText("ANapPqH<");
+            InputUserName.EnterText("CORP_Webdriver");
+            InputPassword.EnterText("ANapPqH<");
             BtnLogin.Click();
 
             Console.WriteLine("Varified input creds and logged into merchtool");
@@ -46,12 +45,12 @@ namespace Autodan.pages.MerchTool.MtCommonSitePages
             var pageElements = new List<IWebElement>
             {
                 PageTitle,
-                UserName,
-                Password,
+                InputUserName,
+                InputPassword,
                 BtnLogin
             };
 
-            foreach (IWebElement element in pageElements)
+            foreach (var element in pageElements)
             {
                 element.Verify();
             }

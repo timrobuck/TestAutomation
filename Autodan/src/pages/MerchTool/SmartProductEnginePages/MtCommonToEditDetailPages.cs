@@ -4,7 +4,7 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace Autodan.pages.MerchTool.SmartProductEnginePages
 {
-    class MtCommonToEditDetailPages:BaseTest
+    public class MtCommonToEditDetailPages:BaseTest
     {
         public MtCommonToEditDetailPages()
         {

@@ -7,8 +7,11 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
 {
     public class MtCommonToSpePages : BaseTest
     {
+        private readonly string _pageName;
+
         public MtCommonToSpePages(string pageName)
         {
+            _pageName = pageName;
             PageFactory.InitElements(Driver, this);
         }
 
@@ -25,7 +28,7 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
         public IWebElement BtnSetPagination { get; set; }
 
         [FindsBy(How = How.ClassName, Using = "DataTables_sort_wrapper")]
-        public IWebElement SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle { get; set; }
+        public IWebElement ColumnHeaderSort { get; set; }
 
         public void VerifyCommonElementsExist()
         {
@@ -33,15 +36,15 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
             BreadCrumbSmartProductEngine.Verify();
             ToCreateANewLabel.Verify();
             BtnSetPagination.Verify();
-            SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle.Verify();
-            Console.WriteLine("Verified Common Elements");
+            ColumnHeaderSort.Verify();
+            Console.WriteLine("Verified Common Elements on " + _pageName);
         }
 
         public void VerifyCommonElementsHaveExpectedContent()
         {
             BreadCrumbHome.VerifyTextIsInThisElement("Home");
             BreadCrumbSmartProductEngine.VerifyTextIsInThisElement("Smart Product Engine");
-            Console.WriteLine("Verified Common Elements Have Expected Content");
+            Console.WriteLine("Verified Common Elements Have Expected Content on " + _pageName);
         }
     }
 }

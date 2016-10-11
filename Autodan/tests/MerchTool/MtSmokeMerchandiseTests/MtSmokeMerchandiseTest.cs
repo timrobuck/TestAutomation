@@ -95,21 +95,25 @@ namespace Autodan.tests.MerchTool.MtSmokeMerchandiseTests
         [Test]
         public void ProductTypeAspectRatiosPage()
         {
-            //todo: create this page class and verify elements
             _home.NavigateToMerchPage();
             var ptnPage = _home.SideNavToProductTypes();
             var page = ptnPage.NavigateToProductTypesByAspectRatioPage();
-            //page.IsAt("");
             page.VerifyElements();
             page.VerifyElementContent();
             page.RunActions();
         }
 
-        [Test]
-        public void ProductTypeDetailPageTest()
-        {
-            //todo: create this page class and verify elements
-        }
+        //todo:will restore this shortly
+        //[Test]
+        //public void ProductTypeDetailPageTest()
+        //{
+        //    _home.NavigateToMerchPage();
+        //    var ptnPage = _home.SideNavToProductTypes();
+        //    var page = ptnPage.NavigateToProductTypeDetailPage();
+        //    page.VerifyElements();
+        //    page.VerifyElementContent();
+        //    page.RunActions();//to include tge download (template) on the Crunch Info table
+        //}
 
         [Test]
         public void SalesChannelsPage_And_DetailsPage_SmokeTest()

@@ -68,7 +68,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         private IWebElement BtnSetPagination { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(1) > div > span")]
-        private IWebElement SortAscendingDescendingByTableColumnHeaderId { get; set; }
+        private IWebElement ColumnHeaderSort { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td.sorting_1")]
         private IWebElement GetTableDataValueFromC1R1 { get; set; }
@@ -118,7 +118,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         private void ActionSortAscendingDescendingByTableColumnHeaderClick()
         {
             var beforeSortValue = GetTableDataValueFromC1R1.Text;
-            SortAscendingDescendingByTableColumnHeaderId.Click();
+            ColumnHeaderSort.Click();
             var afterSortValue = GetTableDataValueFromC1R1.Text;
             if (beforeSortValue == afterSortValue)
                 throw new Exception("Resorting items does not appear to work. ");

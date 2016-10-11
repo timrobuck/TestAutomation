@@ -9,7 +9,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
 {
     public interface IMtMerchandiseSizePage
     {
-        void DrillIntoSizeTable();
+        void VerifyElements();
         void RunActions();
     }
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
@@ -61,7 +61,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         private IWebElement BtnSetPagination { get; set; }
         
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(1) > div > span")]
-        private IWebElement SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle { get; set; }
+        private IWebElement ColumnHeaderSort { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td.sorting_1")]
         private IWebElement GetTableIdValueFromFirstRow { get; set; }
@@ -119,7 +119,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         private void SortAscendingDescendingByTableColumnHeaderClick()
         {
             var beforeSortValue = GetTableIdValueFromFirstRow.Text;
-            SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle.Click();
+            ColumnHeaderSort.Click();
             var afterSortValue =  GetTableIdValueFromFirstRow.Text;
             Console.WriteLine("Verified that records return.");
             if (beforeSortValue == afterSortValue)

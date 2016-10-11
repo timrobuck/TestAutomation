@@ -91,7 +91,6 @@ namespace Autodan.pages.MerchTool.MerchandisePages
             GotoProductTypesByPtnPage();
             //todo: create an IsAt call then verify
             GotoProductTypesByAspectRatioPage();
-            //varify with IsAt 
             Console.WriteLine("Verified that navigation tabs work.");
         }
 

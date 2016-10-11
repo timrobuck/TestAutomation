@@ -126,7 +126,7 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
         private void ActionSortAscendingDescendingByTableColumnHeaderClick()
         {
             var beforeSortValue = TableIdValueFromFirstRow.Text;
-            _mtCommonToSpePages.SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle.Click();
+            _mtCommonToSpePages.ColumnHeaderSort.Click();
             var afterSortValue = TableIdValueFromFirstRow.Text;
             if (beforeSortValue == afterSortValue)
                 throw new Exception("Resorting items does not appear to work");
