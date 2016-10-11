@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 
 namespace Autodan.core
@@ -60,7 +61,6 @@ namespace Autodan.core
                 return false;
             }
         }
-       
 
         /// <summary>
         /// click and wait for up to value in seconds before error
