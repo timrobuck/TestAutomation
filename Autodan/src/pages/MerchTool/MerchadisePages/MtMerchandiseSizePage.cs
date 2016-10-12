@@ -1,32 +1,27 @@
-﻿using Autodan.core;
+﻿using System;
+using System.Collections.Generic;
+using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using System;
-using System.Collections.Generic;
 
-
-namespace Autodan.pages.MerchTool
+namespace Autodan.pages.MerchTool.MerchadisePages
 {
-    internal class MtMerchandiseColorsPageObject : BaseTest
+    public class MtMerchandiseSizePage:BaseTest
     {
-
-        public MtMerchandiseColorsPageObject()
+        public  MtMerchandiseSizePage()
         {
             PageFactory.InitElements(Driver, this);
         }
 
-        //Colors subpage elements
+        //sizes subpage elements
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul.breadcrumb > li:nth-child(1)")]
         public IWebElement BreadCrumbHome { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul.breadcrumb > li:nth-child(2)")]
-        public IWebElement BreadCrumbMerchanise { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul > li.active")]
-        public IWebElement BreadCrumbColorsList { get; set; }
+        public IWebElement BreadCrumbSizesList { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > fieldset > legend")]
-        public IWebElement LegendCafepressColorOptions { get; set; }
+        public IWebElement LegendCafepressSizeOptions { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > fieldset > div > a")]
         public IWebElement BtnExportToCsv { get; set; }
@@ -47,7 +42,7 @@ namespace Autodan.pages.MerchTool
         public IWebElement InputSearch { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_wrapper")]
-        public IWebElement TableColors { get; set; }
+        public IWebElement TableSizes { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(3)")]
         public IWebElement TableHeaders { get; set; }
@@ -56,80 +51,71 @@ namespace Autodan.pages.MerchTool
         public IWebElement ShowingEntries { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_paginate")]
-        public IWebElement ButtonSetPagination { get; set; }
+        public IWebElement BtnSetPagination { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(2)")]
-        public IWebElement ColorTableSelectWhite { get; set; }
-
-        [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td.sorting_1")]
-        public IWebElement GetTableIdValueFromFirstRow { get; set; }
+        public IWebElement SizeTableSelectSmall { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > thead > tr > td:nth-child(1) > div > span")]
         public IWebElement SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "")]
-        public IWebElement ExportToCvs { get; set; }
-        
+        [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0 > tbody > tr:nth-child(1) > td.sorting_1")]
+        public IWebElement GetTableIdValueFromFirstRow { get; set; }
+
         //navigation elements
-        public void DrillIntoColorTable()
+        public void DrillIntoSizeTable()
         {
-            ColorTableSelectWhite.Click();
+            SizeTableSelectSmall.Click();
         }
 
-        public void ClickTheExportToCvsButton()
-        {
-            ExportToCvs.Click();
-        }
-
-        public void VerifyColorsPageElements()
+        public void VerifySizesPageElements()
         {
             var pageElements = new List<IWebElement>
             {
                 BreadCrumbHome,
-                BreadCrumbMerchanise,
-                BreadCrumbColorsList,
-                LegendCafepressColorOptions,
+                BreadCrumbSizesList,
+                LegendCafepressSizeOptions,
                 BtnExportToCsv,
                 LabelShow,
                 SelectNumberOfEntries,
                 OptionSelected50,
                 LabelSearch,
                 InputSearch,
-                TableColors,
+                TableSizes,
                 TableHeaders,
                 ShowingEntries,
-                ButtonSetPagination
+                BtnSetPagination
             };
 
             foreach (var element in pageElements)
             {
                 element.Verify();
             }
-            Console.WriteLine("Verified Color page elements");
+            Console.WriteLine("Verified Size page elements");
         }
 
-        public void MerchandiseColorFilterColors()
+        public void MerchandiseSizeFilterSizes()
         {
-            InputSearch.ClearAndEnterText("White");
+            InputSearch.ClearAndEnterText("Small");
             WaitForAjax();
-            TableColors.Verify();
+            TableSizes.Verify();
             InputSearch.ClearAndEnterText("BlahBlah");
             WaitForAjax();
-            TableColors.Verify();
-            InputSearch.ClearAndEnterText("Black");
+            TableSizes.Verify();
+            InputSearch.ClearAndEnterText("Small");
             WaitForAjax();
-            TableColors.Verify();
-            Console.WriteLine("Verified that filtering the list of colors works.");
+            TableSizes.Verify();
+            Console.WriteLine("Verified that filtering the list of Sizes works.");
         }
 
-        public void MerchandiseColorExportToCsvButton()  
+        public void MerchandiseSizeExportToCsvButton()
         {
             BtnExportToCsv.Click();
             //todo: the code do the download and varify this is not trivial due to various browser specificities. Get back to this after more research and testing. 
             Console.WriteLine("Verified that the a CSV file is created.");
         }
 
-        public void MerchandiseColorSelectNumberOfEntries()
+        public void MerchandiseSizeSelectNumberOfEntries()
         {
             SelectNumberOfEntries.SelectDropdown("50");
             SelectNumberOfEntries.SelectDropdown("10");
@@ -142,10 +128,13 @@ namespace Autodan.pages.MerchTool
         {
             var beforeSortValue = GetTableIdValueFromFirstRow.Text;
             SortAscendingDescendingByTableColumnHeaderIdClickTheTriangle.Click();
-            var afterSortValue = GetTableIdValueFromFirstRow.Text;
+            var afterSortValue =  GetTableIdValueFromFirstRow.Text;
             if (beforeSortValue == afterSortValue) return false;
-            Console.WriteLine("Verified records will sort desc and asc off colunn header");
+            Console.WriteLine("Verified records will sort desc and asc off colunn header ");
+            Console.WriteLine("Verified records that some records return.");
             return true;
         }
     }
 }
+
+  
