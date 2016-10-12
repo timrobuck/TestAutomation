@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing.Drawing2D;
 using Autodan.core;
-using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Autodan.pages.MerchTool
+namespace Autodan.pages.MerchTool.MerchadisePages
 {
     internal class MtMerchProductTypesPageObject : BaseTest
     {
         public MtMerchProductTypesPageObject()
         {
-            PageFactory.InitElements(BaseTest.Driver, this);
+            PageFactory.InitElements(Driver, this);
         }
-
 
         //ProductTypes sub-page eles
         //bread
@@ -26,7 +23,7 @@ namespace Autodan.pages.MerchTool
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul.breadcrumb > li:nth-child(3)")]
         public IWebElement BreadCrumbMerchDetails { get; set; }
-    
+
         //table
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > ul.merch-nav.nav.nav-tabs > li:nth-child(1)")]
         public IWebElement BtnTableByPtn { get; set; }
@@ -51,8 +48,8 @@ namespace Autodan.pages.MerchTool
 
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > table > tbody > tr:nth-child(1) > td:nth-child(2)")]
         public IWebElement ProductTypesTableMug { get; set; }
-        
-        
+
+
         //navigation options
         public void DrillIntoProductTypeTable()
         {
