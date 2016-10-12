@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using Autodan.core;
-using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Autodan.pages.MerchTool
+namespace Autodan.pages.MerchTool.MerchadisePages
 {
     internal class MtCommonPageObject
     {
@@ -110,24 +108,28 @@ namespace Autodan.pages.MerchTool
             return new MtMerchandiseAttributeOptionsPage();
         }
        
-        public void SideNavToProductCategories()
+        public MtMerchandiseProductCategoriesPage SideNavToProductCategories()
         {
             SideNavProductCategories.Click();
+            return new MtMerchandiseProductCategoriesPage();
         }
 
-        public void SideNavToSalesChannels()
+        public MtMerchandiseSalesChannelsPage SideNavToSalesChannels()
         {
             SideNavSalesChannels.Click();
+            return new MtMerchandiseSalesChannelsPage();
         }
 
-        public void SideNavToShipBoxCategories()
+        public MtMerchandiseShipBoxCategoriesPage SideNavToShipBoxCategories()
         {
             SideNavShipBoxCategories.Click();
+            return new MtMerchandiseShipBoxCategoriesPage();
         }
 
-        public void SideNavToShippingMethods()
+        public MtMerchandiseShippingMethodsPage SideNavToShippingMethods()
         {
             SideNavShippingMethods.Click();
+            return new MtMerchandiseShippingMethodsPage();
         }
 
 

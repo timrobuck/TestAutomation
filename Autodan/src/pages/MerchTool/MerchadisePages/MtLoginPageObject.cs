@@ -1,10 +1,10 @@
-﻿using Autodan.core;
+﻿using System;
+using System.Collections.Generic;
+using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using System;
-using System.Collections.Generic;
 
-namespace Autodan.pages.MerchTool
+namespace Autodan.pages.MerchTool.MerchadisePages
 {
     internal class MtLoginPageObject
     {
