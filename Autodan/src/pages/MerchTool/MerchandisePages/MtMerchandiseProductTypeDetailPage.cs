@@ -1,4 +1,5 @@
-﻿using Autodan.core;
+﻿using System.Linq.Expressions;
+using Autodan.core;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace Autodan.pages.MerchTool.MerchandisePages
@@ -85,13 +86,77 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         private const string HeaderWidth = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(4) > table > thead > tr > td:nth-child(5)";
         private const string HeaderHeight = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(4) > table > thead > tr > td:nth-child(6)";
         private const string HeaderTemplate = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(4) > table > thead > tr > td:nth-child(7)";
-        //assume at least a first row to this table
-        private const string TableCrunchInfoR1C1 = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(4) > table > tbody > tr:nth-child(1) > td:nth-child(1)";
-        private const string TableCrunchInfoR1C2 = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(4) > table > tbody > tr:nth-child(1) > td:nth-child(2)";
-        private const string TableCrunchInfoR1C3 = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(4) > table > tbody > tr:nth-child(1) > td:nth-child(3)";
-        private const string TableCrunchInfoR1C4 = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(4) > table > tbody > tr:nth-child(1) > td:nth-child(4)";
-        private const string TableCrunchInfoR1C5 = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(4) > table > tbody > tr:nth-child(1) > td:nth-child(5)";
-        private const string TableCrunchInfoR1C6 = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(4) > table > tbody > tr:nth-child(1) > td:nth-child(6)";
+        //assume at least a first row of data in this table
+        private const string TableOrientationR1C1 = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(4) > table > tbody > tr:nth-child(1) > td:nth-child(1)";
+        private const string TablePerspectiveR1C2 = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(4) > table > tbody > tr:nth-child(1) > td:nth-child(2)";
+        private const string TableMediaRegion1C3 = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(4) > table > tbody > tr:nth-child(1) > td:nth-child(3)";
+        private const string TableAspectRatioR1C4 = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(4) > table > tbody > tr:nth-child(1) > td:nth-child(4)";
+        private const string TableWidthR1C5 = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(4) > table > tbody > tr:nth-child(1) > td:nth-child(5)";
+        private const string TableHeightR1C6 = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(4) > table > tbody > tr:nth-child(1) > td:nth-child(6)";
+        private const string TableTemplateR1C6 = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(4) > table > tbody > tr:nth-child(1) > td:nth-child(7)";
+
+        //Sales Channels and Pricing SCP
+        private const string LegendSalesChannelsAndPricing ="body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(6) > legend";
+        private const string BasePrice ="body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(6) > div:nth-child(2)";
+        private const string MulisidePrintSurcharge ="body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(6) > div:nth-child(3)";
+        private const string RestockFee = "body > div.container > div.row > div.span9.view - container > div > fieldset:nth-child(6) > div:nth-child(4)";
+        //SCP table headers
+        private const string HeaderId ="body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(6) > table > thead > tr > td:nth-child(1)";
+        private const string HeaderName = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(6) > table > thead > tr > td:nth-child(2";
+        private const string HeaderPrice = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(6) > table > thead > tr > td:nth-child(3";
+        private const string HeaderSalePrice = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(6) > table > thead > tr > td:nth-child(4)";
+        private const string HeaderStartDate = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(6) > table > thead > tr > td:nth-child(5)";
+        private const string HeaderEndDate = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(6) > table > thead > tr > td:nth-child(6)";
+        //SCP data (only id and name req)
+        private const string TableIdR1C1 = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(6) > table > tbody > tr:nth-child(1) > td:nth-child(1)";
+        private const string TableNameR1C2 = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(6) > table > tbody > tr:nth-child(1) > td:nth-child(2)";
+        private const string TablePriceR1C3 = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(6) > table > tbody > tr:nth-child(1) > td:nth-child(3";
+        private const string TableSalePriceR1C4 = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(6) > table > tbody > tr:nth-child(1) > td:nth-child(4)";
+        private const string TableStartDateR1C5 = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(6) > table > tbody > tr:nth-child(1) > td:nth-child(5)";
+        private const string TableEndDateR1C6 = "body > div.container > div.row > div.span9.view-container > div > fieldset:nth-child(6) > table > tbody > tr:nth-child(1) > td:nth-child(6)";
+
+        //Markup Pricing
+        private const string LegendMarkupPricing ="body > div.container > div.row > div.span9.view-container > div > div:nth-child(7) > fieldset:nth-child(1) > legend";
+        private const string HdrProfile ="body > div.container > div.row > div.span9.view-container > div > div:nth-child(7) > fieldset:nth-child(1) > table > thead > tr > td:nth-child(1)";
+        private const string HdrMarkupPrice = "body > div.container > div.row > div.span9.view-container > div > div:nth-child(7) > fieldset:nth-child(1) > table > thead > tr > td:nth-child(2)";
+        private const string R1C1MarkupRowDataOptional ="body > div.container > div.row > div.span9.view-container > div > div:nth-child(7) > fieldset:nth-child(1) > table > tbody > tr:nth-child(1) > td:nth-child(1)";
+        private const string R1C2MarkupRowDataDependentOnC1 ="body > div.container > div.row > div.span9.view-container > div > div:nth-child(7) > fieldset:nth-child(1) > table > tbody > tr:nth-child(1) > td:nth-child(2)";
+        
+        //Volume Pricing
+        private const string LegendVolumePriceing = "body > div.container > div.row > div.span9.view-container > div > div:nth-child(7) > fieldset:nth-child(3) > legend";
+        private const string HdrQuantity = "body > div.container > div.row > div.span9.view-container > div > div:nth-child(7) > fieldset:nth-child(3) > table > thead > tr > td:nth-child(1)";
+        private const string HdrVolumePrice = "body > div.container > div.row > div.span9.view-container > div > div:nth-child(7) > fieldset:nth-child(3) > table > thead > tr > td:nth-child(2)";
+        private const string R1C1VolumeRowDataOptional = "body > div.container > div.row > div.span9.view-container > div > div:nth-child(7) > fieldset:nth-child(3) > table > tbody > tr:nth-child(1) > td:nth-child(1)";
+        private const string R1C2VolumeRowDataDependentOnC1 = "body > div.container > div.row > div.span9.view-container > div > div:nth-child(7) > fieldset:nth-child(3) > table > tbody > tr:nth-child(1) > td:nth-child(2)";
+
+        //ProductCategories list items are optional
+        private const string LegendProductCategories = "body > div.container > div.row > div.span9.view-container > div > div:nth-child(8) > fieldset:nth-child(1) > legend";
+        private const string LiProductCategoriesOptional = "body > div.container > div.row > div.span9.view-container > div > div:nth-child(8) > fieldset:nth-child(1) > ul > li:nth-child(1)";
+        //Member Exclusive list items are optional
+        private const string LegendMemberExclusive = "body > div.container > div.row > div.span9.view-container > div > div:nth-child(8) > fieldset:nth-child(3) > legend";
+        private const string LiMemberExclusionOptional = "body > div.container > div.row > div.span9.view-container > div > div:nth-child(8) > fieldset:nth-child(1) > ul > li:nth-child(1)";
+
+        private const string LegendShipping = "";
+        private const string ShippingCategory = "";
+        private const string HdrId = "";
+        private const string HdrShippingMethod = "";
+        private const string HdrPrice = "";
+        private const string HdrAdditionalPrice = "";
+        private const string R1C1Optional = "";
+        private const string R1C2DependentOnC1 = "";
+        private const string R1C3DependentOnC1 = "";
+        private const string R1C4DependentOnC1CanBeEmpty = "";
+        //Excluded Countries list may be empty
+        private const string LegendExcludedCountries = "body > div.container > div.row > div.span9.view-container > div > div:nth-child(10) > fieldset:nth-child(1) > legend";
+        private const string LiExcludedCountriesOptional = "";
+        //Excluded Shipping Methods list may be empty
+        private const string LegendExcludedShippingMethod ="body > div.container > div.row > div.span9.view-container > div > div:nth-child(10) > fieldset:nth-child(3) > legend";
+        private const string LiExcludedShippingMethodOptional = "";
+        //Website Exclusions list may be empty
+        private const string LegendWebsiteExclusions = "";
+        private const string LiWebsiteExclusionOptional = "";
+
+
 
 
         public MtMerchandiseProductTypeDetailPage() : this(new MtCommonToMerchandiseDetailsPage()) { }
@@ -114,6 +179,13 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         public void RunActions()
         {
             throw new System.NotImplementedException();
+        }
+
+        private void ActionVerifyOptionalDependentData()
+        {
+            //todo: if optional elements exists and has data then dependent elements must exist and have data
+            //todo: continued...build call into Extentions to handle this. 
+
         }
     }
 }
