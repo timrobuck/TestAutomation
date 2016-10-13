@@ -70,16 +70,7 @@ namespace Autodan.pages.cafepress.com
 
         [FindsBy(How = How.CssSelector, Using = "#b_ghlink_designyourown > a")]
         public IWebElement BtnGlobalNavDesignYourOwn { get; set; }
-
-
-        ////All products dropdown list
-        //[FindsBy(How = How.CssSelector, Using = "wasd1234")]
-        //public IWebElement wasd1234 { get; set; }
-
-        //[FindsBy(How = How.CssSelector, Using = "wasd1234")]
-        //public IWebElement wasd1234 { get; set; }
-
-
+        
 
         //shopby DDL hover expand views        
         [FindsBy(How = How.CssSelector, Using = "#b_ghmenus > div.b_ghmenu.menu-target.b_ghmenu_product")]
