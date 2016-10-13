@@ -130,7 +130,6 @@
     <Compile Include="src\pages\cafepress.com\CpCommonPageObjectGlobalNavUpdate.cs" />
     <Compile Include="src\pages\cafepress.com\CpCommonPageObject.cs" />
     <Compile Include="src\pages\cafepress.com\CpProductDescriptionPageObject.cs" />
-    <Compile Include="src\tests\cafepress.com\cart\CafePressCartGlobalNavUpdate.cs" />
     <Compile Include="src\tests\cafepress.com\checkout\CpCheckoutSmokeTest.cs" />
     <Compile Include="src\pages\MerchTool\ShippingManager\SmCommonPageObject.cs" />
     <Compile Include="src\pages\MerchTool\ShippingManager\SmLoginPageObject.cs" />

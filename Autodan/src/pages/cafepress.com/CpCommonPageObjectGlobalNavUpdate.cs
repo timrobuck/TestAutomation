@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Autodan.core;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace Autodan.pages.cafepress.com
@@ -10,6 +9,7 @@ namespace Autodan.pages.cafepress.com
     internal class CpCommonPageObjectGlobalNavUpdate : BaseTest
     {
         private readonly string _className;
+
         public CpCommonPageObjectGlobalNavUpdate()
         {
             PageFactory.InitElements(BaseTest.Driver, this);
@@ -94,7 +94,7 @@ namespace Autodan.pages.cafepress.com
         [FindsBy(How = How.CssSelector, Using = "#b_ghmenus > div.b_ghmenu.menu-target.b_ghmenu_occasion")]
         public IWebElement ContainerGlobalNavOccasionsExpand { get; set; }
 
-        
+
 
         //cartpage tests
         public void VerifyGlobalPencilBanner()
@@ -136,45 +136,22 @@ namespace Autodan.pages.cafepress.com
             Console.WriteLine("Verified Shop By elements on page");
         }
 
-        //public void ExpandCheckTest()
-        //{
-        //    var ddlEmement = DdlGlobalNavProducts;
-        //    var expandedView = ContainerGlobalNavProductsExpand;
-
-        //    Actions action = new Action(Driver);
-        //    action.MoveToElement(ddlEmement).Perform();
-        //    Driver.Wait(1);
-        //    expandedView.Verify();         
-        //}
-
-        public void VerifyShopByExpandedOptions()
-        {
-            var expandedShopByNavElements = new List<IWebElement>
-            {
-                ContainerGlobalNavProductsExpand,
-                ContainerGlobalNavInterestsExpand,
-                ContainerGlobalNavRecipientsExpand,
-                ContainerGlobalNavOccasionsExpand,
-            };
-
-            foreach (var element in expandedShopByNavElements)
-            {
-                Actions action = new Actions(Driver);
-                action.MoveToElement(element).Perform();
-                Driver.Wait(1);
-                element.Verify();
-                
-            }
-            //todo: need to create a hover extension to hover+verify expanded views on global nav
-        }
-
         public void SearchInputSmokeTest()
         {
             DdlGlobalNavSearchProductType.Click();
-
             InputGlobalNavSearch.ClearAndEnterText("test text");
         }
 
-        
+        public void SmokeTestNavExpandedView()
+        {
+            const int animationTime = 1000;
+
+            DdlGlobalNavProducts.HoverAndVerify(ContainerGlobalNavProductsExpand, Driver, animationTime);
+            DdlGlobalNavInterests.HoverAndVerify(ContainerGlobalNavInterestsExpand, Driver, animationTime);
+            DdlGlobalNavRecipients.HoverAndVerify(ContainerGlobalNavRecipientsExpand, Driver, animationTime);
+            DdlGlobalNavOccasions.HoverAndVerify(ContainerGlobalNavOccasionsExpand, Driver, animationTime);
+
+            Console.WriteLine("Verified expanded Shop By Expanded options");
+        }
     }
 }
