@@ -103,17 +103,17 @@ namespace Autodan.tests.MerchTool.MtSmokeMerchandiseTests
             page.RunActions();
         }
 
-        //todo:will restore this shortly
-        //[Test]
-        //public void ProductTypeDetailPageTest()
-        //{
-        //    _home.NavigateToMerchPage();
-        //    var ptnPage = _home.SideNavToProductTypes();
-        //    var page = ptnPage.NavigateToProductTypeDetailPage();
-        //    page.VerifyElements();
-        //    page.VerifyElementContent();
-        //    page.RunActions();//to include tge download (template) on the Crunch Info table
-        //}
+        [Test]
+        public void ProductTypesDetailPageTest()
+        {
+            var masterPage = _home.NavigateToMerchPage();
+            var detailPage = masterPage.NavigateToProductTypeDetailsPageByClickOnRow(); //row 1 is ptn 0 for mug, it has example of most elements to verify
+            detailPage.VerifyElements();
+            detailPage.VerifyOptionalElements();
+            detailPage.VerifyOptionalElement(521, detailPage.LiWebsiteExclusionOptional);//this navigates to another ptn detail page then verifies the element. 
+            detailPage.VerifyDependentElements();
+            detailPage.VerifyDependentElement(1220, detailPage.R1C2VolumeRowDataDependentOnC1, detailPage.R1C1VolumeRowDataOptional);
+        }
 
         [Test]
         public void SalesChannelsPage_And_DetailsPage_SmokeTest()

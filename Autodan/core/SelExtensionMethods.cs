@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading;
  using OpenQA.Selenium.Support.UI;
  using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq.Expressions;
+using System.Text;
 
 namespace Autodan.core
 {
@@ -36,11 +39,57 @@ namespace Autodan.core
             new SelectElement(element).SelectByText(value);
             driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(wait));
         }
-        
+
         // verify presence of an element in dom; smoke/sanity tests
         public static void Verify(this IWebElement element)
         {
-            _type = element.GetType();
+           _type = element.GetType();
+        }
+        // verify presence of element: if used with 'debugger.isattched' condition and run debug from test runner, this can give a list of all failures in a test suite on single run
+        public static bool VerifyOrSendMessage(this IWebElement element)
+        {
+            try
+            {
+                _type = element.GetType();
+            }
+            catch (Exception ex)
+            {
+                var sb = new StringBuilder();
+                sb.Append(" ERROR!   ");
+                sb.Append(ex.Message);
+                if (!Debugger.IsAttached) throw new Exception(sb.ToString());
+                Console.WriteLine(sb.ToString());
+                return false;
+            }
+            return true;
+        }
+
+        //// <summary>
+        //note:some elements are present and required only if an optional element is first present.
+        //approach: we will examine if the optional is present then and only then will an error be thrown if the required element is missing
+        //// </summary>
+        public static bool VerifyElementDependentOnOptionalElement(this IWebElement requiredDependent, IWebElement optional)
+        {
+            try {_type = optional.GetType();}
+            catch{return false;}
+
+            try { requiredDependent.Verify(); }
+            catch(Exception ex)
+            {
+                var sb = new StringBuilder();
+                sb.Append(" ERROR!   ");
+                sb.Append(ex.Message);
+                sb.Append(" ");
+                sb.Append(nameof(requiredDependent));
+                sb.Append(" is dependent on ");
+                sb.Append(nameof(optional));
+                sb.Append(" and is required! ");
+
+                if (!Debugger.IsAttached) throw new Exception(sb.ToString());
+                Console.WriteLine();
+                return false;
+            }
+            return true;
         }
 
         public static void VerifyTextIsInThisElement(this List<IWebElement> elements, int orderOfOccuranceOnPage,string targetContent)

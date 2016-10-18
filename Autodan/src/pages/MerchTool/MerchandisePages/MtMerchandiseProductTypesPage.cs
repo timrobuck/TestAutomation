@@ -12,13 +12,23 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         void DrillIntoProductTypeTable();
         void ViewTableByAspectRatio();
         void MerchProductTypesTableFilterTest();
+        IMtMerchProductTypesByPtnPage NavigateToProductTypesByPtnPage();
+        IMtMerchProductTypesByAspectRatioPage NavigateToProductTypesByAspectRatioPage();
+        IMtMerchandiseProductTypeDetailPage NavigateToProductTypeDetailsPageByClickOnRow();
+        void NavigateToProductTypeDetailsPageBySearchInput(int ptn);
     }
 
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
     public class MtMerchProductTypesByPtnPage : BaseTest, IBaseSmokeTest, IMtMerchProductTypesByPtnPage
     {
-        public MtMerchProductTypesByPtnPage()
+        private readonly IMtMerchandiseProductTypeDetailPage _detailsPage;
+        private readonly IMtMerchProductTypesByAspectRatioPage _aspectRationPage;
+
+        public MtMerchProductTypesByPtnPage() :this(new MtMerchProductTypesByAspectRatioPage(), new  MtMerchandiseProductTypeDetailPage()) { }
+        public MtMerchProductTypesByPtnPage(IMtMerchProductTypesByAspectRatioPage aspectRatioPage,IMtMerchandiseProductTypeDetailPage detailsPage)
         {
+            _detailsPage = detailsPage;
+            _aspectRationPage = aspectRatioPage;
             PageFactory.InitElements(Driver, this);
         }
 
@@ -54,6 +64,8 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > table > tbody > tr:nth-child(1) > td:nth-child(2)")]
         private IWebElement ProductTypesTableMug { get; set; }
 
+        [FindsBy(How = How.CssSelector, Using = "body > div.container > div.row > div.span9.view-container > table > tbody > tr:nth-child(1)")]
+        private IWebElement RowGotoDetailsForThisPageHiddenEvent { get; set; }
 
         //navigation options
         public void DrillIntoProductTypeTable()
@@ -68,9 +80,6 @@ namespace Autodan.pages.MerchTool.MerchandisePages
             Console.WriteLine("Verified AspectRationClick Action ");
         }
 
-        //todo: create public method for InputSearchProductTypes by PTN or Name into filter textbox returning a detail page
-        //todo: then write fluent method calls for tests.
-
         public void MerchProductTypesTableFilterTest()
         {
             InputSearchProductTypes.ClearAndEnterText("Mug");
@@ -84,7 +93,6 @@ namespace Autodan.pages.MerchTool.MerchandisePages
             InputSearchProductTypes.ClearAndEnterText("Shirt");
             BtnSearchMagGlass.Click();
             WaitForAjax();
-            VerifyElements();
             Console.WriteLine("Verified search input and re-tested table container");
         }
 
@@ -101,14 +109,15 @@ namespace Autodan.pages.MerchTool.MerchandisePages
                 TableHeaderProductTypes,
                 TableContainerProductTypes,
                 TablePagerProductTypes,
-                ProductTypesTableMug
+                ProductTypesTableMug,
+                RowGotoDetailsForThisPageHiddenEvent
             };
 
             foreach (var element in pageElements)
             {
                 element.Verify();
             }
-            Console.WriteLine("Verified ProductType page elements");
+            Console.WriteLine("Verified ProductType page for " + pageElements.Count + " elements");
         }
 
         public void RunActions()
@@ -119,12 +128,29 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         public IMtMerchProductTypesByPtnPage NavigateToProductTypesByPtnPage()
         {
             BtnTableByPtn.Click();
-            return new MtMerchProductTypesByPtnPage();
+            Console.WriteLine("Navigated to ProductTypes page by clicking on the ByPTN tab");
+            return this;
         }
         public IMtMerchProductTypesByAspectRatioPage NavigateToProductTypesByAspectRatioPage()
         {
             BtnTableByAspectRatio.Click();
-            return new MtMerchProductTypesByAspectRatioPage();
+            Console.WriteLine("Navigated to AspectRatioPage by clicking on the ByApectRatio tab");
+            return _aspectRationPage;
+        }
+
+        public IMtMerchandiseProductTypeDetailPage NavigateToProductTypeDetailsPageByClickOnRow()
+        {
+            RowGotoDetailsForThisPageHiddenEvent.Click();
+            Console.WriteLine("Navigated to detail page by selecting the first row item ");
+            return _detailsPage;
+        }
+
+        public void NavigateToProductTypeDetailsPageBySearchInput(int ptn)
+        {
+            InputSearchProductTypes.ClearAndEnterText(ptn.ToString());
+            BtnSearchMagGlass.Click();
+            WaitForAjax();
+            Console.WriteLine("Navigated to detail page using the search input for ptn =" + ptn);
         }
     }
 }
