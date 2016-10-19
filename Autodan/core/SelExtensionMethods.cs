@@ -1,11 +1,14 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
+
 using System;
-using System.Collections.Generic;
+
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using OpenQA.Selenium.Support.UI;
+using System.Collections.Generic;
+using OpenQA.Selenium.Interactions;
 using static System.Console;
 
 namespace Autodan.core
@@ -156,6 +159,22 @@ namespace Autodan.core
         public static string GetTextFromDdl(IWebElement element)
         {
             return new SelectElement(element).AllSelectedOptions.SingleOrDefault()?.Text;
+        }
+
+        /// <summary>
+        /// performs a mouseover action on the selected element; then verifies the provided expanded element
+        /// (added an int value for a driverwait to help with animation times/lockout times during expanded transitions
+        /// </summary>
+        /// <param name="hoverElement"></param>
+        /// <param name="expandedElement"></param>
+        /// <param name="driver"></param>
+        /// <param name="value"></param>
+        public static void HoverAndVerify(this IWebElement hoverElement, IWebElement expandedElement, IWebDriver driver, int value)
+        {
+            Actions action = new Actions(driver);
+            action.MoveToElement(hoverElement).Perform();
+            driver.Wait(value);
+            expandedElement.Verify();
         }
     }
 }

@@ -47,6 +47,8 @@ namespace Autodan.core
                 Driver.Navigate().GoToUrl("http://tools.cafepress.com/Merchandise/");
             else if (serviceUrl.ToLower().Equals("cafepress.dev"))
                 Driver.Navigate().GoToUrl("http://10.1.2.115/");
+            else if (serviceUrl.ToLower().Equals("cafepress.live"))
+                Driver.Navigate().GoToUrl("https://cafepress.com/");
 
 
             Console.WriteLine("Created fresh " + browserName + " instance");
