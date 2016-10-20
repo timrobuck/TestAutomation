@@ -169,11 +169,12 @@ namespace Autodan.core
         /// <param name="expandedElement"></param>
         /// <param name="driver"></param>
         /// <param name="value"></param>
-        public static void HoverAndVerify(this IWebElement hoverElement, IWebElement expandedElement, IWebDriver driver, int value)
+        public static void HoverAndVerify(this IWebElement hoverElement, IWebElement expandedElement, 
+            IWebDriver driver, int value)
         {
             Actions action = new Actions(driver);
             action.MoveToElement(hoverElement).Perform();
-            driver.Wait(value);
+            driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromMilliseconds(value));
             expandedElement.Verify();
         }
     }
