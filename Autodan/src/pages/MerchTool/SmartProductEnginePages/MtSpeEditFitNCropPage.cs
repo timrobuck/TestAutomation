@@ -36,7 +36,7 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
         public IWebElement BtnLoadProductType { get; set; }
 
         //only after the BtnLoadProductType is clicked does the configuration for that ptn appear. So
-        //1)before varify above elements
+        //1)before Verify above elements
         //a)test that the ConfigurationEntryTable does not exist beforehand  
         //b)that the SaveChangesBtn does not exist
 

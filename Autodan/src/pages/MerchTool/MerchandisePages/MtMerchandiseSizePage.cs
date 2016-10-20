@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Autodan.core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -42,7 +43,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_length > label > select > option:nth-child(3)")]
         private IWebElement OptionSelected50 { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_filter > label")]
+        [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_filter > label") ]
         private IWebElement LabelSearch { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#DataTables_Table_0_filter > label > input")]
@@ -85,10 +86,10 @@ namespace Autodan.pages.MerchTool.MerchandisePages
                 BtnSetPagination
             };
 
-            foreach (var element in pageElements)
-            {
-                element.Verify();
-            }
+            var cnt = pageElements.Count(element => !element.VerifyOrSendMessage());
+            if(cnt > 0)
+                throw new Exception(pageElements.Count + " of " + cnt + " Failed!");
+
             Console.WriteLine("Verified Size page elements");
         }
 

@@ -11,7 +11,7 @@ namespace Autodan.pages.MerchTool.SmartProductEnginePages
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
     public class MtAdministativeFunctionPage
     {
-        private string PageName { get; } = "Administative Functions Page";
+        private  string PageName { get; } = "Administative Functions Page";
         public MtAdministativeFunctionPage()
         {
             PageFactory.InitElements(BaseTest.Driver, this);

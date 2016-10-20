@@ -48,7 +48,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
         public void VerifyElements()
         {
             VerifyElementsUniqueToPage();
-            VarifyElementsCommonToPage();
+            VerifyElementsCommonToPage();
         }
 
         public void VerifyElementContent()
@@ -79,7 +79,7 @@ namespace Autodan.pages.MerchTool.MerchandisePages
             Console.WriteLine(" Verified page elements on " +  _className);
         }
 
-        private void VarifyElementsCommonToPage()
+        private void VerifyElementsCommonToPage()
         {
             _commonPage.VerifyCommonElements();
             Console.WriteLine("Verified common elements on "+ _className);

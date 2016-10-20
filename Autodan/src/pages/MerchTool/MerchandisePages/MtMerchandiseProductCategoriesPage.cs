@@ -43,10 +43,10 @@ namespace Autodan.pages.MerchTool.MerchandisePages
                 element.Verify();
             }
             Console.WriteLine("Verified ProductCategories page elements");
-            VarifyElementsCommonToPage();
+            VerifyElementsCommonToPage();
         }
 
-        private void VarifyElementsCommonToPage()
+        private void VerifyElementsCommonToPage()
         {
             _common.VerifyCommonElements();
         }
