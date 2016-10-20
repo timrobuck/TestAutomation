@@ -21,7 +21,7 @@ namespace Autodan.core
     }
 
 
-    public class BaseTest
+    public class BaseTest : Attribute
     {
         public const string SkipSetup = "SkipSetup";
 

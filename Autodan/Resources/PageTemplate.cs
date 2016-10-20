@@ -22,7 +22,7 @@ namespace Autodan.Resources
 
         public void VerifyElementsExists()
         {
-            VarifyElementsCommonToPage();
+            VerifyElementsCommonToPage();
             VerifyElementsUniqueToPage();
             Console.WriteLine("Verified " + PageName + " page elements exist");
         }
@@ -49,7 +49,7 @@ namespace Autodan.Resources
             }
         }
 
-        private void VarifyElementsCommonToPage()
+        private void VerifyElementsCommonToPage()
         {
             var page = new MtCommonToMerchandisePages(PageName);
             page.VerifyCommonElements();

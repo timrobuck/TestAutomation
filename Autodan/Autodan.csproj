@@ -140,6 +140,7 @@
     <Compile Include="src\pages\ShippingManager\SmStockStatusPageObject.cs" />
     <Compile Include="src\pages\MerchTool\MtCommonSitePages\MtHomePageObject.cs" />
     <Compile Include="src\tests\MerchTool\MtSmokeMerchandiseTests\ProductCategoriesPageTest.cs" />
+    <Compile Include="src\tests\MerchTool\MtSmokeMerchandiseTests\ProductTypeDetailsPageTest.cs" />
     <Compile Include="src\tests\MerchTool\MtSmokeMerchandiseTests\ProductTypePageTest.cs" />
     <Compile Include="src\tests\MerchTool\MtSmokeMerchandiseTests\SalesChannelsPageWithDetailsPageTests.cs" />
     <Compile Include="src\tests\MerchTool\MtSmokeMerchandiseTests\ShipBoxCategoriesPageWithDetailPageTests.cs" />
